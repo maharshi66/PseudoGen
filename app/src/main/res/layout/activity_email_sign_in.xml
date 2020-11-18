@@ -46,7 +46,6 @@
         android:ems="10"
         android:hint="password"
         android:inputType="textPersonName|textPassword"
-        android:text="Name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -56,8 +55,8 @@
         android:id="@+id/emailSignInButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
-        android:layout_marginBottom="181dp"
+        android:layout_marginTop="113dp"
+        android:layout_marginBottom="144dp"
         android:onClick="signInClicked"
         android:text="Go"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -65,4 +64,5 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordEditText" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
