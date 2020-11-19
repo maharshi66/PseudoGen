@@ -144,9 +144,9 @@ public class EmailSignInActivity extends AppCompatActivity {
 
     public void writeToDatabase(String firstName, String lastName, String userEmail, String userPassword)
     {
-        firebaseDatabaseRef.child("Users").child("First Name").setValue(firstName);
-        firebaseDatabaseRef.child("Users").child("Last Name").setValue(lastName);
-        firebaseDatabaseRef.child("Users").child("Email").setValue(userEmail);
-        firebaseDatabaseRef.child("Users").child("Password").setValue(userPassword);
+        firebaseDatabaseRef.child("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Credentials").child("First Name").setValue(firstName);
+        firebaseDatabaseRef.child("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Credentials").child("Last Name").setValue(lastName);
+        firebaseDatabaseRef.child("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Credentials").child("Email").setValue(userEmail);
+        firebaseDatabaseRef.child("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Credentials").child("Password").setValue(userPassword);
     }
 }
