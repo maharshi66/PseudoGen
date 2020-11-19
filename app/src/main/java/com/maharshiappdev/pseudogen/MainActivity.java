@@ -21,10 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void startLoadingAnimation()
     {
-        loadingImageView.animate().rotation(3600).setDuration(3500);
-        appNameTextView.animate().rotation(1800).alpha(0).setDuration(1500);
-        appNameTextView.setText("pGen");
-        appNameTextView.animate().alpha(1);
+        loadingImageView.animate().rotation(3600).setDuration(2000);
     }
 
     public Boolean checkIfLoggedIn(FirebaseAuth user) {
@@ -54,11 +51,13 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
+                loadingImageView.setVisibility(View.INVISIBLE);
                 if(checkIfLoggedIn(mAuth))
                 {
-                    //TODO: Move to codeEditor activity
-                }else {
-                    loadingImageView.setVisibility(View.INVISIBLE);
+                    //TODO: Move to central activity
+                    Intent intent = new Intent(getApplicationContext(), CentralActivity.class);
+                    startActivity(intent);
+                }else{
                     Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                     startActivity(intent);
                 }

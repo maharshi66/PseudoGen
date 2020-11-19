@@ -42,7 +42,7 @@
         android:fontFamily="@font/audiowide"
         android:text="pseudoGen"
         android:textAlignment="center"
-        android:textSize="48sp"
+        android:textSize="38dp"
         app:layout_constraintBottom_toTopOf="@+id/loadingImageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

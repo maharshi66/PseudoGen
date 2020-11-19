@@ -5,6 +5,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -57,7 +58,9 @@ public class EmailSignInActivity extends AppCompatActivity {
                         if(task.isSuccessful())
                         {
                             Log.i("INFO:", "User signed in " + username);
-                            //TODO Switch Activity
+                            //Switch activity to central
+                            Intent intent = new Intent(EmailSignInActivity.this, CentralActivity.class);
+                            startActivity(intent);
                         }else
                         {
                             try
