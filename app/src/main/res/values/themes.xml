@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.PseudoGen" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.PseudoGen" parent="Theme.MaterialComponents.DayNight">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/app_blue</item>
         <item name="colorPrimaryVariant">@color/app_blue </item>
@@ -13,14 +13,11 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
-
     <style name="Widget.BottomNavigationView"
         parent="Widget.Design.BottomNavigationView">
         <item name="fontFamily">@font/audiowide</item>
     </style>
-
     <style name="AppTheme.FullBackground" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:background">@color/light_grey</item>
     </style>
-
 </resources>
