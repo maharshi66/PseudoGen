@@ -18,6 +18,15 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if(FirebaseAuth.getInstance().getCurrentUser() != null)
+        {
+          FirebaseAuth.getInstance().signOut();
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);

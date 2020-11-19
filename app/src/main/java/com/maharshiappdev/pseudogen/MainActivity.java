@@ -7,18 +7,24 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
     ImageView loadingImageView;
+    TextView appNameTextView;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     public void startLoadingAnimation()
     {
-        loadingImageView.animate().rotation(3600).setDuration(2500);
+        loadingImageView.animate().rotation(3600).setDuration(3500);
+        appNameTextView.animate().rotation(1800).alpha(0).setDuration(1500);
+        appNameTextView.setText("pGen");
+        appNameTextView.animate().alpha(1);
     }
 
     public Boolean checkIfLoggedIn(FirebaseAuth user) {
@@ -35,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         loadingImageView = findViewById(R.id.loadingImageView);
+        appNameTextView = findViewById(R.id.appNameTextView);
         startLoadingAnimation();
         handleLoginAndSignUp();
     }
