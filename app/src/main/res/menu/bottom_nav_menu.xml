@@ -5,15 +5,18 @@
         android:id="@+id/action_home"
         android:enabled="true"
         android:title="Home"
+        android:icon="@drawable/home_icon"
         app:showAsAction="always"/>
     <item
         android:id="@+id/action_code"
         android:enabled="true"
         android:title="Code"
+        android:icon="@drawable/code_icon"
         app:showAsAction="always" />
     <item
         android:id="@+id/action_analysis"
         android:enabled="true"
         android:title="Analysis"
+        android:icon="@drawable/analysis_icon"
         app:showAsAction="always"/>
 </menu>

@@ -17,5 +17,6 @@
         app:itemBackground="@color/black"
         app:itemIconTint="@android:color/white"
         app:itemTextAppearanceActive="@style/Widget.BottomNavigationView"
-        app:itemTextColor="@color/app_blue"/>
+        app:itemTextColor="@color/app_blue"
+        app:labelVisibilityMode="labeled" />
 </androidx.constraintlayout.widget.ConstraintLayout>
