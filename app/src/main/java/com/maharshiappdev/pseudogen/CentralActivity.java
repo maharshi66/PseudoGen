@@ -52,7 +52,22 @@ public class CentralActivity extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavView);
 //        setTitle(bottomNavigationView.getMenu().findItem(bottomNavigationView.getSelectedItemId()).getTitle());
         setTitle("");
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                if(item.getItemId() == R.id.action_home)
+                {
+//                    Intent intent = new Intent(CentralActivity.this,  )
+                }
+
+                return false;
+            }
+        });
+
     }
+
+
 
     public void alertUserForSignOut()
     {
