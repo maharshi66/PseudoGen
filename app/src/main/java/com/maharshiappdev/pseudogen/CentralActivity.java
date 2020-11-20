@@ -56,11 +56,11 @@ public class CentralActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if(item.getItemId() == R.id.action_home)
+                if(item.getItemId() == R.id.action_code)
                 {
-//                    Intent intent = new Intent(CentralActivity.this,  )
+                    Intent intent = new Intent(CentralActivity.this, CodeActivity.class);
+                    startActivity(intent);
                 }
-
                 return false;
             }
         });

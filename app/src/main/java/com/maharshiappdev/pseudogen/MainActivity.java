@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     public Boolean checkIfLoggedIn(FirebaseAuth user) {
         if(user.getCurrentUser() != null)
         {
-            Toast.makeText(this, "Logged In!", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Logged In!", Toast.LENGTH_SHORT).show();
             return true;
         }
         return false;
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void handleLoginAndSignUp() {
-        new CountDownTimer(2500,1000)
+        new CountDownTimer(1500,1000)
         {
             @Override
             public void onTick(long millisUntilFinished) {}

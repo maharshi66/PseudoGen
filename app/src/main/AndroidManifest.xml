@@ -10,7 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PseudoGen">
         <activity android:name=".CodeEditorActivity"></activity>
-        <activity android:name=".CentralActivity"></activity>
+        <activity android:name=".CodeActivity" />
+        <activity android:name=".CentralActivity" />
         <activity android:name=".EmailSignInActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".MainActivity">

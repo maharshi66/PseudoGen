@@ -13,11 +13,20 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+    <!-- Bottom Navigation Style -->
     <style name="Widget.BottomNavigationView"
         parent="Widget.Design.BottomNavigationView">
         <item name="fontFamily">@font/audiowide</item>
     </style>
-    <style name="AppTheme.FullBackground" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
+    <!-- List View Style -->
+    <style name="Widget.AppCompat.NewListView" parent="Widget.AppCompat.ListView">
+        <item name="fontFamily">@font/audiowide</item>
+        <item name="android:text">@color/app_blue</item>
         <item name="android:background">@color/light_grey</item>
+    </style>
+
+    <style name="AppTheme.FullBackground" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:background">@color/dull_blue</item>
     </style>
 </resources>
