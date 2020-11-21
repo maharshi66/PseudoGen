@@ -49,12 +49,14 @@
         android:lines="25"
         android:scrollbars="vertical|horizontal"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/app_blue"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:theme="@style/Widget.AppCompat.NewEditText">
+
     </com.maharshiappdev.pseudogen.LineNumberedEditText>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,6 +31,13 @@ public class CodeActivity extends AppCompatActivity {
     ArrayList<String> codesList = new ArrayList<>();
     ArrayAdapter arrayAdapter;
     private final DatabaseReference firebaseDatabaseRef = FirebaseDatabase.getInstance().getReference();
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, CentralActivity.class);
+        startActivity(intent);
+        finish();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -58,7 +66,19 @@ public class CodeActivity extends AppCompatActivity {
         arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, codesList);
         codesList.add("Hello Universe!");
         codesListView.setAdapter(arrayAdapter);
-        getTitlesFromDatabase();
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavView);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                if(item.getItemId() == R.id.action_home)
+                {
+                    Intent intent = new Intent(CodeActivity.this, CentralActivity.class);
+                    startActivity(intent);
+                }
+                return false;
+            }
+        });
     }
 
     public void createAlertForAddNew()

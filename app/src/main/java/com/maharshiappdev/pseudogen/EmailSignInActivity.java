@@ -36,7 +36,10 @@ public class EmailSignInActivity extends AppCompatActivity {
     {
         if(mAuth.getCurrentUser() == null)
         {
-            signInUser(usernameEditText.getText().toString(), passwordEditText.getText().toString());
+            if(!usernameEditText.getText().toString().isEmpty() && !passwordEditText.getText().toString().isEmpty())
+            {
+                signInUser(usernameEditText.getText().toString(), passwordEditText.getText().toString());
+            }
         }
     }
 
@@ -44,7 +47,6 @@ public class EmailSignInActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_email_sign_in);
-        setTitle("Sign in With Email");
         usernameEditText = findViewById(R.id.usernameEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
     }

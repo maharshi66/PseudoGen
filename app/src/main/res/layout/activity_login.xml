@@ -7,7 +7,7 @@
     tools:context=".LoginActivity">
 
   <ImageView
-      android:id="@+id/imageView"
+      android:id="@+id/logoImageView"
       android:layout_width="150dp"
       android:layout_height="150dp"
       android:layout_marginTop="100dp"
@@ -17,7 +17,7 @@
       app:layout_constraintHorizontal_bias="0.498"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      app:srcCompat="@drawable/psglogo" />
+      app:srcCompat="@drawable/pigeonlogo" />
 
   <Button
       android:id="@+id/emailButton"

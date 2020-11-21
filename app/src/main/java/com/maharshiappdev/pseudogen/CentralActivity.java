@@ -67,8 +67,6 @@ public class CentralActivity extends AppCompatActivity {
 
     }
 
-
-
     public void alertUserForSignOut()
     {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(CentralActivity.this);

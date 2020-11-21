@@ -12,9 +12,11 @@
         <activity android:name=".CodeEditorActivity"></activity>
         <activity android:name=".CodeActivity" />
         <activity android:name=".CentralActivity" />
-        <activity android:name=".EmailSignInActivity" />
+        <activity android:name=".EmailSignInActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".LoginActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
