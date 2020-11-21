@@ -16,12 +16,20 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 
 public class CodeActivity extends AppCompatActivity {
     ListView codesListView;
     ArrayList<String> codesList = new ArrayList<>();
     ArrayAdapter arrayAdapter;
+    private final DatabaseReference firebaseDatabaseRef = FirebaseDatabase.getInstance().getReference();
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -36,8 +44,7 @@ public class CodeActivity extends AppCompatActivity {
         super.onOptionsItemSelected(item);
         if(item.getItemId() == R.id.action_addNew)
         {
-            createAlertForNewCode();
-            arrayAdapter.notifyDataSetChanged();
+            createAlertForAddNew();
         }
         return true;
     }
@@ -49,12 +56,12 @@ public class CodeActivity extends AppCompatActivity {
         setTitle("Your List");
         codesListView = findViewById(R.id.codesListview);
         arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, codesList);
-        codesList.add("Hello World");
-
+        codesList.add("Hello Universe!");
         codesListView.setAdapter(arrayAdapter);
+        getTitlesFromDatabase();
     }
 
-    public void createAlertForNewCode()
+    public void createAlertForAddNew()
     {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(CodeActivity.this);
         LayoutInflater layoutInflater = CodeActivity.this.getLayoutInflater();
@@ -66,9 +73,13 @@ public class CodeActivity extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             //TODO Take the title, input and output for cloud storage and updating codesList
+
                             if(!titleEditText.getText().toString().isEmpty())
                             {
-                                codesList.add(titleEditText.getText().toString());
+                                writeToDatabase(titleEditText.getText().toString());
+                                Intent intent = new Intent(CodeActivity.this, CodeEditorActivity.class);
+                                intent.putExtra("pseudocodeTitle", titleEditText.getText().toString());
+                                startActivity(intent);
                             }
                         }
                     })
@@ -79,5 +90,30 @@ public class CodeActivity extends AppCompatActivity {
                         }
                     })
                     .show();
+    }
+
+    //TODO Change function parameters as development changes
+    public void writeToDatabase(String title)
+    {
+        //Write Pseudocode Titles to Database
+        firebaseDatabaseRef.child("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Posts").child("Code List").child(title).setValue(title);
+    }
+
+    public void getTitlesFromDatabase()
+    {
+        firebaseDatabaseRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot postSnapshot : snapshot.getChildren())
+                {
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }

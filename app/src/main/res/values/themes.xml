@@ -3,10 +3,11 @@
     <style name="Theme.PseudoGen" parent="Theme.MaterialComponents.DayNight">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/app_blue</item>
+        <item name="fontFamily">@font/audiowide</item>
         <item name="colorPrimaryVariant">@color/app_blue </item>
-        <item name="colorOnPrimary">@color/light_grey</item>
+        <item name="colorOnPrimary">@color/bright_orange</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/light_grey</item>
+        <item name="colorSecondary">@color/bright_orange</item>
         <item name="colorSecondaryVariant">@color/light_grey</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
@@ -21,9 +22,15 @@
 
     <!-- List View Style -->
     <style name="Widget.AppCompat.NewListView" parent="Widget.AppCompat.ListView">
-        <item name="fontFamily">@font/audiowide</item>
-        <item name="android:text">@color/app_blue</item>
+        <item name="fontFamily">@font/fira_mono_medium</item>
+        <item name="android:textColor">@color/app_blue</item>
         <item name="android:background">@color/light_grey</item>
+    </style>
+
+    <!-- Edit Text Style -->
+    <style name="Widget.AppCompat.NewEditText" parent="Widget.AppCompat.EditText">
+        <item name="fontFamily">@font/fira_mono</item>
+        <item name="android:textColor">@color/bright_orange</item>
     </style>
 
     <style name="AppTheme.FullBackground" parent="Theme.MaterialComponents.DayNight.NoActionBar">

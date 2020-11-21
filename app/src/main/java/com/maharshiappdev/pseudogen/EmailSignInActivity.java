@@ -88,8 +88,9 @@ public class EmailSignInActivity extends AppCompatActivity {
                          Toast.makeText(getApplicationContext(), "Signed Up!", Toast.LENGTH_SHORT).show();
                          //Update Database
                          writeToDatabase(firstName, lastName, userEmail, userPassword);
-
                          //TODO Switch Activity
+                         Intent intent = new Intent(EmailSignInActivity.this, CentralActivity.class);
+                         startActivity(intent);
                      }else
                      {
                         try{

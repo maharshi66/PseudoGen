@@ -4,6 +4,7 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/app_blue </item>
         <item name="colorPrimaryVariant">@color/app_blue </item>
+        <item name="fontFamily">@font/audiowide</item>
         <item name="colorOnPrimary">@color/light_grey </item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/light_grey</item>
@@ -18,10 +19,17 @@
         parent="Widget.Design.BottomNavigationView">
         <item name="fontFamily">@font/audiowide</item>
     </style>
+    <!-- Edit Text Style -->
+    <style name="Widget.AppCompat.NewEditText" parent="Widget.AppCompat.EditText">
+        <item name="fontFamily">@font/fira_mono</item>
+        <item name="android:background">@color/black</item>
+        <item name="android:textColor">@color/bright_orange</item>
+    </style>
 
     <!-- List View Style -->
     <style name="Widget.AppCompat.NewListView" parent="Widget.AppCompat.ListView">
-        <item name="android:background">@color/dull_blue</item>
+        <item name="fontFamily">@font/fira_mono_medium</item>
+        <item name="android:background">@color/light_grey</item>
     </style>
 
 </resources>
