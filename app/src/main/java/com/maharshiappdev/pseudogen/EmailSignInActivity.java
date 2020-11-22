@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,6 +42,18 @@ public class EmailSignInActivity extends AppCompatActivity {
             {
                 signInUser(usernameEditText.getText().toString(), passwordEditText.getText().toString());
             }
+        }
+    }
+
+    public void showPasswordClicked(View view)
+    {
+        if(passwordEditText.getTransformationMethod().equals(PasswordTransformationMethod.getInstance())){
+            //Show Password
+            passwordEditText.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+        }
+        else{
+            //Hide Password
+            passwordEditText.setTransformationMethod(PasswordTransformationMethod.getInstance());
         }
     }
 

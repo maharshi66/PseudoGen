@@ -11,19 +11,27 @@
         <item name="colorSecondaryVariant">@color/indigo</item>
         <item name="colorOnSecondary">@color/bright_orange</item>
 
+        <item name="android:windowBackground">@drawable/background_gradient</item>
+        <item name="fontFamily">@font/audiowide</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-
         <!-- Customize your theme here. -->
-        <item name="android:windowBackground">@drawable/background_gradient</item>
-        <item name="buttonStyle">@style/Widget.AppCompat.Button.Borderless</item>
-        <item name="fontFamily">@font/audiowide</item>
     </style>
 
     <!-- Action Bar Style -->
     <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="colorPrimary">@color/dark_grey</item>
+        <item name="colorPrimaryVariant">@color/indigo</item>
+        <item name="colorOnPrimary">@color/black</item>
+
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/light_grey</item>
+        <item name="colorSecondaryVariant">@color/indigo</item>
+        <item name="colorOnSecondary">@color/bright_orange</item>
+
+        <item name="fontFamily">@font/audiowide</item>
     </style>
 
     <!-- Bottom Navigation Style -->
