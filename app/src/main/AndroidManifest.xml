@@ -9,13 +9,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PseudoGen">
-        <activity android:name=".CodeEditorActivity"></activity>
+        <activity
+            android:name=".CodeEditorTabbedActivity"
+            android:label="@string/title_activity_code_editor_tabbed"
+            android:theme="@style/Theme.PseudoGen.NoActionBar"></activity>
+        <activity android:name=".CodeEditorActivity" />
         <activity android:name=".CodeActivity" />
         <activity android:name=".CentralActivity" />
-        <activity android:name=".EmailSignInActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".EmailSignInActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

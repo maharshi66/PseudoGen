@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".CodeEditorActivity">
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
+<!--    <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,7 +20,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_nav_menu"
-        app:theme="@style/Widget.BottomNavigationView" />
+        app:theme="@style/Widget.BottomNavigationView" />-->
 
     <!--    <EditText
         android:id="@+id/inputCodeEditText"
@@ -39,7 +39,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:theme="@style/Widget.AppCompat.NewEditText" />-->
-
+<!--
     <com.maharshiappdev.pseudogen.LineNumberedEditText
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -57,6 +57,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:theme="@style/Widget.AppCompat.NewEditText">
 
-    </com.maharshiappdev.pseudogen.LineNumberedEditText>
+    </com.maharshiappdev.pseudogen.LineNumberedEditText>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

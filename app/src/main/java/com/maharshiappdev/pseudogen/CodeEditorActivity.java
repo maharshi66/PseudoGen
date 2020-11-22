@@ -1,5 +1,5 @@
 package com.maharshiappdev.pseudogen;
-
+//TODO: DELETE this Activity! Not being used. Tabbed Activity with fragments being used!
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -44,7 +44,6 @@ public class CodeEditorActivity extends AppCompatActivity {
                 })
                 .show();
     }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

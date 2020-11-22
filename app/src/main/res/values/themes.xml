@@ -2,12 +2,12 @@
     <!-- Base application theme. -->
     <style name="Theme.PseudoGen" parent="Theme.MaterialComponents.DayNight">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/app_blue</item>
+        <item name="colorPrimary">@color/dark_grey</item>
         <item name="colorPrimaryVariant">@color/indigo</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnPrimary">@color/black</item>
 
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/app_blue</item>
+        <item name="colorSecondary">@color/light_grey</item>
         <item name="colorSecondaryVariant">@color/indigo</item>
         <item name="colorOnSecondary">@color/bright_orange</item>
 
@@ -18,7 +18,6 @@
         <item name="android:windowBackground">@drawable/background_gradient</item>
         <item name="buttonStyle">@style/Widget.AppCompat.Button.Borderless</item>
         <item name="fontFamily">@font/audiowide</item>
-
     </style>
 
     <!-- Action Bar Style -->
@@ -28,8 +27,7 @@
     </style>
 
     <!-- Bottom Navigation Style -->
-    <style name="Widget.BottomNavigationView"
-        parent="Widget.Design.BottomNavigationView">
+    <style name="Widget.BottomNavigationView" parent="Widget.Design.BottomNavigationView">
         <item name="fontFamily">@font/audiowide</item>
     </style>
 
@@ -44,5 +42,14 @@
     <style name="Widget.AppCompat.NewEditText" parent="Widget.AppCompat.EditText">
         <item name="fontFamily">@font/fira_mono</item>
     </style>
+
+    <style name="Theme.PseudoGen.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.PseudoGen.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.PseudoGen.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>

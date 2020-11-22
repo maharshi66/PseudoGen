@@ -97,7 +97,7 @@ public class CodeActivity extends AppCompatActivity {
                             if(!titleEditText.getText().toString().isEmpty())
                             {
                                 writeToDatabase(titleEditText.getText().toString());
-                                Intent intent = new Intent(CodeActivity.this, CodeEditorActivity.class);
+                                Intent intent = new Intent(CodeActivity.this, CodeEditorTabbedActivity.class);
                                 intent.putExtra("pseudocodeTitle", titleEditText.getText().toString());
                                 startActivity(intent);
                             }

@@ -2,12 +2,12 @@
     <!-- Base application theme. -->
     <style name="Theme.PseudoGen" parent="Theme.MaterialComponents.DayNight">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/app_blue </item>
+        <item name="colorPrimary">@color/dark_grey</item>
         <item name="colorPrimaryVariant">@color/indigo</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnPrimary">@color/black</item>
 
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/app_blue</item>
+        <item name="colorSecondary">@color/light_grey</item>
         <item name="colorSecondaryVariant">@color/indigo</item>
         <item name="colorOnSecondary">@color/bright_orange</item>
 
@@ -41,7 +41,4 @@
     <style name="Widget.AppCompat.NewEditText" parent="Widget.AppCompat.EditText">
         <item name="fontFamily">@font/fira_mono</item>
     </style>
-
-
-
 </resources>
