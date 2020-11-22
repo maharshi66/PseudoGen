@@ -58,6 +58,7 @@ public class CentralActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if(item.getItemId() == R.id.action_code)
                 {
+                    item.setChecked(true);
                     Intent intent = new Intent(CentralActivity.this, CodeActivity.class);
                     startActivity(intent);
                 }

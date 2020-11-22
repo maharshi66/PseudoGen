@@ -11,13 +11,14 @@
         <item name="colorSecondaryVariant">@color/indigo</item>
         <item name="colorOnSecondary">@color/bright_orange</item>
 
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-
-        <!-- Customize your theme here. -->
         <item name="android:windowBackground">@drawable/background_gradient</item>
         <item name="fontFamily">@font/audiowide</item>
+        <item name="android:editTextStyle">@style/Widget.AppCompat.NewEditText</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
     </style>
+
     <!-- Action Bar Style -->
     <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="windowActionBar">false</item>
@@ -35,15 +36,14 @@
     </style>
 
     <!-- Bottom Navigation Style -->
-
-    <style name="Widget.BottomNavigationView"
-        parent="Widget.Design.BottomNavigationView">
+    <style name="Widget.BottomNavigationView" parent="Widget.Design.BottomNavigationView">
         <item name="fontFamily">@font/audiowide</item>
     </style>
 
     <!-- List View Style -->
     <style name="Widget.AppCompat.NewListView" parent="Widget.AppCompat.ListView">
-        <item name="android:fontFamily">@font/fira_mono_medium</item>
+        <item name="fontFamily">@font/fira_mono_medium</item>
+        <item name="android:textColor">@color/app_blue</item>
         <item name="android:background">@color/light_grey</item>
     </style>
 
@@ -51,4 +51,14 @@
     <style name="Widget.AppCompat.NewEditText" parent="Widget.AppCompat.EditText">
         <item name="fontFamily">@font/fira_mono</item>
     </style>
+
+    <style name="Theme.PseudoGen.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.PseudoGen.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.PseudoGen.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 </resources>

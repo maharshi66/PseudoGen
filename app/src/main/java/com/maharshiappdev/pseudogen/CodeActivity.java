@@ -73,6 +73,7 @@ public class CodeActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if(item.getItemId() == R.id.action_home)
                 {
+                    item.setChecked(true);
                     Intent intent = new Intent(CodeActivity.this, CentralActivity.class);
                     startActivity(intent);
                 }

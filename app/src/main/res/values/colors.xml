@@ -7,10 +7,12 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="app_blue">#05203b</color>
+    <color name="code_editor_white">#F7F9F9</color>
+    <color name="code_editor_dark">#566573</color>
     <color name="white">#FFFFFFFF</color>
     <color name="light_grey">#B8B8B8</color>
     <color name="dark_grey">#838383</color>
-    <color name="dull_blue">#4f4944</color>
+    <color name="deep_sky_blue">#00BFFF</color>
     <color name="dull_yellow">#ffff84</color>
     <color name="pale">#fff9d0</color>
     <color name="indigo">#4B0082</color>

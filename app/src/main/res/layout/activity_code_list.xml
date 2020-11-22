@@ -14,15 +14,14 @@
         android:layout_alignParentBottom="true"
         app:itemBackground="@color/black"
         android:background="@color/black"
-        app:itemIconTint="@android:color/white"
-        app:itemTextAppearanceActive="@style/Widget.BottomNavigationView"
-        app:itemTextColor="@color/light_grey"
+        app:theme="@style/Widget.BottomNavigationView"
+        app:itemIconTint="@drawable/nav_bar_selector"
+        app:itemTextColor="@drawable/nav_bar_selector"
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_nav_menu"
-        app:theme="@style/Widget.BottomNavigationView" />
+        app:menu="@menu/bottom_nav_menu"/>
 
     <ListView
         android:id="@+id/codesListview"

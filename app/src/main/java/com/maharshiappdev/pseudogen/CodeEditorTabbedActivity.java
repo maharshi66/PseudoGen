@@ -66,7 +66,7 @@ public class CodeEditorTabbedActivity extends AppCompatActivity {
         tabs.setupWithViewPager(viewPager);
         tabs.getTabAt(0).setIcon(R.drawable.code_icon);
         tabs.getTabAt(1).setIcon(R.drawable.analysis_icon);
-        FloatingActionButton fab = findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.compileCodeButton);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
