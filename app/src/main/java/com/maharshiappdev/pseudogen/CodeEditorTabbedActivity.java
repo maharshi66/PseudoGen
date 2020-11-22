@@ -64,6 +64,8 @@ public class CodeEditorTabbedActivity extends AppCompatActivity {
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
+        tabs.getTabAt(0).setIcon(R.drawable.code_icon);
+        tabs.getTabAt(1).setIcon(R.drawable.analysis_icon);
         FloatingActionButton fab = findViewById(R.id.fab);
 
         fab.setOnClickListener(new View.OnClickListener() {
