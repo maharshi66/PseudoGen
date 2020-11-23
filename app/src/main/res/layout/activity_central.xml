@@ -40,7 +40,7 @@
             android:background="@color/bright_orange"
             android:backgroundTint="@color/indigo"
             android:clickable="true"
-            android:src="@drawable/add_new_icon">
+            android:src="@drawable/edit_new_icon">
         </com.google.android.material.floatingactionbutton.FloatingActionButton>
     </FrameLayout>
 

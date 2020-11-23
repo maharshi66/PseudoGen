@@ -10,14 +10,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/Theme.PseudoGen.AppBarOverlay">
-        <TextView
-            android:id="@+id/title"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/editorToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+        </androidx.appcompat.widget.Toolbar>
+<!--        <TextView
+            android:id="@+id/tabActivityTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:minHeight="?actionBarSize"
             android:padding="@dimen/appbar_padding"
-            android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title" />
+            android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title" />-->
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
             app:tabSelectedTextColor="@color/bright_orange"
@@ -42,5 +49,5 @@
         android:clickable="true"
         android:background="@color/bright_orange"
         android:backgroundTint="@color/indigo"
-        android:src="@drawable/compile_icon"/>
+        android:src="@drawable/compile_code_icon"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

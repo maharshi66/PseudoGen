@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-<item android:id="@+id/codeEditorMenu" android:title="Save and Exit">
-</item>
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".CodeEditorTabbedActivity">
+
+    <item android:id="@+id/saveAndExit"
+        android:title="Save"
+        android:icon="@drawable/save_icon"
+        app:showAsAction="ifRoom">
+    </item>
 </menu>

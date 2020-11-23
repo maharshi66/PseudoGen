@@ -5,6 +5,5 @@
         android:id="@+id/action_addNew"
         android:enabled="true"
         android:title="Add New"
-        android:icon="@drawable/add_new"
         app:showAsAction="always"/>
 </menu>

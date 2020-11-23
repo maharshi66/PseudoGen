@@ -36,6 +36,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         {
             case 0:
                 fragment = new CodeEditorFragment();
+
                 break;
             case 1:
                 fragment = new CodeAnalysisFragment();

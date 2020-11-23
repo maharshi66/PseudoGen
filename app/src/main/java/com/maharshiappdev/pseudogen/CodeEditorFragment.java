@@ -1,5 +1,6 @@
 package com.maharshiappdev.pseudogen;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,12 +12,16 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link CodeEditorFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class CodeEditorFragment extends Fragment {
+    private final DatabaseReference firebaseDatabaseRef = FirebaseDatabase.getInstance().getReference();
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -57,6 +62,9 @@ public class CodeEditorFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
         setHasOptionsMenu(true);
+        //TODO:Send editText content to activity.
+/*        LineNumberedEditText inputCodeEditText = getActivity().findViewById(R.id.inputCodeEditText);
+        String code = inputCodeEditText.getText().toString();*/
     }
 
     @Override

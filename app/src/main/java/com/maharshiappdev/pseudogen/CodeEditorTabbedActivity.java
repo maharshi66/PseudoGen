@@ -8,7 +8,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,17 +18,34 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.maharshiappdev.pseudogen.ui.main.SectionsPagerAdapter;
 
 public class CodeEditorTabbedActivity extends AppCompatActivity {
+    private final DatabaseReference firebaseDatabaseRef = FirebaseDatabase.getInstance().getReference();
+    String inputCodeTitle = "";
+    String inputCode = "";
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-         super.onCreateOptionsMenu(menu);
-         MenuInflater inflater = new MenuInflater(this);
-         inflater.inflate(R.menu.code_editor_menu, menu);
+         getMenuInflater().inflate(R.menu.code_editor_menu,menu);
+         return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+         super.onOptionsItemSelected(item);
+         switch(item.getItemId())
+         {
+             case R.id.saveAndExit:
+                 saveAndExitPressed();
+                 break;
+         }
          return true;
     }
 
@@ -54,9 +73,6 @@ public class CodeEditorTabbedActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent intent = getIntent();
-        String title = intent.getStringExtra("pseudocodeTitle");
-        setTitle(title);
 
         setContentView(R.layout.activity_code_editor_tabbed);
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
@@ -75,5 +91,41 @@ public class CodeEditorTabbedActivity extends AppCompatActivity {
 //                        .setAction("Action", null).show();
             }
         });
+
+        Toolbar editorToolBar = findViewById(R.id.editorToolbar);
+        setSupportActionBar(editorToolBar);
+        inputCodeTitle = getTabActivityTitle();
+        setTitle(inputCodeTitle);
+    }
+
+    public String getTabActivityTitle()
+    {
+        Intent intent = getIntent();
+        String newTitle = "";
+        newTitle = intent.getStringExtra("pseudocodeTitle");
+        return newTitle;
+    }
+
+    public void saveAndExitPressed()
+    {
+        final LineNumberedEditText codeInputEditText = findViewById(R.id.inputCodeEditText);
+
+        if(!codeInputEditText.getText().toString().isEmpty() )
+        {
+            inputCode = codeInputEditText.getText().toString();
+        }
+
+        if(!inputCodeTitle.isEmpty() && !inputCode.isEmpty())
+        {
+            writeToDatabase(inputCodeTitle,inputCode);
+            Toast.makeText(this, "Saved!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    //TODO Change function parameters as development changes
+    public void writeToDatabase(String title, String code)
+    {
+        //Write Pseudocode Title and corresponding code to Database
+        firebaseDatabaseRef.child("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Posts").child("Code List").child(title).setValue(code);
     }
 }

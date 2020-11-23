@@ -35,7 +35,7 @@ public class LineNumberedEditText extends androidx.appcompat.widget.AppCompatEdi
      *the difference between line text size and the normal text size.
      * line text size is preferabl smaller than the normal text size
      */
-    protected int LINE_NUMBER_TEXTSIZE_GAP = 2;
+    protected int LINE_NUMBER_TEXTSIZE_GAP = 3;
 
     public LineNumberedEditText (Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -77,7 +77,7 @@ public class LineNumberedEditText extends androidx.appcompat.widget.AppCompatEdi
         if (lineNumberVisible) {
 
             //set the size in case it changed after the last update
-            lpaint.setTextSize(getTextSize() - 1);
+            lpaint.setTextSize(getTextSize() - LINE_NUMBER_TEXTSIZE_GAP);
             setLineNumberMarginGap(5);
             setLineNumberTextColor(R.color.black);
 

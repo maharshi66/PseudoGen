@@ -135,7 +135,7 @@ public class CentralActivity extends AppCompatActivity {
 
         BottomNavigationView navigation = findViewById(R.id.bottomNavView);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        navigation.setSelectedItemId(R.id.action_code);
+        navigation.setSelectedItemId(R.id.action_home);
         setTitle(actionBarTitle);
 
         fab_addNew = findViewById(R.id.fab_addNew);
