@@ -23,10 +23,25 @@
         app:menu="@menu/bottom_nav_menu"/>
 
     <FrameLayout
-        android:layout_above="@+id/bottomNavView"
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavView">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_addNew"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            android:background="@color/bright_orange"
+            android:backgroundTint="@color/indigo"
+            android:clickable="true"
+            android:src="@drawable/add_new_icon">
+        </com.google.android.material.floatingactionbutton.FloatingActionButton>
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -39,7 +39,7 @@ public class CodeEditorTabbedActivity extends AppCompatActivity {
                 .setPositiveButton("Yes, discard", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(CodeEditorTabbedActivity.this, CodeActivity.class);
+                        Intent intent = new Intent(CodeEditorTabbedActivity.this, CentralActivity.class);
                         startActivity(intent);
                     }
                 })
@@ -71,8 +71,8 @@ public class CodeEditorTabbedActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
             }
         });
     }
