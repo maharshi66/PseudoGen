@@ -15,4 +15,11 @@
         android:title="Code"
         android:icon="@drawable/code_icon"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_premium"
+        android:enabled="true"
+        android:layout_width="fill_parent"
+        android:title="Premium"
+        android:icon="@drawable/premium_icon"
+        app:showAsAction="ifRoom" />
 </menu>

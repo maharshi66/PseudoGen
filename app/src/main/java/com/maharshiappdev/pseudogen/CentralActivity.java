@@ -2,6 +2,8 @@ package com.maharshiappdev.pseudogen;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -14,6 +16,35 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class CentralActivity extends AppCompatActivity {
+    FragmentTransaction fragmentTransaction;
+    Fragment selectedFragment = null;
+    String actionBarTitle = "";
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.action_home:
+                    selectedFragment = new HomeFragment();
+                    switchFragment(selectedFragment);
+                    break;
+                case R.id.action_code:
+                    selectedFragment = new CodeListFragment();
+                    switchFragment(selectedFragment);
+                    break;
+            }
+            return true;
+        }
+    };
+
+    private void switchFragment(Fragment fragment)
+    {
+        fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+
     @Override
     public void onBackPressed() {
         //super.onBackPressed();
@@ -44,30 +75,6 @@ public class CentralActivity extends AppCompatActivity {
          }
          return true;
     }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_central);
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavView);
-//        setTitle(bottomNavigationView.getMenu().findItem(bottomNavigationView.getSelectedItemId()).getTitle());
-        setTitle("");
-
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if(item.getItemId() == R.id.action_code)
-                {
-                    item.setChecked(true);
-                    Intent intent = new Intent(CentralActivity.this, CodeActivity.class);
-                    startActivity(intent);
-                }
-                return false;
-            }
-        });
-
-    }
-
     public void alertUserForSignOut()
     {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(CentralActivity.this);
@@ -90,10 +97,21 @@ public class CentralActivity extends AppCompatActivity {
 
     public void signOut()
     {
-        FirebaseAuth.getInstance().signOut();
         //Sign out and go to login
+        FirebaseAuth.getInstance().signOut();
         finish();
         Intent intent = new Intent(CentralActivity.this, LoginActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_central);
+
+        BottomNavigationView navigation = findViewById(R.id.bottomNavView);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        navigation.setSelectedItemId(R.id.action_home);
+        setTitle(actionBarTitle);
     }
 }
