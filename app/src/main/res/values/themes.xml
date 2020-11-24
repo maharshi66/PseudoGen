@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.PseudoGen" parent="Theme.MaterialComponents.DayNight">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/dark_grey</item>
+        <item name="colorPrimary">@color/bright_orange</item>
         <item name="colorPrimaryVariant">@color/indigo</item>
         <item name="colorOnPrimary">@color/black</item>
 
@@ -20,19 +20,14 @@
     </style>
 
     <!-- Action Bar Style -->
-    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="colorPrimary">@color/dark_grey</item>
-        <item name="colorPrimaryVariant">@color/indigo</item>
-        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorPrimary">@color/indigo</item>
 
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/light_grey</item>
-        <item name="colorSecondaryVariant">@color/indigo</item>
-        <item name="colorOnSecondary">@color/bright_orange</item>
-
+        <item name="android:windowBackground">@drawable/background_gradient</item>
         <item name="fontFamily">@font/audiowide</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/indigo</item>
     </style>
 
     <!-- Bottom Navigation Style -->

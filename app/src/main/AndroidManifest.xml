@@ -18,7 +18,8 @@
 
         <activity android:name=".CodeEditorActivity" />
         <activity android:name=".CodeActivity" />
-        <activity android:name=".CentralActivity" />
+        <activity android:name=".CentralActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".EmailSignInActivity"
             android:theme="@style/AppTheme.NoActionBar" />
