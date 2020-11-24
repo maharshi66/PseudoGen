@@ -1,7 +1,9 @@
 package com.maharshiappdev.pseudogen;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -14,10 +16,12 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +34,9 @@ public class CodeEditorTabbedActivity extends AppCompatActivity {
     private final DatabaseReference firebaseDatabaseRef = FirebaseDatabase.getInstance().getReference();
     String inputCodeTitle = "";
     String inputCode = "";
+    String defaultPrintHundredOddTitle= "";
+    String defaultPrintHundredOddCode = "";
+    Boolean isPrintHundredOddClicked = false;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -42,8 +49,8 @@ public class CodeEditorTabbedActivity extends AppCompatActivity {
          super.onOptionsItemSelected(item);
          switch(item.getItemId())
          {
-             case R.id.saveAndExit:
-                 saveAndExitPressed();
+             case R.id.checkAndSave:
+                 checkAndSave();
                  break;
          }
          return true;
@@ -70,6 +77,7 @@ public class CodeEditorTabbedActivity extends AppCompatActivity {
                 })
                 .show();
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,14 +95,21 @@ public class CodeEditorTabbedActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
+                //TODO Add action for Code Analysis button clicked
             }
         });
 
         Toolbar editorToolBar = findViewById(R.id.editorToolbar);
         setSupportActionBar(editorToolBar);
-        inputCodeTitle = getTabActivityTitle();
+
+        if(isPrintOddClicked())
+        {
+            inputCodeTitle = defaultPrintHundredOddTitle;
+        }else
+        {
+            inputCodeTitle = getTabActivityTitle();
+        }
+
         setTitle(inputCodeTitle);
     }
 
@@ -106,23 +121,38 @@ public class CodeEditorTabbedActivity extends AppCompatActivity {
         return newTitle;
     }
 
-    public void saveAndExitPressed()
+    public Boolean isPrintOddClicked()
     {
-        final LineNumberedEditText codeInputEditText = findViewById(R.id.inputCodeEditText);
+        getFromSharedPref();
+        Intent intent = getIntent();
+        isPrintHundredOddClicked = intent.getBooleanExtra("defaultPrintHundredOddClicked", false);
+        return isPrintHundredOddClicked;
+    }
 
-        if(!codeInputEditText.getText().toString().isEmpty() )
-        {
-            inputCode = codeInputEditText.getText().toString();
-        }
+    public void getFromSharedPref()
+    {
+        SharedPreferences appSharedPref = getSharedPreferences("com.maharshiappdev.pseudogen", Context.MODE_PRIVATE);
+        defaultPrintHundredOddTitle = appSharedPref.getString("inputCodeTitle", "");
+        defaultPrintHundredOddCode = appSharedPref.getString("inputCode", "");
+    }
 
-        if(!inputCodeTitle.isEmpty() && !inputCode.isEmpty())
+    public void checkAndSave()
+    {
+        final LineNumberedEditText inputCodeEditText = findViewById(R.id.inputCodeEditText);
+        inputCode = inputCodeEditText.getText().toString();
+
+        if(!isPrintHundredOddClicked && !inputCodeTitle.isEmpty() && !inputCode.isEmpty())
         {
             writeToDatabase(inputCodeTitle,inputCode);
             Toast.makeText(this, "Saved!", Toast.LENGTH_SHORT).show();
+        }else if(isPrintHundredOddClicked)
+        {
+            inputCodeEditText.setText(defaultPrintHundredOddCode);
         }
     }
 
     //TODO Change function parameters as development changes
+    //TODO Add complexities as well (Space and Time)
     public void writeToDatabase(String title, String code)
     {
         //Write Pseudocode Title and corresponding code to Database

@@ -3,10 +3,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
-        <item android:title="Log Out" android:id="@+id/nav_logOut"> </item>
-        <item android:title="Privacy" android:id="@+id/nav_Privacy"></item>
-        <item android:id="@+id/nav_rateApp" android:title="Rate App"></item>
-    </group>
+        <item android:id="@+id/nav_premium" android:title="Get Premium"
+            android:icon="@drawable/premium_icon">
+        </item>
+
+        <item android:id="@+id/nav_rateApp" android:title="Rate App"
+        android:icon="@drawable/rate_app_icon">
+        </item>
+
+        <item android:id="@+id/nav_developer" android:title="Developer"
+            android:icon="@drawable/developer_icon">
+        </item>
+
+        <item android:title="Log Out" android:id="@+id/nav_logOut"
+            android:icon="@drawable/log_out">
+        </item>
 
 </menu>

@@ -4,19 +4,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CodeEditorFragment">
+    tools:context=".CodeEditorFragment"
+    android:id="@+id/fragment_code_editor">
 
     <com.maharshiappdev.pseudogen.LineNumberedEditText
         android:id="@+id/inputCodeEditText"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/dark_grey"
         android:gravity="top|start"
-        android:inputType="textMultiLine"
-        android:lines="25"
-        android:scrollbars="vertical|horizontal"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"
         android:hint="Add pseudocode here"
-        android:background="@color/code_editor_dark"
+        android:lines="25"
+        android:scrollbars="vertical"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
         android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavView"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,6 +24,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:theme="@style/Widget.AppCompat.NewEditText">
+
     </com.maharshiappdev.pseudogen.LineNumberedEditText>
 
 </FrameLayout>

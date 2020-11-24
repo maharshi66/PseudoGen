@@ -18,8 +18,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="pseudoGen"
-        android:textSize="16dp"
-        android:textStyle="bold"
+        android:textAlignment="center"
+        android:fontFamily="@font/audiowide"
+        android:textSize="20dp"
         android:textColor="@color/bright_orange">
     </TextView>
 

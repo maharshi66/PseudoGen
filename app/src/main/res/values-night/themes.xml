@@ -12,7 +12,7 @@
         <item name="colorOnSecondary">@color/bright_orange</item>
 
         <item name="android:windowBackground">@drawable/background_gradient</item>
-        <item name="fontFamily">@font/audiowide</item>
+        <item name="fontFamily">@font/maven_pro_medium</item>
         <item name="android:editTextStyle">@style/Widget.AppCompat.NewEditText</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
@@ -32,7 +32,7 @@
         <item name="colorSecondaryVariant">@color/indigo</item>
         <item name="colorOnSecondary">@color/bright_orange</item>
 
-        <item name="fontFamily">@font/audiowide</item>
+        <item name="fontFamily">@font/maven_pro_medium</item>
     </style>
 
     <!-- Bottom Navigation Style -->

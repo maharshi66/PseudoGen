@@ -10,9 +10,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.ListFragment;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -23,21 +26,41 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class CentralActivity extends AppCompatActivity {
+public class CentralActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     FragmentTransaction fragmentTransaction;
     Fragment selectedFragment = null;
     String actionBarTitle = "";
     FloatingActionButton fab_addNew;
-
     private DrawerLayout navDrawer;
+    ListView codeListView;
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId())
+        {
+            case R.id.nav_logOut:
+                alertUserForSignOut();
+                break;
+            case R.id.nav_developer:
+                //TODO Add alert giving background on the developer and why this app was made (succinctly)
+                break;
+            case R.id.rateApp:
+                //TODO open Playstore for rating the app
+                break;
+        }
+        return true;
+    }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -77,35 +100,35 @@ public class CentralActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-    @Override
-    public void onBackPressed() {
-        //super.onBackPressed();
-        if(navDrawer.isDrawerOpen(GravityCompat.START))
-        {
-            navDrawer.closeDrawer(GravityCompat.START);
-        }else
-        {
-            alertUserForSignOut();
-        }
+    public void createAlertForAddNew()
+    {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        LayoutInflater layoutInflater = this.getLayoutInflater();
+        final View dialogView = layoutInflater.inflate(R.layout.add_new_code_dialog, null);
+        final EditText titleEditText = dialogView.findViewById(R.id.titleEditText);
+        alertDialog.setTitle("Add New")
+                .setView(dialogView)
+                .setPositiveButton("Go", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //TODO Take the title, input and output for cloud storage and updating codesList
+
+                        if(!titleEditText.getText().toString().isEmpty())
+                        {
+                            Intent intent = new Intent(CentralActivity.this, CodeEditorTabbedActivity.class);
+                            intent.putExtra("pseudocodeTitle", titleEditText.getText().toString());
+                            startActivity(intent);
+                        }
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                })
+                .show();
     }
-
-/*    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-         super.onOptionsItemSelected(item);
-         switch(item.getItemId())
-         {
-             case R.id.signOut:
-//                 alertUserForSignOut();
-                 break;
-             case R.id.rateApp:
-                 //TODO Rate App Alert Dialog
-                 break;
-             default:
-                 break;
-         }
-         return true;
-    }*/
-
     public void alertUserForSignOut()
     {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(CentralActivity.this);
@@ -136,6 +159,17 @@ public class CentralActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        if(navDrawer.isDrawerOpen(GravityCompat.START))
+        {
+            navDrawer.closeDrawer(GravityCompat.START);
+        }else
+        {
+            alertUserForSignOut();
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_central);
@@ -155,38 +189,18 @@ public class CentralActivity extends AppCompatActivity {
 
         Toolbar centralToolbar = findViewById(R.id.centralToolBar);
         navDrawer = findViewById(R.id.drawerLayout);
+        NavigationView navigationView = findViewById(R.id.navView);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, navDrawer, centralToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         navDrawer.addDrawerListener(toggle);
         toggle.syncState();
-    }
 
-    public void createAlertForAddNew()
-    {
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-        LayoutInflater layoutInflater = this.getLayoutInflater();
-        final View dialogView = layoutInflater.inflate(R.layout.add_new_code_dialog, null);
-        final EditText titleEditText = dialogView.findViewById(R.id.titleEditText);
-        alertDialog.setTitle("Add New")
-                .setView(dialogView)
-                .setPositiveButton("Go", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //TODO Take the title, input and output for cloud storage and updating codesList
+        navigationView.setNavigationItemSelectedListener(this);
 
-                        if(!titleEditText.getText().toString().isEmpty())
-                        {
-                            Intent intent = new Intent(CentralActivity.this, CodeEditorTabbedActivity.class);
-                            intent.putExtra("pseudocodeTitle", titleEditText.getText().toString());
-                            startActivity(intent);
-                        }
-                    }
-                })
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                })
-                .show();
+        SharedPreferences appSharedPref = this.getSharedPreferences("com.maharshiappdev.pseudogen", Context.MODE_PRIVATE);
+        String printHundredOddTitle = "Print all odd integers from 1 to n";
+        String getPrintHundredOddCode = "for i in 1 to n\n\tif(i % 2 != 0)\n\t\tprint i;\n\tendif;\nend loop;";
+        appSharedPref.edit().putString("inputCodeTitle", printHundredOddTitle ).apply();
+        appSharedPref.edit().putString("inputCode", getPrintHundredOddCode).apply();
     }
 }

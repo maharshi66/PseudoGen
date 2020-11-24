@@ -1,19 +1,27 @@
 package com.maharshiappdev.pseudogen;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,6 +39,7 @@ public class CodeEditorFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    String defaultPrintHundredOddCode="";
 
     public CodeEditorFragment() {
         // Required empty public constructor
@@ -63,19 +72,66 @@ public class CodeEditorFragment extends Fragment {
         }
         setHasOptionsMenu(true);
         //TODO:Send editText content to activity.
-/*        LineNumberedEditText inputCodeEditText = getActivity().findViewById(R.id.inputCodeEditText);
-        String code = inputCodeEditText.getText().toString();*/
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_code_editor, container, false);
+        View root = inflater.inflate(R.layout.fragment_code_editor, container, false);
+        return root;
+    }
+
+    //Fixed! How to send shared preferences data for PrintAllOdd to CodeEditText
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        LineNumberedEditText inputCodeEditText = getActivity().findViewById(R.id.inputCodeEditText);
+        updateEditTextViewForPrintOddIntegers(inputCodeEditText);
+//        registerForContextMenu(getActivity().findViewById(R.id.codesListview));
     }
 
     @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
+    public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View v, @Nullable ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getActivity().getMenuInflater();
+        inflater.inflate(R.menu.codelist_item_context_menu, menu);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+/*        switch (item.getItemId()) {
+            case R.id.a_item:
+                Log.i("ContextMenu", "Item 1a was chosen");
+                return true;
+            case R.id.b_item:
+                Log.i("ContextMenu", "Item 1b was chosen");
+                return true;
+        }*/
+        return super.onContextItemSelected(item);
+    }
+
+    public void updateEditTextViewForPrintOddIntegers(LineNumberedEditText inputCodeEditText)
+    {
+        getFromSharedPref();
+        Intent intent = Objects.requireNonNull(getActivity()).getIntent();
+        boolean isPrintAllOddsSelected = intent.getBooleanExtra("defaultPrintHundredOddClicked", false);
+
+        if(isPrintAllOddsSelected)
+        {
+            inputCodeEditText.setText(defaultPrintHundredOddCode);
+        }
+    }
+
+    //Get code from shared preferences for PrintAllOdd!
+    public void getFromSharedPref()
+    {
+        SharedPreferences appSharedPref = getActivity().getSharedPreferences("com.maharshiappdev.pseudogen", Context.MODE_PRIVATE);
+        defaultPrintHundredOddCode = appSharedPref.getString("inputCode", "");
     }
 }

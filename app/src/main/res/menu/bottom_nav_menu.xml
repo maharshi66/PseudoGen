@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
     <item
         android:id="@+id/action_home"
         android:enabled="true"
@@ -12,8 +11,8 @@
         android:id="@+id/action_code"
         android:enabled="true"
         android:layout_width="fill_parent"
-        android:title="Code"
-        android:icon="@drawable/code_icon"
+        android:title="My List"
+        android:icon="@drawable/my_list_icon"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_premium"

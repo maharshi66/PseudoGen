@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".CodeEditorTabbedActivity">
 
-    <item android:id="@+id/saveAndExit"
+    <item android:id="@+id/checkAndSave"
         android:title="Save"
         android:icon="@drawable/save_icon"
         app:showAsAction="ifRoom">

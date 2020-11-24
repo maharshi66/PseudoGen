@@ -1,9 +1,12 @@
 package com.maharshiappdev.pseudogen;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
@@ -41,6 +44,7 @@ public class CodeListFragment extends Fragment implements OnItemClickListener{
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    String defaultPrintHundredOddCode="";
 
     public CodeListFragment() {
         // Required empty public constructor
@@ -78,9 +82,21 @@ public class CodeListFragment extends Fragment implements OnItemClickListener{
         super.onActivityCreated(savedInstanceState);
         ListView codeListView = getActivity().findViewById(R.id.codesListview);
         ArrayList<String> codeList = new ArrayList<>();
-        codeList.add("Hello World!");
+        codeList.add("Print all odd integers from 1 to n");
         ArrayAdapter arrayAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, codeList);
         codeListView.setAdapter(arrayAdapter);
+
+        codeListView.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if(position == 0)
+                {
+                    Intent intent = new Intent(getActivity(), CodeEditorTabbedActivity.class);
+                    intent.putExtra("defaultPrintHundredOddClicked", true);
+                    getActivity().startActivity(intent);
+                }
+            }
+        });
     }
 
     @Override
