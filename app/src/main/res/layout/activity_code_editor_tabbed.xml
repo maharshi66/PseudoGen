@@ -29,12 +29,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="@dimen/appbar_padding"
             android:theme="@style/CodeEditorTitleEditText"
+            android:padding="@dimen/appbar_padding"
             android:background="@color/light_grey">
             <TextView
                 android:id="@+id/codeInputTextView"
                 android:layout_weight="5"
+                android:textColor="@color/indigo"
                 android:textAlignment="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
@@ -42,6 +43,7 @@
             <TextView
                 android:id="@+id/codeOutputTextView"
                 android:textAlignment="center"
+                android:textColor="@color/green"
                 android:layout_weight="5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
@@ -57,20 +59,39 @@
             />
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/view_pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/compileCodeButton"
-        android:layout_width="wrap_content"
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/compileCodeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:translationY="-50dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            android:clickable="true"
+            android:background="@color/bright_orange"
+            android:backgroundTint="@color/indigo"
+            android:src="@drawable/compile_code_icon"/>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavEditShortCuts"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:clickable="true"
-        android:background="@color/bright_orange"
-        android:backgroundTint="@color/indigo"
-        android:src="@drawable/compile_code_icon"/>
+        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true"
+        android:textStyle="bold"
+        android:background="@color/black"
+        app:itemBackground="@color/black"
+        app:itemIconTint="@color/indigo"
+        app:itemTextColor="@color/bright_orange"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/bottom_nav_editor_shortcuts"
+        app:theme="@style/Widget.BottomNavigationView"/>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

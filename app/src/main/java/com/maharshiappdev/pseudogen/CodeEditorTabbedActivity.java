@@ -77,47 +77,6 @@ public class CodeEditorTabbedActivity extends AppCompatActivity {
                 })
                 .show();
     }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_code_editor_tabbed);
-        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
-        ViewPager viewPager = findViewById(R.id.view_pager);
-        viewPager.setAdapter(sectionsPagerAdapter);
-        TabLayout tabs = findViewById(R.id.tabs);
-        tabs.setupWithViewPager(viewPager);
-        tabs.getTabAt(0).setIcon(R.drawable.code_icon);
-        tabs.getTabAt(1).setIcon(R.drawable.analysis_icon);
-        FloatingActionButton fab = findViewById(R.id.compileCodeButton);
-
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //TODO Add action for Code Analysis button clicked
-            }
-        });
-
-        Toolbar editorToolBar = findViewById(R.id.editorToolbar);
-        setSupportActionBar(editorToolBar);
-
-        if(isPrintOddClicked())
-        {
-            inputCodeTitle = defaultPrintHundredOddTitle;
-        }else
-        {
-            inputCodeTitle = getTabActivityTitle();
-        }
-
-        setTitle(inputCodeTitle);
-        TextView codeInputTextView = findViewById(R.id.codeInputTextView);
-        TextView codeOutputTextView = findViewById(R.id.codeOutputTextView);
-
-        codeInputTextView.setText("Input: \t" + getInputCodeText());
-        codeOutputTextView.setText("Output: \t" + getOutputCodeText());
-    }
-
     public String getTabActivityTitle()
     {
         Intent intent = getIntent();
@@ -179,4 +138,50 @@ public class CodeEditorTabbedActivity extends AppCompatActivity {
         //Write Pseudocode Title and corresponding code to Database
         firebaseDatabaseRef.child("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Posts").child("Code List").child(title).setValue(code);
     }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.activity_code_editor_tabbed);
+        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
+        ViewPager viewPager = findViewById(R.id.view_pager);
+        viewPager.setAdapter(sectionsPagerAdapter);
+        TabLayout tabs = findViewById(R.id.tabs);
+        tabs.setupWithViewPager(viewPager);
+        tabs.getTabAt(0).setIcon(R.drawable.code_icon);
+        tabs.getTabAt(1).setIcon(R.drawable.analysis_icon);
+        FloatingActionButton fab = findViewById(R.id.compileCodeButton);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO Add action for Code Analysis button clicked
+            }
+        });
+
+        Toolbar editorToolBar = findViewById(R.id.editorToolbar);
+        setSupportActionBar(editorToolBar);
+
+        if(isPrintOddClicked())
+        {
+            inputCodeTitle = defaultPrintHundredOddTitle;
+        }else
+        {
+            inputCodeTitle = getTabActivityTitle();
+        }
+
+        setTitle(inputCodeTitle);
+        TextView codeInputTextView = findViewById(R.id.codeInputTextView);
+        TextView codeOutputTextView = findViewById(R.id.codeOutputTextView);
+
+        codeInputTextView.setText("Input: \t" + getInputCodeText());
+        codeOutputTextView.setText("Output: \t" + getOutputCodeText());
+
+
+
+
+    }
+
+
 }
