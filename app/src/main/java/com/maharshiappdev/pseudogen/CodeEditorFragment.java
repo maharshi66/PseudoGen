@@ -7,8 +7,14 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import android.text.Editable;
+import android.text.SpannableString;
+import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -20,6 +26,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -83,7 +90,6 @@ public class CodeEditorFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_code_editor, container, false);
-
         return root;
     }
 
@@ -93,7 +99,23 @@ public class CodeEditorFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         LineNumberedEditText inputCodeEditText = getActivity().findViewById(R.id.inputCodeEditText);
         updateEditTextViewForPrintOddIntegers(inputCodeEditText);
-//        registerForContextMenu(getActivity().findViewById(R.id.codesListview));
+
+        inputCodeEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.toString().contains("for"))
+                {
+                    inputCodeEditText.setTextColor(getResources().getColor(R.color.indigo));
+                }
+            }
+        });
+        //registerForContextMenu(getActivity().findViewById(R.id.codesListview));
     }
 
     @Override
