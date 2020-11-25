@@ -111,6 +111,11 @@ public class CodeEditorTabbedActivity extends AppCompatActivity {
         }
 
         setTitle(inputCodeTitle);
+        TextView codeInputTextView = findViewById(R.id.codeInputTextView);
+        TextView codeOutputTextView = findViewById(R.id.codeOutputTextView);
+
+        codeInputTextView.setText("Input: \t" + getInputCodeText());
+        codeOutputTextView.setText("Output: \t" + getOutputCodeText());
     }
 
     public String getTabActivityTitle()
@@ -119,6 +124,22 @@ public class CodeEditorTabbedActivity extends AppCompatActivity {
         String newTitle = "";
         newTitle = intent.getStringExtra("pseudocodeTitle");
         return newTitle;
+    }
+
+    public String getInputCodeText()
+    {
+        Intent intent = getIntent();
+        String newInputText = "";
+        newInputText = intent.getStringExtra( "pseudocodeInputText");
+        return newInputText;
+    }
+
+    public String getOutputCodeText()
+    {
+        Intent intent = getIntent();
+        String newOutputText = "";
+        newOutputText = intent.getStringExtra("pseudocodeOutputText");
+        return newOutputText;
     }
 
     public Boolean isPrintOddClicked()

@@ -15,6 +15,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.ContextMenu;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -22,6 +23,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -126,11 +128,20 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //TODO Take the title, input and output for cloud storage and updating codesList
+                        String codeTitleText = "";
+                        String codeInputText = "";
+                        String codeOutputText = "";
+                        codeTitleText = titleEditText.getText().toString();
+                        codeInputText = codeInputSpinner.getSelectedItem().toString();
+                        codeOutputText = codeOutputSpinner.getSelectedItem().toString();
 
-                        if(!titleEditText.getText().toString().isEmpty())
+                        if(!codeTitleText.isEmpty() &&
+                            !codeInputText.isEmpty() && !codeOutputText.isEmpty())
                         {
                             Intent intent = new Intent(CentralActivity.this, CodeEditorTabbedActivity.class);
-                            intent.putExtra("pseudocodeTitle", titleEditText.getText().toString());
+                            intent.putExtra("pseudocodeTitle", codeTitleText);
+                            intent.putExtra("pseudocodeInputText", codeInputText);
+                            intent.putExtra("pseudocodeOutputText", codeOutputText);
                             startActivity(intent);
                         }
                     }
@@ -140,8 +151,25 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
                     }
-                })
-                .show();
+                });
+
+        AlertDialog dialog = alertDialog.create();
+        dialog.show();
+
+        //TODO Helps Increase Size of the Dialog but doesnt extent the View with it. FIX
+        /*
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int displayWidth = displayMetrics.widthPixels;
+        int displayHeight = displayMetrics.heightPixels;
+
+        WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+        layoutParams.copyFrom(dialog.getWindow().getAttributes());
+        int dialogWindowWidth = (int) (displayWidth);
+        int dialogWindowHeight = (int) (displayHeight * 0.70f);
+        layoutParams.width = dialogWindowWidth;
+        layoutParams.height = dialogWindowHeight;
+        dialog.getWindow().setAttributes(layoutParams);*/
     }
 
     public void alertUserForSignOut()

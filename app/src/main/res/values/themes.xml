@@ -56,4 +56,9 @@
 
     <style name="Theme.PseudoGen.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="CodeEditorTitleEditText" parent="Theme.PseudoGen">
+        <item name="android:textColor">@color/indigo</item>
+        <item name="background">@color/dark_grey</item>
+    </style>
+
 </resources>
