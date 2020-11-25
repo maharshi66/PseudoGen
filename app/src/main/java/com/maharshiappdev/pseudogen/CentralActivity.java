@@ -22,9 +22,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,13 +39,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CentralActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class CentralActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     FragmentTransaction fragmentTransaction;
     Fragment selectedFragment = null;
     String actionBarTitle = "";
     FloatingActionButton fab_addNew;
     private DrawerLayout navDrawer;
-    ListView codeListView;
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -106,6 +107,19 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
         LayoutInflater layoutInflater = this.getLayoutInflater();
         final View dialogView = layoutInflater.inflate(R.layout.add_new_code_dialog, null);
         final EditText titleEditText = dialogView.findViewById(R.id.titleEditText);
+        final Spinner codeInputSpinner = dialogView.findViewById(R.id.codeInputSpinner);
+        final Spinner codeOutputSpinner = dialogView.findViewById(R.id.codeOutputSpinner);
+        String[] dataStructures = getResources().getStringArray(R.array.data_structures);
+
+        ArrayAdapter<String> codeInputArrayAdapter = new ArrayAdapter<String>(CentralActivity.this, android.R.layout.simple_spinner_dropdown_item, dataStructures);
+        ArrayAdapter<String> codeOutputArrayAdapter = new ArrayAdapter<String>(CentralActivity.this, android.R.layout.simple_spinner_dropdown_item, dataStructures);
+
+        codeInputArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        codeOutputArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        codeInputSpinner.setAdapter(codeInputArrayAdapter);
+        codeOutputSpinner.setAdapter(codeOutputArrayAdapter);
+
         alertDialog.setTitle("Add New")
                 .setView(dialogView)
                 .setPositiveButton("Go", new DialogInterface.OnClickListener() {
@@ -129,6 +143,7 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
                 })
                 .show();
     }
+
     public void alertUserForSignOut()
     {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(CentralActivity.this);
@@ -197,10 +212,17 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
 
         navigationView.setNavigationItemSelectedListener(this);
 
+        //Default Print All Odd Integers Shared Pref
         SharedPreferences appSharedPref = this.getSharedPreferences("com.maharshiappdev.pseudogen", Context.MODE_PRIVATE);
         String printHundredOddTitle = "Print all odd integers from 1 to n";
         String getPrintHundredOddCode = "for i in 1 to n\n\tif(i % 2 != 0)\n\t\tprint i;\n\tendif;\nend loop;";
         appSharedPref.edit().putString("inputCodeTitle", printHundredOddTitle ).apply();
         appSharedPref.edit().putString("inputCode", getPrintHundredOddCode).apply();
+
+/*        Spinner codeInputSpinner = findViewById(R.id.codeInputSpinner);
+        String[] data_structures = getResources().getStringArray(R.array.data_structures);
+        ArrayAdapter<String> codeInputArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, data_structures);
+        codeInputArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        codeInputSpinner.setAdapter(codeInputArrayAdapter);*/
     }
 }

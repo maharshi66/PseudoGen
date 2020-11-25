@@ -12,20 +12,50 @@
         android:layout_height="wrap_content"
         android:hint="Pseudocode Title"
         android:inputType="text" />
-
     <EditText
-        android:id="@+id/codeInputEditText"
+        android:id="@+id/descriptionEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop = "10dp"
-        android:hint="Input"
-        android:inputType="text" />
-
-    <EditText
-        android:id="@+id/codeOutputEditText"
+        android:hint="Description"
+        android:inputType="textMultiLine" />
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop = "10dp"
-        android:hint="Output"
-        android:inputType="text" />
+        android:layout_height="40dp"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/label_inputDataStructure"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Input"
+            android:layout_weight="4">
+        </TextView>
+        <Spinner
+            android:id="@+id/codeInputSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="10dp"
+            android:layout_weight="6"
+            android:textColor="#ffffff" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/label_outputDataStructure"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ouput"
+            android:layout_weight="4">
+        </TextView>
+        <Spinner
+            android:id="@+id/codeOutputSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="10dp"
+            android:layout_weight="6" />
+    </LinearLayout>
 </LinearLayout>

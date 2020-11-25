@@ -18,4 +18,17 @@
     <string name="navigation_drawer_open">Open Navigation Drawer</string>
     <string name="navigation_drawer_close">Close Navigation Drawer</string>
 
+    <!--Code Input Options Strings for Spinner-->
+    <string-array name="data_structures">
+        <item>Void</item>
+        <item>Array</item>
+        <item>String</item>
+        <item>Linked List</item>
+        <item>Map</item>
+        <item>Set</item>
+        <item>Binary Tree</item>
+        <item>Binary Search Tree</item>
+        <item>Graph</item>
+    </string-array>
+
 </resources>
