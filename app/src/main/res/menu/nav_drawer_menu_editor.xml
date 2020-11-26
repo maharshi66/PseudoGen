@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+        <item android:id="@+id/nav_premium" android:title="Get Premium"
+            android:icon="@drawable/premium_icon">
+        </item>
+
+        <item android:id="@+id/nav_rateApp" android:title="Rate App"
+        android:icon="@drawable/rate_app_icon">
+        </item>
+
+        <item android:id="@+id/nav_developer" android:title="Developer"
+            android:icon="@drawable/developer_icon">
+        </item>
+
+        <item android:title="Home" android:id="@+id/nav_goHome"
+            android:icon="@drawable/home_icon">
+        </item>
+</menu>

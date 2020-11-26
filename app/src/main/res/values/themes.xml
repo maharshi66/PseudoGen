@@ -32,7 +32,8 @@
 
     <!-- Bottom Navigation Style -->
     <style name="Widget.BottomNavigationView" parent="Widget.Design.BottomNavigationView">
-        <item name="fontFamily">@font/audiowide</item>
+        <item name="fontFamily">@font/maven_pro_medium</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <!-- List View Style -->
