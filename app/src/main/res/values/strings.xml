@@ -31,4 +31,7 @@
         <item>Graph</item>
     </string-array>
 
+    <string name="hint_input_resource">Input</string>
+    <string name="hint_output_resource">Output</string>
+
 </resources>

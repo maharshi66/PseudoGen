@@ -61,4 +61,8 @@
         <item name="background">@color/dark_grey</item>
     </style>
 
+    <!--Alert Dialog-->
+    <style name="CutomAlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:background">@color/light_grey</item>
+    </style>
 </resources>

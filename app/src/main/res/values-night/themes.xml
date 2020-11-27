@@ -65,4 +65,8 @@
         <item name="background">@color/dark_grey</item>
     </style>
 
+    <!--Alert Dialog-->
+    <style name="CutomAlertDialog" parent="Theme.PseudoGen">
+        <item name="background">@color/bright_orange</item>
+    </style>
 </resources>

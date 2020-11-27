@@ -105,7 +105,7 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
 
     public void createAlertForAddNew()
     {
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this, R.style.CutomAlertDialog);
         LayoutInflater layoutInflater = this.getLayoutInflater();
         final View dialogView = layoutInflater.inflate(R.layout.add_new_code_dialog, null);
         final EditText titleEditText = dialogView.findViewById(R.id.titleEditText);
@@ -122,8 +122,7 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
         codeInputSpinner.setAdapter(codeInputArrayAdapter);
         codeOutputSpinner.setAdapter(codeOutputArrayAdapter);
 
-        alertDialog.setTitle("Add New")
-                .setView(dialogView)
+        alertDialog.setView(dialogView)
                 .setPositiveButton("Go", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -151,13 +150,12 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
                     }
-                });
-
-        AlertDialog dialog = alertDialog.create();
+                })
+                .show();
+/*        AlertDialog dialog = alertDialog.create();
         dialog.show();
 
         //TODO Helps Increase Size of the Dialog but doesnt extent the View with it. FIX
-        /*
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int displayWidth = displayMetrics.widthPixels;
@@ -166,7 +164,7 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
         WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
         layoutParams.copyFrom(dialog.getWindow().getAttributes());
         int dialogWindowWidth = (int) (displayWidth);
-        int dialogWindowHeight = (int) (displayHeight * 0.70f);
+        int dialogWindowHeight = (int) (displayHeight * 0.80f);
         layoutParams.width = dialogWindowWidth;
         layoutParams.height = dialogWindowHeight;
         dialog.getWindow().setAttributes(layoutParams);*/
