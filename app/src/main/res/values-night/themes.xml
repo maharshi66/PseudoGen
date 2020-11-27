@@ -69,4 +69,9 @@
     <style name="CutomAlertDialog" parent="Theme.PseudoGen">
         <item name="background">@color/bright_orange</item>
     </style>
+
+    <!--Tool Bar Custom Code Editor-->
+    <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">14sp</item>
+    </style>
 </resources>
