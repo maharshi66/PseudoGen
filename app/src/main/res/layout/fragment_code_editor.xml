@@ -14,8 +14,10 @@
         android:background="@color/white"
         android:gravity="top|start"
         android:hint="Add pseudocode here"
+        android:inputType="textMultiLine|textNoSuggestions"
         android:lines="35"
         android:scrollbars="vertical"
+        android:text="process:"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavView"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,6 +25,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:theme="@style/Widget.AppCompat.NewEditText">
+
     </com.maharshiappdev.pseudogen.LineNumberedEditText>
 
 </FrameLayout>
