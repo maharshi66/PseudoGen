@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.PseudoGen" parent="Theme.MaterialComponents.DayNight">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/dark_grey</item>
+        <item name="colorPrimary">@color/bright_orange</item>
         <item name="colorPrimaryVariant">@color/indigo</item>
         <item name="colorOnPrimary">@color/black</item>
 
@@ -20,24 +20,20 @@
     </style>
 
     <!-- Action Bar Style -->
-    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="colorPrimary">@color/dark_grey</item>
-        <item name="colorPrimaryVariant">@color/indigo</item>
-        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorPrimary">@color/indigo</item>
 
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/light_grey</item>
-        <item name="colorSecondaryVariant">@color/indigo</item>
-        <item name="colorOnSecondary">@color/bright_orange</item>
-
+        <item name="android:windowBackground">@drawable/background_gradient</item>
         <item name="fontFamily">@font/maven_pro_medium</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/indigo</item>
     </style>
 
     <!-- Bottom Navigation Style -->
     <style name="Widget.BottomNavigationView" parent="Widget.Design.BottomNavigationView">
-        <item name="fontFamily">@font/audiowide</item>
+        <item name="fontFamily">@font/maven_pro_medium</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <!-- List View Style -->
@@ -66,12 +62,24 @@
     </style>
 
     <!--Alert Dialog-->
-    <style name="CutomAlertDialog" parent="Theme.PseudoGen">
-        <item name="background">@color/bright_orange</item>
+    <style name="CutomAlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:background">@color/light_grey</item>
     </style>
 
     <!--Tool Bar Custom Code Editor-->
     <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textSize">14sp</item>
+    </style>
+
+    <!--Custom Sign In Buttons-->
+    <style name="CustomSignInButtons" parent="Theme.PseudoGen">
+        <item name="colorPrimary">@color/light_grey</item>
+        <item name="colorPrimaryVariant">@color/indigo</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/dark_grey</item>
+        <item name="colorSecondaryVariant">@color/indigo</item>
+        <item name="colorOnSecondary">@color/bright_orange</item>
+        <item name="fontFamily">@font/maven_pro_medium</item>
     </style>
 </resources>

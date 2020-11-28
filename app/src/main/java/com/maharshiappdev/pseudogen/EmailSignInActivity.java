@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -13,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -33,7 +35,8 @@ public class EmailSignInActivity extends AppCompatActivity {
     String userPassword;
     String firstName;
     String lastName;
-
+    //Hide is 0, Show is 1
+    boolean showHideState = false;
     public void signInClicked(View view)
     {
         if(mAuth.getCurrentUser() == null)
@@ -47,12 +50,23 @@ public class EmailSignInActivity extends AppCompatActivity {
 
     public void showPasswordClicked(View view)
     {
+        final ImageView passwordShowHideImageView = findViewById(R.id.passwordShowHideImageView);
+        String uriShow = "@drawable/showpassword";  //where myresource (without the extension) is the file
+        int imageResourceShow = getResources().getIdentifier(uriShow, null, getPackageName());
+        Drawable resShow = getResources().getDrawable(imageResourceShow);
+
+        String uriHide = "@drawable/hidepassword";  //where myresource (without the extension) is the file
+        int imageResourceHide = getResources().getIdentifier(uriHide, null, getPackageName());
+        Drawable resHide = getResources().getDrawable(imageResourceHide);
+
         if(passwordEditText.getTransformationMethod().equals(PasswordTransformationMethod.getInstance())){
             //Show Password
+            passwordShowHideImageView.setImageDrawable(resHide);
             passwordEditText.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
         }
         else{
             //Hide Password
+            passwordShowHideImageView.setImageDrawable(resShow);
             passwordEditText.setTransformationMethod(PasswordTransformationMethod.getInstance());
         }
     }

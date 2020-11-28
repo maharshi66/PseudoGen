@@ -70,4 +70,18 @@
     <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textSize">14sp</item>
     </style>
+
+    <!--Custom Sign In Buttons-->
+    <style name="CustomSignInButtons" parent="Theme.PseudoGen">
+        <item name="colorPrimary">@color/light_grey</item>
+        <item name="colorPrimaryVariant">@color/indigo</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/light_grey</item>
+        <item name="colorSecondaryVariant">@color/indigo</item>
+        <item name="colorOnSecondary">@color/bright_orange</item>
+
+        <item name="fontFamily">@font/maven_pro_medium</item>
+    </style>
 </resources>

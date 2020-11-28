@@ -21,25 +21,24 @@
 
   <Button
       android:id="@+id/emailButton"
-      android:layout_width="250dp"
+      android:layout_width="170dp"
       android:layout_height="wrap_content"
-      android:layout_marginTop="135dp"
       android:layout_marginBottom="307dp"
       android:adjustViewBounds="true"
       android:drawableLeft="@drawable/emailsignin"
       android:onClick="signInWithEmailClicked"
       android:padding="20dp"
       android:scaleType="centerInside"
-      android:text="Sign In With Email"
+      android:text="Email"
+      android:theme="@style/CustomSignInButtons"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.5"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/imageView" />
+      app:layout_constraintStart_toStartOf="parent" />
 
   <Button
       android:id="@+id/googleButton"
-      android:layout_width="250dp"
+      android:layout_width="170dp"
       android:layout_height="wrap_content"
       android:layout_marginTop="62dp"
       android:layout_marginBottom="197dp"
@@ -47,7 +46,8 @@
       android:drawableLeft="@drawable/googlesignin"
       android:padding="20dp"
       android:scaleType="centerInside"
-      android:text="Sign In With Google"
+      android:text="Google"
+      android:theme="@style/CustomSignInButtons"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.5"
