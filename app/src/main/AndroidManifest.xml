@@ -15,8 +15,6 @@
             android:theme="@style/Theme.PseudoGen.NoActionBar">
         </activity>
 
-        <activity android:name=".CodeEditorActivity" />
-        <activity android:name=".CodeActivity" />
         <activity android:name=".CentralActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
