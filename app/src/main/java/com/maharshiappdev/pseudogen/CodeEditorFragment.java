@@ -30,7 +30,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -39,53 +42,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link CodeEditorFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class CodeEditorFragment extends Fragment {
+public class CodeEditorFragment extends Fragment{
     private final DatabaseReference firebaseDatabaseRef = FirebaseDatabase.getInstance().getReference();
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    View view;
     String defaultPrintHundredOddCode="";
-
-    public CodeEditorFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment CodeEditorFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static CodeEditorFragment newInstance(String param1, String param2) {
-        CodeEditorFragment fragment = new CodeEditorFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
+    LineNumberedEditText inputCodeEditText;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
         setHasOptionsMenu(true);
         //TODO:Send editText content to activity.
     }
@@ -94,15 +58,20 @@ public class CodeEditorFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View root = inflater.inflate(R.layout.fragment_code_editor, container, false);
-        return root;
+        view = inflater.inflate(R.layout.fragment_code_editor, container, false);
+        return view;
     }
 
     //Fixed! How to send shared preferences data for PrintAllOdd to CodeEditText
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        LineNumberedEditText inputCodeEditText = getActivity().findViewById(R.id.inputCodeEditText);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        inputCodeEditText = view.findViewById(R.id.inputCodeEditText);
         updateEditTextViewForPrintOddIntegers(inputCodeEditText);
 
         inputCodeEditText.addTextChangedListener(new TextWatcher() {
@@ -158,34 +127,41 @@ public class CodeEditorFragment extends Fragment {
                             start = endIdx;
                             if (beginIdx > 0)
                                 editable.setSpan(
-                                    span,
-                                    beginIdx,
-                                    endIdx,
-                                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                                        span,
+                                        beginIdx,
+                                        endIdx,
+                                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                         }
                     }
                 }
             }
         });
+
+        BottomNavigationView navigation = getActivity().findViewById(R.id.bottomNavEditShortCuts);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-    }
-
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-/*        switch (item.getItemId()) {
-            case R.id.a_item:
-                Log.i("ContextMenu", "Item 1a was chosen");
-                return true;
-            case R.id.b_item:
-                Log.i("ContextMenu", "Item 1b was chosen");
-                return true;
-        }*/
-        return super.onContextItemSelected(item);
-    }
+    //Shortcuts Listener
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.action_tab:
+                    inputCodeEditText.append("\t\t");
+                    break;
+                case R.id.action_semicolon:
+                    inputCodeEditText.append(";");
+                    break;
+                case R.id.action_ifelse:
+                    inputCodeEditText.append("\tif\n\telse");
+                    break;
+                default:
+                    break;
+            }
+            return true;
+        }
+    };
 
     public void updateEditTextViewForPrintOddIntegers(LineNumberedEditText inputCodeEditText)
     {
