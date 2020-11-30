@@ -38,8 +38,6 @@
 
     <!-- List View Style -->
     <style name="Widget.AppCompat.NewListView" parent="Widget.AppCompat.ListView">
-        <item name="fontFamily">@font/fira_mono_medium</item>
-        <item name="android:textColor">@color/app_blue</item>
         <item name="android:background">@color/light_grey</item>
     </style>
 

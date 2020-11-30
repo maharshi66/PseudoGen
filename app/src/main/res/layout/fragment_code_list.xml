@@ -6,9 +6,8 @@
     android:layout_height="match_parent"
     android:id="@+id/codeListFragment"
     tools:context=".CodeListFragment">
-
-    <ListView
-        android:id="@+id/codesListview"
+    <ExpandableListView
+        android:id="@+id/codeListExpandableListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavView"
@@ -16,5 +15,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:theme="@style/Widget.AppCompat.NewListView">
-    </ListView>
+    </ExpandableListView>
 </LinearLayout>

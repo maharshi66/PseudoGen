@@ -15,7 +15,7 @@ import java.util.List;
 
 public class HomeFragment extends Fragment implements AdapterView.OnItemClickListener{
     View view;
-    ExpandableListAdapter listAdapter;
+    HomeExpandableListAdapter listAdapter;
     List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
 
@@ -32,7 +32,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemClickLis
         ExpandableListView expandableListView = view.findViewById(R.id.homeExpandableListView);
         prepareListData();
 
-        listAdapter = new ExpandableListAdapter(getActivity().getApplicationContext(), listDataHeader, listDataChild);
+        listAdapter = new HomeExpandableListAdapter(getActivity().getApplicationContext(), listDataHeader, listDataChild);
         // setting list adapter
         expandableListView.setAdapter(listAdapter);
 

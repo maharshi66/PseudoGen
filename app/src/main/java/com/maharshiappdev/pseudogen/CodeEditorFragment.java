@@ -110,19 +110,19 @@ public class CodeEditorFragment extends Fragment {
             ForegroundColorSpan span;
             public void setUpMap()
             {
-                map.put("startprocess",Color.RED);
-                map.put("endprocess",Color.RED);
+                map.put("process",Color.RED);
+                map.put("endProcess",Color.RED);
                 map.put("char",Color.GREEN);
                 map.put("string",Color.GREEN);
-                map.put("integer",Color.GREEN);
+                map.put("int",Color.GREEN);
                 map.put("for",Color.BLUE);
                 map.put("while",Color.BLUE);
                 map.put("do",Color.BLUE);
-                map.put("endloop",Color.BLUE);
+                map.put("endLoop",Color.BLUE);
                 map.put("if",Color.BLUE);
                 map.put("else",Color.BLUE);
-                map.put("endif",Color.BLUE);
-                map.put("endif",Color.BLUE);
+                map.put("endIf",Color.BLUE);
+                map.put("endIf",Color.BLUE);
             }
 
             public void clearMap()
@@ -167,14 +167,6 @@ public class CodeEditorFragment extends Fragment {
                 }
             }
         });
-        //registerForContextMenu(getActivity().findViewById(R.id.codesListview));
-    }
-
-    @Override
-    public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View v, @Nullable ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-        MenuInflater inflater = getActivity().getMenuInflater();
-        inflater.inflate(R.menu.codelist_item_context_menu, menu);
     }
 
     @Override

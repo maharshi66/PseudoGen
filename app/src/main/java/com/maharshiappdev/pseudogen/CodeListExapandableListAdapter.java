@@ -1,5 +1,4 @@
 package com.maharshiappdev.pseudogen;
-
 import android.content.Context;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
@@ -11,14 +10,13 @@ import android.widget.TextView;
 import java.util.HashMap;
 import java.util.List;
 
-public class ExpandableListAdapter extends BaseExpandableListAdapter {
-
+public class CodeListExapandableListAdapter extends BaseExpandableListAdapter {
     private Context _context;
     private List<String> _listDataHeader; // header titles
     // child data in format of header title, child title
     private HashMap<String, List<String>> _listDataChild;
 
-    public ExpandableListAdapter(Context context, List<String> listDataHeader,
+    public CodeListExapandableListAdapter(Context context, List<String> listDataHeader,
                                  HashMap<String, List<String>> listChildData) {
         this._context = context;
         this._listDataHeader = listDataHeader;
@@ -68,11 +66,11 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this._context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = infalInflater.inflate(R.layout.home_list_group, null);
+            convertView = infalInflater.inflate(R.layout.code_list_title, null);
         }
 
         TextView lblListHeader = (TextView) convertView
-                .findViewById(R.id.homeListHeader);
+                .findViewById(R.id.codeListTitle);
         lblListHeader.setTypeface(null, Typeface.BOLD);
         lblListHeader.setText(headerTitle);
 
@@ -86,11 +84,11 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this._context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = infalInflater.inflate(R.layout.home_list_item, null);
+            convertView = infalInflater.inflate(R.layout.code_list_item, null);
         }
 
         TextView txtListChild = (TextView) convertView
-                .findViewById(R.id.homeListItem);
+                .findViewById(R.id.codeListItem);
 
         txtListChild.setText(childText);
         return convertView;
@@ -98,6 +96,6 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
-        return true;
+        return false;
     }
 }
