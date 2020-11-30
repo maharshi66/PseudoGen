@@ -11,5 +11,6 @@
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
+        android:paddingRight="?android:attr/expandableListPreferredItemPaddingLeft"
         android:textSize="20dp"/>
 </LinearLayout>

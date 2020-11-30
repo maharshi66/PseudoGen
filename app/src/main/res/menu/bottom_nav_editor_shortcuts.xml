@@ -16,6 +16,6 @@
         android:id="@+id/action_ifelse"
         android:enabled="true"
         android:layout_width="fill_parent"
-        android:title="if...else"
+        android:title="if-else"
         app:showAsAction="ifRoom" />
 </menu>

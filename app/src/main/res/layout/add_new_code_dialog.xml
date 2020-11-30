@@ -3,34 +3,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:minHeight="400dp"
-    android:layout_height="fill_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical">
     <EditText
         android:id="@+id/titleEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:hint="Pseudocode Title"
         android:inputType="text"/>
     <EditText
         android:id="@+id/descriptionEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:hint="Description"
         android:inputType="textMultiLine"/>
         <Spinner
             android:id="@+id/codeInputSpinner"
             android:spinnerMode="dialog"
             android:prompt="@string/hint_input_resource"
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"/>
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_gravity="center_horizontal"/>
        <Spinner
             android:id="@+id/codeOutputSpinner"
             android:spinnerMode="dialog"
             android:prompt="@string/hint_output_resource"
             android:layout_width="match_parent"
+           android:layout_marginTop="20dp"
+           android:layout_marginBottom="20dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"/>
+            android:layout_gravity="center_horizontal"/>
 </LinearLayout>
