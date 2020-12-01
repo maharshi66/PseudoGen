@@ -14,6 +14,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -255,11 +256,5 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
         String getPrintHundredOddCode = "for i in 1 to n\n\tif(i % 2 != 0)\n\t\tprint i;\n\tendif;\nend loop;";
         appSharedPref.edit().putString("inputCodeTitle", printHundredOddTitle ).apply();
         appSharedPref.edit().putString("inputCode", getPrintHundredOddCode).apply();
-
-/*        Spinner codeInputSpinner = findViewById(R.id.codeInputSpinner);
-        String[] data_structures = getResources().getStringArray(R.array.data_structures);
-        ArrayAdapter<String> codeInputArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, data_structures);
-        codeInputArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        codeInputSpinner.setAdapter(codeInputArrayAdapter);*/
     }
 }
