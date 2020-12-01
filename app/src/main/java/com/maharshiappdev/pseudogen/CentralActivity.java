@@ -14,6 +14,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.ContextMenu;
@@ -58,8 +59,18 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
             case R.id.nav_developer:
                 //TODO Add alert giving background on the developer and why this app was made (succinctly)
                 break;
-            case R.id.rateApp:
-                //TODO open Playstore for rating the app
+            case R.id.nav_rateApp:
+                //Opens  Playstore for rating the app
+                Intent intent = getPackageManager().getLaunchIntentForPackage("com.android.vending");
+                startActivity(intent);
+
+                //TODO uncomment once app is on Playstore
+/*                final String appPackageName = getPackageName(); // getPackageName() from Context or Activity object
+                try {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+                } catch (android.content.ActivityNotFoundException anfe) {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+                }*/
                 break;
         }
         return true;
