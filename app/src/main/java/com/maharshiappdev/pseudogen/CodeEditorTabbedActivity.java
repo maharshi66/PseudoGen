@@ -36,8 +36,13 @@ import com.maharshiappdev.pseudogen.ui.main.SectionsPagerAdapter;
 public class CodeEditorTabbedActivity extends AppCompatActivity/* implements NavigationView.OnNavigationItemSelectedListener */{
     private final DatabaseReference firebaseDatabaseRef = FirebaseDatabase.getInstance().getReference();
     private DrawerLayout navDrawerEditor;
-    String inputCodeTitle = "";
-    String inputCode = "";
+    String postTitle = "";
+    String postPseudocode = "";
+    String postDescription = "";
+    String postInput = "";
+    String postOutput = "";
+    String postTime = "";
+    String postSpace = "";
     String defaultPrintHundredOddTitle = "";
     String defaultPrintHundredOddCode = "";
     Boolean isPrintHundredOddClicked = false;
@@ -117,10 +122,20 @@ public class CodeEditorTabbedActivity extends AppCompatActivity/* implements Nav
 
     public void checkAndSave() {
         final LineNumberedEditText inputCodeEditText = findViewById(R.id.inputCodeEditText);
-        inputCode = inputCodeEditText.getText().toString();
+        postPseudocode = inputCodeEditText.getText().toString();
+        postDescription = "Description";
+        postInput = "Input";
+        postOutput = "Output";
+        postTime = "Time";
+        postSpace = "Space";
 
-        if (!isPrintHundredOddClicked && !inputCodeTitle.isEmpty() && !inputCode.isEmpty()) {
-            writeToDatabase(inputCodeTitle, inputCode);
+        if (!isPrintHundredOddClicked && !postTitle.isEmpty() && !postPseudocode.isEmpty()) {
+//            writeToDatabase(inputCodeTitle, inputCode);
+            DatabaseHandler db = new DatabaseHandler(getApplicationContext());
+            //TODO Change id, description as per content in encountered in app
+            Posts post = new Posts(4, postTitle, postDescription, postPseudocode,postInput, postOutput, postTime, postSpace);
+            db.addPseudocodePost(post);
+            db.close();
             Toast.makeText(this, "Saved!", Toast.LENGTH_SHORT).show();
         } else if (isPrintHundredOddClicked) {
             inputCodeEditText.setText(defaultPrintHundredOddCode);
@@ -160,28 +175,16 @@ public class CodeEditorTabbedActivity extends AppCompatActivity/* implements Nav
 //        navigationViewEditor.setNavigationItemSelectedListener(this);
 
         if (isPrintOddClicked()) {
-            inputCodeTitle = defaultPrintHundredOddTitle;
+            postTitle = defaultPrintHundredOddTitle;
         } else {
-            inputCodeTitle = getTabActivityTitle();
+            postTitle = getTabActivityTitle();
         }
 
-        setTitle(inputCodeTitle);
+        setTitle(postTitle);
         TextView codeInputTextView = findViewById(R.id.codeInputTextView);
         TextView codeOutputTextView = findViewById(R.id.codeOutputTextView);
 
         codeInputTextView.setText("Input: \t" + getInputCodeText());
         codeOutputTextView.setText("Output: \t" + getOutputCodeText());
     }
-/*
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.nav_goHome:
-                Intent intent = new Intent(CodeEditorTabbedActivity.this, CentralActivity.class);
-                finish();
-                startActivity(intent);
-                break;
-        }
-        return true;
-    }*/
 }

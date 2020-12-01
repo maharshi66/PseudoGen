@@ -16,6 +16,7 @@ import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -40,6 +41,7 @@ public class CodeListFragment extends Fragment implements OnItemClickListener{
     Menu deleteMenu;
     ExpandableListView codeListExpandableListView;
     CodeListExapandableListAdapter listAdapter;
+    List<Posts> postList;
     List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
 
@@ -56,6 +58,22 @@ public class CodeListFragment extends Fragment implements OnItemClickListener{
             MenuInflater inflater = getActivity().getMenuInflater();
             inflater.inflate(R.menu.code_list_menu, menu);
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        super.onOptionsItemSelected(item);
+        switch(item.getItemId())
+        {
+            case R.id.deleteItem:
+                codeListExpandableListView.removeViewAt(1);
+                listAdapter.notifyDataSetChanged();
+                break;
+            case R.id.editItem:
+                break;
+        }
+
+        return true;
     }
 
     @Override
@@ -79,10 +97,11 @@ public class CodeListFragment extends Fragment implements OnItemClickListener{
             }
         });*/
         codeListExpandableListView = getView().findViewById(R.id.codeListExpandableListView);
-        prepareDataListDefault();
+        prepareDataList();
         listAdapter = new CodeListExapandableListAdapter(getActivity().getApplicationContext(), listDataHeader, listDataChild);
         // setting list adapter
         codeListExpandableListView.setAdapter(listAdapter);
+        listAdapter.notifyDataSetChanged();
         registerForContextMenu(codeListExpandableListView);
     }
 
@@ -99,12 +118,14 @@ public class CodeListFragment extends Fragment implements OnItemClickListener{
 
     }
 
-    public void prepareDataListDefault()
+    public void prepareDataList()
     {
         listDataHeader = new ArrayList<String>();
         listDataChild = new HashMap<String, List<String>>();
-
+        List<Posts> uploadedPosts = loadPosts();
+        //Print Odd Example
         // Adding header data
+
         listDataHeader.add("Print All Odd");
         // Adding child data
         List<String> pseudocodePostList = new ArrayList<String>();
@@ -114,6 +135,25 @@ public class CodeListFragment extends Fragment implements OnItemClickListener{
         pseudocodePostList.add("Time: O(N)");
         pseudocodePostList.add("Space: O(1)");
         listDataChild.put(listDataHeader.get(0), pseudocodePostList); // Header, Child data
+
+        int i = 1;
+        for(Posts p :  uploadedPosts)
+        {
+            listDataHeader.add(p.getTitle());
+            List<String> postChildrenList = new ArrayList<String>();
+            postChildrenList.add(p.getDescription());
+            postChildrenList.add(p.getInput());
+            postChildrenList.add(p.getOutput());
+            postChildrenList.add(p.getTime());
+            postChildrenList.add(p.getSpace());
+            listDataChild.put(listDataHeader.get(i), postChildrenList);
+            i++;
+        }
     }
 
+    private List<Posts> loadPosts(){
+        DatabaseHandler db = new DatabaseHandler(getActivity().getApplicationContext());
+        postList = db.getAllPosts();
+        return postList;
+    }
 }
