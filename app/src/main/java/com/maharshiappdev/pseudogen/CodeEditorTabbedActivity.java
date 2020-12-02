@@ -100,6 +100,13 @@ public class CodeEditorTabbedActivity extends AppCompatActivity/* implements Nav
         return newInputText;
     }
 
+    public String getCodeDescriptionText() {
+        Intent intent = getIntent();
+        String newInputText = "";
+        newInputText = intent.getStringExtra("pseudocodeDescription");
+        return newInputText;
+    }
+
     public String getOutputCodeText() {
         Intent intent = getIntent();
         String newOutputText = "";
@@ -123,17 +130,18 @@ public class CodeEditorTabbedActivity extends AppCompatActivity/* implements Nav
     public void checkAndSave() {
         final LineNumberedEditText inputCodeEditText = findViewById(R.id.inputCodeEditText);
         postPseudocode = inputCodeEditText.getText().toString();
-        postDescription = "Description";
-        postInput = "Input";
-        postOutput = "Output";
+        postDescription = getCodeDescriptionText();
+        postInput = getInputCodeText();
+        postOutput = getOutputCodeText();
+        //TODO Change this after Analysis code written, placeholders
         postTime = "Time";
         postSpace = "Space";
 
         if (!isPrintHundredOddClicked && !postTitle.isEmpty() && !postPseudocode.isEmpty()) {
 //            writeToDatabase(inputCodeTitle, inputCode);
             DatabaseHandler db = new DatabaseHandler(getApplicationContext());
-            //TODO Change id, description as per content in encountered in app
-            Posts post = new Posts(4, postTitle, postDescription, postPseudocode,postInput, postOutput, postTime, postSpace);
+            //TODO Change id, time and space as per content in encountered in app
+            Posts post = new Posts(10, postTitle, postDescription, postPseudocode, postInput, postOutput, postTime, postSpace);
             db.addPseudocodePost(post);
             db.close();
             Toast.makeText(this, "Saved!", Toast.LENGTH_SHORT).show();
@@ -172,7 +180,6 @@ public class CodeEditorTabbedActivity extends AppCompatActivity/* implements Nav
 
         Toolbar editorToolBar = findViewById(R.id.editorToolbar);
         setSupportActionBar(editorToolBar);
-//        navigationViewEditor.setNavigationItemSelectedListener(this);
 
         if (isPrintOddClicked()) {
             postTitle = defaultPrintHundredOddTitle;

@@ -121,6 +121,7 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
         LayoutInflater layoutInflater = this.getLayoutInflater();
         final View dialogView = layoutInflater.inflate(R.layout.add_new_code_dialog, null);
         final EditText titleEditText = dialogView.findViewById(R.id.titleEditText);
+        final EditText descriptionEditText = dialogView.findViewById(R.id.descriptionEditText);
         final Spinner codeInputSpinner = dialogView.findViewById(R.id.codeInputSpinner);
         final Spinner codeOutputSpinner = dialogView.findViewById(R.id.codeOutputSpinner);
         String[] dataStructures = getResources().getStringArray(R.array.data_structures);
@@ -140,19 +141,23 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
                     public void onClick(DialogInterface dialog, int which) {
                         //TODO Take the title, input and output for cloud storage and updating codesList
                         String codeTitleText = "";
+                        String codeDescriptionText = "";
                         String codeInputText = "";
                         String codeOutputText = "";
                         codeTitleText = titleEditText.getText().toString();
+                        codeDescriptionText = descriptionEditText.getText().toString();
                         codeInputText = codeInputSpinner.getSelectedItem().toString();
                         codeOutputText = codeOutputSpinner.getSelectedItem().toString();
 
-                        if(!codeTitleText.isEmpty() &&
+                        if(!codeTitleText.isEmpty() && !codeDescriptionText.isEmpty() &&
                             !codeInputText.isEmpty() && !codeOutputText.isEmpty())
                         {
                             Intent intent = new Intent(CentralActivity.this, CodeEditorTabbedActivity.class);
                             intent.putExtra("pseudocodeTitle", codeTitleText);
+                            intent.putExtra("pseudocodeDescription", codeDescriptionText);
                             intent.putExtra("pseudocodeInputText", codeInputText);
                             intent.putExtra("pseudocodeOutputText", codeOutputText);
+
                             startActivity(intent);
                         }
                     }

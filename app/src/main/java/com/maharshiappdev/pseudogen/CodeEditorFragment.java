@@ -72,6 +72,7 @@ public class CodeEditorFragment extends Fragment{
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         inputCodeEditText = view.findViewById(R.id.inputCodeEditText);
+
         updateEditTextViewForPrintOddIntegers(inputCodeEditText);
 
         inputCodeEditText.addTextChangedListener(new TextWatcher() {
@@ -111,7 +112,7 @@ public class CodeEditorFragment extends Fragment{
                 setUpMap();
                 String editString = editable.toString();
                 //Split on white space
-                String[] splitStrArray = editString.split("\\s+");
+                String[] splitStrArray = editString.split("\\s");
                 int start = 0, beginIdx = 0, endIdx = 0, color = 0, count = 0;
 
                 for (int i = 0; i < splitStrArray.length; i++) {

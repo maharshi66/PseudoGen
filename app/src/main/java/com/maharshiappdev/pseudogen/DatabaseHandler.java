@@ -40,13 +40,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         // Create table SQL query
         String CREATE_POSTS_TABLE = "CREATE TABLE " + TABLE_NAME + "("
                         + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                        + KEY_TITLE + " VARCHAR,"
-                        + KEY_DES + " VARCHAR,"
-                        + KEY_PSEUDOCODE + " VARCHAR,"
-                        + KEY_INPUT + " VARCHAR,"
-                        + KEY_OUTPUT + " VARCHAR,"
-                        + KEY_TIME + " VARCHAR,"
-                        + KEY_SPACE + " VARCHAR"
+                        + KEY_TITLE + " TEXT NOT NULL,"
+                        + KEY_DES + " TEXT,"
+                        + KEY_PSEUDOCODE + " TEXT,"
+                        + KEY_INPUT + " TEXT,"
+                        + KEY_OUTPUT + " TEXT,"
+                        + KEY_TIME + " TEXT,"
+                        + KEY_SPACE + " TEXT"
                         + ")";
         db.execSQL(CREATE_POSTS_TABLE);
     }
@@ -124,5 +124,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         db.close();
         return postsList;
+    }
+
+    public void deletePost(String title)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM " + TABLE_NAME + " WHERE " + KEY_TITLE + "=\"" + title + "\";");
+        db.close();
     }
 }

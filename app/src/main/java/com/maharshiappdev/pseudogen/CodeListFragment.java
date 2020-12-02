@@ -12,6 +12,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.provider.ContactsContract;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -22,6 +23,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.app.ListFragment;
@@ -44,7 +46,7 @@ public class CodeListFragment extends Fragment implements OnItemClickListener{
     List<Posts> postList;
     List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
-
+    DatabaseHandler db;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,41 +63,32 @@ public class CodeListFragment extends Fragment implements OnItemClickListener{
     }
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        super.onOptionsItemSelected(item);
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        super.onContextItemSelected(item);
         switch(item.getItemId())
         {
             case R.id.deleteItem:
-                codeListExpandableListView.removeViewAt(1);
+                ExpandableListView.ExpandableListContextMenuInfo info = (ExpandableListView.ExpandableListContextMenuInfo) item.getMenuInfo();
+                int groupPos = ExpandableListView.getPackedPositionGroup(info.packedPosition);
+                int childPos = ExpandableListView.getPackedPositionChild(info.packedPosition);
+                //Deletes from Database based on pseudocode title.
+                //TODO Careful with this. Add checks to avoid duplicate naming!!!
+                db.deletePost(listDataHeader.get(groupPos));
+                listDataHeader.remove(groupPos);
+                listDataChild.remove(childPos);
                 listAdapter.notifyDataSetChanged();
                 break;
             case R.id.editItem:
+
                 break;
         }
-
         return true;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        //Old Way for adding Print all odd to ListView
-        /*        ArrayList<String> codeList = new ArrayList<>();
-        codeList.add("Print all odd integers from 1 to n");
-        ArrayAdapter arrayAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, codeList);
-        codeListView.setAdapter(arrayAdapter);
-
-        codeListView.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(position == 0)
-                {
-                    Intent intent = new Intent(getActivity(), CodeEditorTabbedActivity.class);
-                    intent.putExtra("defaultPrintHundredOddClicked", true);
-                    getActivity().startActivity(intent);
-                }
-            }
-        });*/
+        db = new DatabaseHandler(getActivity().getApplicationContext());
         codeListExpandableListView = getView().findViewById(R.id.codeListExpandableListView);
         prepareDataList();
         listAdapter = new CodeListExapandableListAdapter(getActivity().getApplicationContext(), listDataHeader, listDataChild);
@@ -152,7 +145,6 @@ public class CodeListFragment extends Fragment implements OnItemClickListener{
     }
 
     private List<Posts> loadPosts(){
-        DatabaseHandler db = new DatabaseHandler(getActivity().getApplicationContext());
         postList = db.getAllPosts();
         return postList;
     }
