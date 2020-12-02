@@ -20,11 +20,14 @@ import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.ContextMenu;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -59,6 +62,9 @@ public class CodeEditorTabbedActivity extends AppCompatActivity/* implements Nav
         switch (item.getItemId()) {
             case R.id.checkAndSave:
                 checkAndSave();
+                break;
+            case R.id.action_editDetails:
+                createAlertForEditDetails();
                 break;
         }
         return true;
@@ -130,12 +136,6 @@ public class CodeEditorTabbedActivity extends AppCompatActivity/* implements Nav
     public void checkAndSave() {
         final LineNumberedEditText inputCodeEditText = findViewById(R.id.inputCodeEditText);
         postPseudocode = inputCodeEditText.getText().toString();
-        postDescription = getCodeDescriptionText();
-        postInput = getInputCodeText();
-        postOutput = getOutputCodeText();
-        //TODO Change this after Analysis code written, placeholders
-        postTime = "Time";
-        postSpace = "Space";
 
         if (!isPrintHundredOddClicked && !postTitle.isEmpty() && !postPseudocode.isEmpty()) {
 //            writeToDatabase(inputCodeTitle, inputCode);
@@ -155,6 +155,46 @@ public class CodeEditorTabbedActivity extends AppCompatActivity/* implements Nav
     public void writeToDatabase(String title, String code) {
         //Write Pseudocode Title and corresponding code to Database
         firebaseDatabaseRef.child("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Posts").child("Code List").child(title).setValue(code);
+    }
+
+    public void createAlertForEditDetails()
+    {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this, R.style.CutomAlertDialog);
+        LayoutInflater layoutInflater = this.getLayoutInflater();
+        final View dialogView = layoutInflater.inflate(R.layout.edit_post_details_dialog, null);
+        final EditText titleEditText = dialogView.findViewById(R.id.postTitleEditText);
+        final EditText descriptionEditText = dialogView.findViewById(R.id.postDescriptionEditText);
+        final Spinner codeInputSpinner = dialogView.findViewById(R.id.postInputSpinner);
+        final Spinner codeOutputSpinner = dialogView.findViewById(R.id.postOutputSpinner);
+        String[] dataStructures = getResources().getStringArray(R.array.data_structures);
+
+        ArrayAdapter<String> codeInputArrayAdapter = new ArrayAdapter<String>(CodeEditorTabbedActivity.this, android.R.layout.simple_spinner_dropdown_item, dataStructures);
+        ArrayAdapter<String> codeOutputArrayAdapter = new ArrayAdapter<String>(CodeEditorTabbedActivity.this, android.R.layout.simple_spinner_dropdown_item, dataStructures);
+
+        codeInputArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        codeOutputArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        codeInputSpinner.setAdapter(codeInputArrayAdapter);
+        codeOutputSpinner.setAdapter(codeOutputArrayAdapter);
+
+        alertDialog.setView(dialogView)
+                .setPositiveButton("Done", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        postTitle = titleEditText.getText().toString();
+                        postDescription = descriptionEditText.getText().toString();
+                        postInput = codeInputSpinner.getSelectedItem().toString();
+                        postOutput = codeOutputSpinner.getSelectedItem().toString();
+                        //TODO Change input/output textViews and the title of the toolbar as per changes
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                })
+                .show();
     }
 
     @Override
@@ -188,10 +228,18 @@ public class CodeEditorTabbedActivity extends AppCompatActivity/* implements Nav
         }
 
         setTitle(postTitle);
+
         TextView codeInputTextView = findViewById(R.id.codeInputTextView);
         TextView codeOutputTextView = findViewById(R.id.codeOutputTextView);
 
         codeInputTextView.setText("Input: \t" + getInputCodeText());
         codeOutputTextView.setText("Output: \t" + getOutputCodeText());
+
+        postDescription = getCodeDescriptionText();
+        postInput = getInputCodeText();
+        postOutput = getOutputCodeText();
+        //TODO Change this after Analysis code written, placeholders
+        postTime = "Time";
+        postSpace = "Space";
     }
 }
