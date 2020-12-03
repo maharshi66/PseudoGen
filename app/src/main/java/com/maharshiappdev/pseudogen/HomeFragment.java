@@ -1,4 +1,6 @@
 package com.maharshiappdev.pseudogen;
+import android.content.ClipData;
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -41,10 +43,18 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemClickLis
         {
             expandableListView.expandGroup(i);
         }
-    }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                Intent intent = new Intent(getActivity().getApplicationContext(), LearningWebViewActivity.class);
+                intent.putExtra("groupName", listDataHeader.get(groupPosition));
+                intent.putExtra("groupPosition", groupPosition);
+                intent.putExtra("childPosition", childPosition);
+                startActivity(intent);
+                return true;
+            }
+        });
     }
 
     private void prepareListData() {
@@ -88,5 +98,10 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemClickLis
         listDataChild.put(listDataHeader.get(0), introToPseudocodeHeader); // Header, Child data
         listDataChild.put(listDataHeader.get(1), dataStructuresHeader);
         listDataChild.put(listDataHeader.get(2), analysisOfAlgorithmsHeader);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
     }
 }

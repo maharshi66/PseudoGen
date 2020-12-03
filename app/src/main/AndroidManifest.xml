@@ -9,14 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PseudoGen">
+        <activity android:name=".LearningWebViewActivity"></activity>
         <activity
             android:name=".CodeEditorTabbedActivity"
             android:label="@string/title_activity_code_editor_tabbed"
-            android:theme="@style/Theme.PseudoGen.NoActionBar">
-        </activity>
-
-        <activity android:name=".CentralActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/Theme.PseudoGen.NoActionBar"></activity>
+        <activity
+            android:name=".CentralActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".EmailSignInActivity"
             android:theme="@style/AppTheme.NoActionBar" />
