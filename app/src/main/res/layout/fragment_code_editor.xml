@@ -17,7 +17,6 @@
         android:inputType="textMultiLine|textNoSuggestions"
         android:lines="35"
         android:scrollbars="vertical"
-        android:text="process:"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavView"
         app:layout_constraintEnd_toEndOf="parent"

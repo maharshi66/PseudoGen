@@ -78,7 +78,7 @@
             android:clickable="true"
             android:background="@color/bright_orange"
             android:backgroundTint="@color/indigo"
-            android:src="@drawable/compile_code_icon"/>
+            android:src="@drawable/compile_icon"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavEditShortCuts"
