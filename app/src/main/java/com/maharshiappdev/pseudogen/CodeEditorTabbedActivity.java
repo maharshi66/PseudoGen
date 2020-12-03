@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
@@ -49,6 +50,16 @@ public class CodeEditorTabbedActivity extends AppCompatActivity/* implements Nav
     String defaultPrintHundredOddTitle = "";
     String defaultPrintHundredOddCode = "";
     Boolean isPrintHundredOddClicked = false;
+    BottomNavigationView bottomNavEditShortCuts;
+    boolean shortcutsChecked = true;
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        MenuItem action_shortcuts = menu.findItem(R.id.action_shortcuts);
+        action_shortcuts.setChecked(shortcutsChecked);
+        return true;
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -66,27 +77,63 @@ public class CodeEditorTabbedActivity extends AppCompatActivity/* implements Nav
             case R.id.action_editDetails:
                 createAlertForEditDetails();
                 break;
+            case R.id.action_backHome:
+                createAlertForBackHome();
+                break;
+            case R.id.action_shortcuts:
+                shortcutsChecked = !item.isChecked();
+                item.setChecked(shortcutsChecked);
+                if(shortcutsChecked)
+                {
+                    bottomNavEditShortCuts.setVisibility(View.VISIBLE);
+                }else{
+                    bottomNavEditShortCuts.setVisibility(View.INVISIBLE);
+                }
+                break;
+            default:
+                return false;
         }
         return true;
     }
 
-    @Override
-    public void onBackPressed() {
+    public void createAlertForBackHome()
+    {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-        alertDialog.setTitle("Discard draft")
+        alertDialog.setTitle("Exit Editor")
                 .setCancelable(true)
-                .setMessage("Do you want to discard this draft?")
-                .setPositiveButton("Yes, discard", new DialogInterface.OnClickListener() {
+                .setMessage("Do you want to exit the editor?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(CodeEditorTabbedActivity.this, CentralActivity.class);
                         startActivity(intent);
                     }
                 })
-                .setNegativeButton("No, continue", new DialogInterface.OnClickListener() {
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                    }
+                })
+                .show();
+    }
 
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setTitle("Exit Editor")
+                .setCancelable(true)
+                .setMessage("Do you want to exit the editor?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(CodeEditorTabbedActivity.this, CentralActivity.class);
+                        startActivity(intent);
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
                     }
                 })
                 .show();
@@ -228,7 +275,7 @@ public class CodeEditorTabbedActivity extends AppCompatActivity/* implements Nav
         }
 
         setTitle(postTitle);
-
+        bottomNavEditShortCuts = findViewById(R.id.bottomNavEditShortCuts);
         TextView codeInputTextView = findViewById(R.id.codeInputTextView);
         TextView codeOutputTextView = findViewById(R.id.codeOutputTextView);
 

@@ -19,8 +19,10 @@
                 android:id="@+id/action_editDetails"
                 android:title="Edit Details" />
             <item
-                android:id="@+id/action_hideShortcuts"
-                android:title="Hide Shortcuts" />
+                android:id="@+id/action_shortcuts"
+                android:title="Shortcuts"
+                android:checkable="true"
+                android:actionLayout="@layout/toggle_switch_shortcuts"/>
             <item
                 android:id="@+id/action_backHome"
                 android:title="Back Home" />
