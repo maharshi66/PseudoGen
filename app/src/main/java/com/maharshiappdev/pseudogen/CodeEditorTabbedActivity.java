@@ -51,6 +51,8 @@ public class CodeEditorTabbedActivity extends AppCompatActivity/* implements Nav
     String defaultPrintHundredOddCode = "";
     Boolean isPrintHundredOddClicked = false;
     BottomNavigationView bottomNavEditShortCuts;
+    TextView codeInputTextView;
+    TextView codeOutputTextView;
     boolean shortcutsChecked = true;
 
     @Override
@@ -228,11 +230,21 @@ public class CodeEditorTabbedActivity extends AppCompatActivity/* implements Nav
                 .setPositiveButton("Done", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        postTitle = titleEditText.getText().toString();
-                        postDescription = descriptionEditText.getText().toString();
-                        postInput = codeInputSpinner.getSelectedItem().toString();
-                        postOutput = codeOutputSpinner.getSelectedItem().toString();
-                        //TODO Change input/output textViews and the title of the toolbar as per changes
+                        if(!titleEditText.getText().toString().isEmpty() ||
+                                !descriptionEditText.getText().toString().isEmpty())
+                        {
+                            postTitle = titleEditText.getText().toString();
+                            postDescription = descriptionEditText.getText().toString();
+                            postInput = codeInputSpinner.getSelectedItem().toString();
+                            postOutput = codeOutputSpinner.getSelectedItem().toString();
+                        }
+
+                        if(!postTitle.isEmpty() && !postInput.isEmpty() && !postOutput.isEmpty())
+                        {
+                            getSupportActionBar().setTitle(postTitle);
+                            codeInputTextView.setText(postInput);
+                            codeOutputTextView.setText(postOutput);
+                        }
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -276,8 +288,8 @@ public class CodeEditorTabbedActivity extends AppCompatActivity/* implements Nav
 
         setTitle(postTitle);
         bottomNavEditShortCuts = findViewById(R.id.bottomNavEditShortCuts);
-        TextView codeInputTextView = findViewById(R.id.codeInputTextView);
-        TextView codeOutputTextView = findViewById(R.id.codeOutputTextView);
+        codeInputTextView = findViewById(R.id.codeInputTextView);
+        codeOutputTextView = findViewById(R.id.codeOutputTextView);
 
         codeInputTextView.setText("Input: \t" + getInputCodeText());
         codeOutputTextView.setText("Output: \t" + getOutputCodeText());
