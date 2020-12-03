@@ -186,16 +186,20 @@ public class CodeEditorTabbedActivity extends AppCompatActivity/* implements Nav
         final LineNumberedEditText inputCodeEditText = findViewById(R.id.inputCodeEditText);
         postPseudocode = inputCodeEditText.getText().toString();
 
-        if (!isPrintHundredOddClicked && !postTitle.isEmpty() && !postPseudocode.isEmpty()) {
+        //TODO Change Obsolte code to remove Print All Odd from Shared Pref! Save data if title, des, i/o not empty
+        if (!isPrintHundredOddClicked && !postTitle.isEmpty()) {
 //            writeToDatabase(inputCodeTitle, inputCode);
             DatabaseHandler db = new DatabaseHandler(getApplicationContext());
             //TODO Change id, time and space as per content in encountered in app
-            Posts post = new Posts(10, postTitle, postDescription, postPseudocode, postInput, postOutput, postTime, postSpace);
+            Posts post = new Posts(1, postTitle, postDescription, postPseudocode, postInput, postOutput, postTime, postSpace);
             db.addPseudocodePost(post);
             db.close();
             Toast.makeText(this, "Saved!", Toast.LENGTH_SHORT).show();
         } else if (isPrintHundredOddClicked) {
             inputCodeEditText.setText(defaultPrintHundredOddCode);
+        }else
+        {
+            Toast.makeText(this, "Saved Failed!", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -230,14 +234,10 @@ public class CodeEditorTabbedActivity extends AppCompatActivity/* implements Nav
                 .setPositiveButton("Done", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if(!titleEditText.getText().toString().isEmpty() ||
-                                !descriptionEditText.getText().toString().isEmpty())
-                        {
-                            postTitle = titleEditText.getText().toString();
-                            postDescription = descriptionEditText.getText().toString();
-                            postInput = codeInputSpinner.getSelectedItem().toString();
-                            postOutput = codeOutputSpinner.getSelectedItem().toString();
-                        }
+                        postTitle = titleEditText.getText().toString();
+                        postDescription = descriptionEditText.getText().toString();
+                        postInput = codeInputSpinner.getSelectedItem().toString();
+                        postOutput = codeOutputSpinner.getSelectedItem().toString();
 
                         if(!postTitle.isEmpty() && !postInput.isEmpty() && !postOutput.isEmpty())
                         {

@@ -38,14 +38,21 @@
 
     <string name="hint_input_resource">Input</string>
     <string name="hint_output_resource">Output</string>
-    <!--HTML INTRO FOR LEARNING WEB VIEWS -->
-    <string name="arrays_intro">In computer science, an array data structure, or simply an
-        array, is a data structure consisting of a collection of elements (values or variables),
-        each identified by at least one array index or key.
-        An array is stored such that the position of each element can be
-        computed from its index tuple by a mathematical formula.
-        [1][2][3] The simplest type of data structure is a linear array,
-        also called one-dimensional array.
-    </string>
 
+    <!--HTML INTRO FOR LEARNING WEB VIEWS -->
+    <!--ARRAYS-->
+    <string name="arrays_intro">An array consists of a collection of contiguous elements.
+        They organize items in a sequential manner, one after the other, in memory.
+        Linear arrays are the simplest type of data structure and are also known as one-dimensional array.
+    </string>
+    <string name="arrays_pro1">Fast element access
+    </string>
+    <string name="arrays_pro2">Fast appends
+    </string>
+    <string name="arrays_con1">Fixed size
+    </string>
+    <string name="arrays_con2">Expensive insertion and deletion
+    </string>
+    <string name="array_operationTable">
+    </string>
 </resources>

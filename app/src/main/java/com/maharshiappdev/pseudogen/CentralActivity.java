@@ -157,8 +157,10 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
                             intent.putExtra("pseudocodeDescription", codeDescriptionText);
                             intent.putExtra("pseudocodeInputText", codeInputText);
                             intent.putExtra("pseudocodeOutputText", codeOutputText);
-
                             startActivity(intent);
+                        }else
+                        {
+                            Toast.makeText(CentralActivity.this, "Fields cannot be empty!", Toast.LENGTH_SHORT).show();
                         }
                     }
                 })
@@ -172,7 +174,7 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
 /*        AlertDialog dialog = alertDialog.create();
         dialog.show();
 
-        //TODO Helps Increase Size of the Dialog but doesnt extent the View with it. FIX
+        //TODO Helps Increase Size of the Dialog but doesnt extend the View with it. FIX!
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int displayWidth = displayMetrics.widthPixels;

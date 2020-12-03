@@ -23,20 +23,20 @@
         android:inputType="textMultiLine"/>
         <Spinner
             android:id="@+id/codeInputSpinner"
-            android:spinnerMode="dropdown"
+            android:spinnerMode="dialog"
             android:prompt="@string/hint_input_resource"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            android:layout_gravity="center_horizontal"/>
+            android:layout_gravity="center"/>
        <Spinner
             android:id="@+id/codeOutputSpinner"
-            android:spinnerMode="dropdown"
+            android:spinnerMode="dialog"
             android:prompt="@string/hint_output_resource"
             android:layout_width="match_parent"
            android:layout_marginTop="20dp"
            android:layout_marginBottom="20dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"/>
+            android:layout_gravity="center"/>
 </LinearLayout>

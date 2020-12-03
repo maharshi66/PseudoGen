@@ -117,18 +117,7 @@ public class CodeListFragment extends Fragment implements OnItemClickListener{
         listDataChild = new HashMap<String, List<String>>();
         List<Posts> uploadedPosts = loadPosts();
 
-        // Adding header data
-        listDataHeader.add("Print All Odd");
-        // Adding child data
-        List<String> pseudocodePostList = new ArrayList<String>();
-        pseudocodePostList.add("Description: Print all odd integers from 1 to n");
-        pseudocodePostList.add("Input: Void");
-        pseudocodePostList.add("Ouput: Array");
-        pseudocodePostList.add("Time: O(N)");
-        pseudocodePostList.add("Space: O(1)");
-        listDataChild.put(listDataHeader.get(0), pseudocodePostList); // Header, Child data
-
-        int i = 1;
+        int i = 0;
         for(Posts p :  uploadedPosts)
         {
             listDataHeader.add(p.getTitle());
