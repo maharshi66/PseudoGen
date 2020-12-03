@@ -24,10 +24,15 @@
         <item>Array</item>
         <item>String</item>
         <item>Linked List</item>
+        <item>Stack</item>
+        <item>Queue</item>
+        <item>Dequeue</item>
         <item>Map</item>
         <item>Set</item>
         <item>Binary Tree</item>
         <item>Binary Search Tree</item>
+        <item>Heap</item>
+        <item>Priority Queue</item>
         <item>Graph</item>
     </string-array>
 

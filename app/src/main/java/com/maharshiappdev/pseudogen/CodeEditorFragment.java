@@ -51,7 +51,6 @@ public class CodeEditorFragment extends Fragment{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        //TODO:Send editText content to activity.
     }
 
     @Override
@@ -147,15 +146,28 @@ public class CodeEditorFragment extends Fragment{
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            int start, end;
             switch (item.getItemId()) {
                 case R.id.action_tab:
-                    inputCodeEditText.append("\t\t");
+                    String tab = "\t\t";
+                    start = Math.max(inputCodeEditText.getSelectionStart(), 0);
+                    end = Math.max(inputCodeEditText.getSelectionEnd(), 0);
+                    inputCodeEditText.getText().replace(Math.min(start, end), Math.max(start, end),
+                            tab, 0, tab.length());
                     break;
                 case R.id.action_semicolon:
-                    inputCodeEditText.append(";");
+                    String semicolon = ";";
+                    start = Math.max(inputCodeEditText.getSelectionStart(), 0);
+                    end = Math.max(inputCodeEditText.getSelectionEnd(), 0);
+                    inputCodeEditText.getText().replace(Math.min(start, end), Math.max(start, end),
+                            semicolon, 0, semicolon.length());
                     break;
                 case R.id.action_ifelse:
-                    inputCodeEditText.append("\tif\n\telse");
+                    String ifElse = "if\nelse";
+                    start = Math.max(inputCodeEditText.getSelectionStart(), 0);
+                    end = Math.max(inputCodeEditText.getSelectionEnd(), 0);
+                    inputCodeEditText.getText().replace(Math.min(start, end), Math.max(start, end),
+                            ifElse, 0, ifElse.length());
                     break;
                 default:
                     break;

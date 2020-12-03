@@ -23,7 +23,7 @@
         android:inputType="textMultiLine"/>
         <Spinner
             android:id="@+id/codeInputSpinner"
-            android:spinnerMode="dialog"
+            android:spinnerMode="dropdown"
             android:prompt="@string/hint_input_resource"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
@@ -32,7 +32,7 @@
             android:layout_gravity="center_horizontal"/>
        <Spinner
             android:id="@+id/codeOutputSpinner"
-            android:spinnerMode="dialog"
+            android:spinnerMode="dropdown"
             android:prompt="@string/hint_output_resource"
             android:layout_width="match_parent"
            android:layout_marginTop="20dp"

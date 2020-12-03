@@ -242,8 +242,8 @@ public class CodeEditorTabbedActivity extends AppCompatActivity/* implements Nav
                         if(!postTitle.isEmpty() && !postInput.isEmpty() && !postOutput.isEmpty())
                         {
                             getSupportActionBar().setTitle(postTitle);
-                            codeInputTextView.setText(postInput);
-                            codeOutputTextView.setText(postOutput);
+                            codeInputTextView.setText("Input: \t" + postInput);
+                            codeOutputTextView.setText("Output: \t" + postOutput);
                         }
                     }
                 })
