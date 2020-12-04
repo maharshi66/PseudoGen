@@ -45,7 +45,6 @@ import java.util.Objects;
 public class CodeEditorFragment extends Fragment{
     private final DatabaseReference firebaseDatabaseRef = FirebaseDatabase.getInstance().getReference();
     View view;
-    String defaultPrintHundredOddCode="";
     LineNumberedEditText inputCodeEditText;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -61,7 +60,6 @@ public class CodeEditorFragment extends Fragment{
         return view;
     }
 
-    //Fixed! How to send shared preferences data for PrintAllOdd to CodeEditText
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -71,8 +69,6 @@ public class CodeEditorFragment extends Fragment{
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         inputCodeEditText = view.findViewById(R.id.inputCodeEditText);
-
-        updateEditTextViewForPrintOddIntegers(inputCodeEditText);
 
         inputCodeEditText.addTextChangedListener(new TextWatcher() {
             Map<String,Integer> map = new HashMap<>();
@@ -92,11 +88,6 @@ public class CodeEditorFragment extends Fragment{
                 map.put("else",Color.BLUE);
                 map.put("endIf",Color.BLUE);
                 map.put("endIf",Color.BLUE);
-            }
-
-            public void clearMap()
-            {
-                map.clear();
             }
 
             @Override
@@ -175,23 +166,4 @@ public class CodeEditorFragment extends Fragment{
             return true;
         }
     };
-
-    public void updateEditTextViewForPrintOddIntegers(LineNumberedEditText inputCodeEditText)
-    {
-        getFromSharedPref();
-        Intent intent = Objects.requireNonNull(getActivity()).getIntent();
-        boolean isPrintAllOddsSelected = intent.getBooleanExtra("defaultPrintHundredOddClicked", false);
-
-        if(isPrintAllOddsSelected)
-        {
-            inputCodeEditText.setText(defaultPrintHundredOddCode);
-        }
-    }
-
-    //Get code from shared preferences for PrintAllOdd!
-    public void getFromSharedPref()
-    {
-        SharedPreferences appSharedPref = getActivity().getSharedPreferences("com.maharshiappdev.pseudogen", Context.MODE_PRIVATE);
-        defaultPrintHundredOddCode = appSharedPref.getString("inputCode", "");
-    }
 }

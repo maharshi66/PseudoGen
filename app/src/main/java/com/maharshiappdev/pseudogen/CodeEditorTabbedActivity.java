@@ -47,9 +47,6 @@ public class CodeEditorTabbedActivity extends AppCompatActivity/* implements Nav
     String postOutput = "";
     String postTime = "";
     String postSpace = "";
-    String defaultPrintHundredOddTitle = "";
-    String defaultPrintHundredOddCode = "";
-    Boolean isPrintHundredOddClicked = false;
     BottomNavigationView bottomNavEditShortCuts;
     TextView codeInputTextView;
     TextView codeOutputTextView;
@@ -169,25 +166,12 @@ public class CodeEditorTabbedActivity extends AppCompatActivity/* implements Nav
         return newOutputText;
     }
 
-    public Boolean isPrintOddClicked() {
-        getFromSharedPref();
-        Intent intent = getIntent();
-        isPrintHundredOddClicked = intent.getBooleanExtra("defaultPrintHundredOddClicked", false);
-        return isPrintHundredOddClicked;
-    }
-
-    public void getFromSharedPref() {
-        SharedPreferences appSharedPref = getSharedPreferences("com.maharshiappdev.pseudogen", Context.MODE_PRIVATE);
-        defaultPrintHundredOddTitle = appSharedPref.getString("inputCodeTitle", "");
-        defaultPrintHundredOddCode = appSharedPref.getString("inputCode", "");
-    }
-
     public void checkAndSave() {
         final LineNumberedEditText inputCodeEditText = findViewById(R.id.inputCodeEditText);
         postPseudocode = inputCodeEditText.getText().toString();
 
         //TODO Change Obsolte code to remove Print All Odd from Shared Pref! Save data if title, des, i/o not empty
-        if (!isPrintHundredOddClicked && !postTitle.isEmpty()) {
+        if (!postDescription.isEmpty() && !postTitle.isEmpty()) {
 //            writeToDatabase(inputCodeTitle, inputCode);
             DatabaseHandler db = new DatabaseHandler(getApplicationContext());
             //TODO Change id, time and space as per content in encountered in app
@@ -195,8 +179,6 @@ public class CodeEditorTabbedActivity extends AppCompatActivity/* implements Nav
             db.addPseudocodePost(post);
             db.close();
             Toast.makeText(this, "Saved!", Toast.LENGTH_SHORT).show();
-        } else if (isPrintHundredOddClicked) {
-            inputCodeEditText.setText(defaultPrintHundredOddCode);
         }else
         {
             Toast.makeText(this, "Saved Failed!", Toast.LENGTH_SHORT).show();
@@ -279,12 +261,7 @@ public class CodeEditorTabbedActivity extends AppCompatActivity/* implements Nav
 
         Toolbar editorToolBar = findViewById(R.id.editorToolbar);
         setSupportActionBar(editorToolBar);
-
-        if (isPrintOddClicked()) {
-            postTitle = defaultPrintHundredOddTitle;
-        } else {
-            postTitle = getTabActivityTitle();
-        }
+        postTitle = getTabActivityTitle();
 
         setTitle(postTitle);
         bottomNavEditShortCuts = findViewById(R.id.bottomNavEditShortCuts);

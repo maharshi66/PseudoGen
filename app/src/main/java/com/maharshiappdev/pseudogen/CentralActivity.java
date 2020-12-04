@@ -82,7 +82,7 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
-                case R.id.action_home:
+                case R.id.action_data_structures:
                     selectedFragment = new HomeFragment();
                     switchFragmentHome(selectedFragment);
                     break;
@@ -90,7 +90,7 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
                     selectedFragment = new CodeListFragment();
                     switchFragmentCodeList(selectedFragment);
                     break;
-                case R.id.action_premium:
+                case R.id.action_algorithms:
                     break;
                 default:
                     break;
@@ -139,7 +139,6 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
                 .setPositiveButton("Go", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //TODO Take the title, input and output for cloud storage and updating codesList
                         String codeTitleText = "";
                         String codeDescriptionText = "";
                         String codeInputText = "";
@@ -236,7 +235,7 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
 
         BottomNavigationView navigation = findViewById(R.id.bottomNavView);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        navigation.setSelectedItemId(R.id.action_home);
+        navigation.setSelectedItemId(R.id.action_code);
         setTitle(actionBarTitle);
 
         fab_addNew = findViewById(R.id.fab_addNew);
@@ -256,12 +255,5 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
         toggle.syncState();
 
         navigationView.setNavigationItemSelectedListener(this);
-
-        //Default Print All Odd Integers Shared Pref
-        SharedPreferences appSharedPref = this.getSharedPreferences("com.maharshiappdev.pseudogen", Context.MODE_PRIVATE);
-        String printHundredOddTitle = "Print all odd integers from 1 to n";
-        String getPrintHundredOddCode = "for i in 1 to n\n\tif(i % 2 != 0)\n\t\tprint i;\n\tendif;\nend loop;";
-        appSharedPref.edit().putString("inputCodeTitle", printHundredOddTitle ).apply();
-        appSharedPref.edit().putString("inputCode", getPrintHundredOddCode).apply();
     }
 }

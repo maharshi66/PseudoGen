@@ -24,7 +24,6 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="colorPrimary">@color/indigo</item>
-
         <item name="android:windowBackground">@drawable/background_gradient</item>
         <item name="fontFamily">@font/maven_pro_medium</item>
         <item name="android:statusBarColor" tools:targetApi="l">@color/indigo</item>
@@ -33,7 +32,6 @@
     <!-- Bottom Navigation Style -->
     <style name="Widget.BottomNavigationView" parent="Widget.Design.BottomNavigationView">
         <item name="fontFamily">@font/maven_pro_medium</item>
-        <item name="android:textStyle">bold</item>
     </style>
 
     <!-- List View Style -->
@@ -74,12 +72,10 @@
         <item name="colorPrimary">@color/light_grey</item>
         <item name="colorPrimaryVariant">@color/indigo</item>
         <item name="colorOnPrimary">@color/white</item>
-
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/light_grey</item>
         <item name="colorSecondaryVariant">@color/indigo</item>
         <item name="colorOnSecondary">@color/bright_orange</item>
-
         <item name="fontFamily">@font/maven_pro_medium</item>
     </style>
 </resources>
