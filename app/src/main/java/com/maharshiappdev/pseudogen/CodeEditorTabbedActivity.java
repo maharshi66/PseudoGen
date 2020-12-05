@@ -15,6 +15,7 @@ import com.google.android.material.tabs.TabLayout;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
@@ -37,7 +38,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.maharshiappdev.pseudogen.ui.main.SectionsPagerAdapter;
 
-public class CodeEditorTabbedActivity extends AppCompatActivity/* implements NavigationView.OnNavigationItemSelectedListener */{
+public class CodeEditorTabbedActivity extends AppCompatActivity{
     private final DatabaseReference firebaseDatabaseRef = FirebaseDatabase.getInstance().getReference();
     private DrawerLayout navDrawerEditor;
     String postTitle = "";
@@ -116,7 +117,6 @@ public class CodeEditorTabbedActivity extends AppCompatActivity/* implements Nav
                 .show();
     }
 
-
     @Override
     public void onBackPressed() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
@@ -138,7 +138,7 @@ public class CodeEditorTabbedActivity extends AppCompatActivity/* implements Nav
                 .show();
     }
 
-    public String getTabActivityTitle() {
+    public String getAlgorithmTitle() {
         Intent intent = getIntent();
         String newTitle = "";
         newTitle = intent.getStringExtra("pseudocodeTitle");
@@ -239,31 +239,34 @@ public class CodeEditorTabbedActivity extends AppCompatActivity/* implements Nav
     }
 
     @Override
+    protected void onRestart() {
+        super.onRestart();
+        recreate();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_code_editor_tabbed);
-        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
+/*        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
         ViewPager viewPager = findViewById(R.id.view_pager);
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
         tabs.getTabAt(0).setIcon(R.drawable.code_icon);
-        tabs.getTabAt(1).setIcon(R.drawable.analysis_icon);
         FloatingActionButton fab = findViewById(R.id.compileCodeButton);
-
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO Add action for Code Analysis button clicked
             }
         });
-
+*/
         Toolbar editorToolBar = findViewById(R.id.editorToolbar);
         setSupportActionBar(editorToolBar);
-        postTitle = getTabActivityTitle();
+        postTitle = getAlgorithmTitle();
 
-        setTitle(postTitle);
+        setTitle("Editor");
+        getSupportActionBar().setIcon(R.drawable.code_icon);
         bottomNavEditShortCuts = findViewById(R.id.bottomNavEditShortCuts);
         codeInputTextView = findViewById(R.id.codeInputTextView);
         codeOutputTextView = findViewById(R.id.codeOutputTextView);
@@ -277,5 +280,7 @@ public class CodeEditorTabbedActivity extends AppCompatActivity/* implements Nav
         //TODO Change this after Analysis code written, placeholders
         postTime = "Time";
         postSpace = "Space";
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.editor_fragment_container, new CodeEditorFragment()).commit();
     }
 }

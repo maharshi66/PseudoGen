@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.PseudoGen" parent="Theme.MaterialComponents.DayNight">
+    <style name="Theme.PseudoGen" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/bright_orange</item>
         <item name="colorPrimaryVariant">@color/indigo</item>
@@ -10,6 +10,7 @@
         <item name="colorSecondary">@color/light_grey</item>
         <item name="colorSecondaryVariant">@color/indigo</item>
         <item name="colorOnSecondary">@color/bright_orange</item>
+
         <item name="android:windowBackground">@drawable/background_gradient</item>
         <item name="fontFamily">@font/maven_pro_medium</item>
         <item name="android:editTextStyle">@style/Widget.AppCompat.NewEditText</item>
@@ -31,16 +32,12 @@
     <!-- Bottom Navigation Style -->
     <style name="Widget.BottomNavigationView" parent="Widget.Design.BottomNavigationView">
         <item name="fontFamily">@font/maven_pro_medium</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <!-- List View Style -->
     <style name="Widget.AppCompat.NewListView" parent="Widget.AppCompat.ListView">
-        <item name="android:background">@color/dark_orange</item>
-    </style>
-
-    <!-- Edit Text Style -->
-    <style name="Widget.AppCompat.NewEditText" parent="Widget.AppCompat.EditText">
-        <item name="fontFamily">@font/fira_mono</item>
+        <item name="android:background">@color/light_grey</item>
     </style>
 
     <style name="Theme.PseudoGen.NoActionBar">
@@ -54,6 +51,11 @@
 
     <style name="CodeEditorTitleEditText" parent="Theme.PseudoGen">
         <item name="background">@color/dark_grey</item>
+    </style>
+
+    <!-- Edit Text Style -->
+    <style name="Widget.AppCompat.NewEditText" parent="Widget.AppCompat.EditText">
+        <item name="fontFamily">@font/fira_mono</item>
     </style>
 
     <!--Alert Dialog-->
@@ -72,7 +74,7 @@
         <item name="colorPrimaryVariant">@color/indigo</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/dark_grey</item>
+        <item name="colorSecondary">@color/light_grey</item>
         <item name="colorSecondaryVariant">@color/indigo</item>
         <item name="colorOnSecondary">@color/bright_orange</item>
         <item name="fontFamily">@font/maven_pro_medium</item>

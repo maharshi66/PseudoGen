@@ -13,7 +13,8 @@
         <activity
             android:name=".CodeEditorTabbedActivity"
             android:label="@string/title_activity_code_editor_tabbed"
-            android:theme="@style/Theme.PseudoGen.NoActionBar"></activity>
+            android:theme="@style/Theme.PseudoGen.NoActionBar">
+        </activity>
         <activity
             android:name=".CentralActivity"
             android:theme="@style/AppTheme.NoActionBar" />

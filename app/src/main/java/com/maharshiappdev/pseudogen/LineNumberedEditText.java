@@ -43,7 +43,7 @@ public class LineNumberedEditText extends androidx.appcompat.widget.AppCompatEdi
         lpaint = new Paint();
         lpaint.setAntiAlias(true);
         lpaint.setStyle(Paint.Style.FILL);
-        lpaint.setColor(Color.BLACK);
+        lpaint.setColor(Color.GRAY);
         lpaint.setTextSize(getTextSize() - LINE_NUMBER_TEXTSIZE_GAP);
     }
 
@@ -79,7 +79,7 @@ public class LineNumberedEditText extends androidx.appcompat.widget.AppCompatEdi
             //set the size in case it changed after the last update
             lpaint.setTextSize(getTextSize() - LINE_NUMBER_TEXTSIZE_GAP);
             setLineNumberMarginGap(5);
-            setLineNumberTextColor(R.color.black);
+//            setLineNumberTextColor(R.color.white);
 
             int baseLine = getBaseline();
             String t = "";

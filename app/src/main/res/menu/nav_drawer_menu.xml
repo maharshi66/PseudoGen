@@ -2,21 +2,58 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
-
-        <item android:id="@+id/nav_premium" android:title="Get Premium"
-            android:icon="@drawable/premium_icon">
-        </item>
-
-        <item android:id="@+id/nav_rateApp" android:title="Rate App"
-        android:icon="@drawable/rate_app_icon">
-        </item>
-
-        <item android:id="@+id/nav_developer" android:title="Developer"
-            android:icon="@drawable/developer_icon">
-        </item>
-
-        <item android:title="Log Out" android:id="@+id/nav_logOut"
-            android:icon="@drawable/log_out">
-        </item>
-
+        <group android:id="@+id/menu_pseudocode"
+            android:checkableBehavior="none">
+                <item android:id="@+id/nav_usingThisApp"
+                    android:title="Using Pseudogen"
+                    android:icon="@drawable/using_pseudogen_icon">
+                </item>
+                <item android:id="@+id/nav_syntax"
+                    android:title="Syntax"
+                    android:icon="@drawable/syntax_icon">
+                </item>
+                <item android:id="@+id/nav_examples"
+                    android:title="Examples"
+                    android:icon="@drawable/example_icon">
+                </item>
+        </group>
+        <group android:id="@+id/menu_learn"
+                android:checkableBehavior="none">
+                <item android:id="@+id/nav_roadmap"
+                    android:title="Coding Roadmap"
+                    android:icon="@drawable/roadmap_icon">
+                </item>
+                <item android:id="@+id/nav_bigO"
+                    android:title="Big O Analysis"
+                    android:icon="@drawable/analysis_icon">
+                </item>
+                <item android:id="@+id/nav_ds"
+                    android:title="Big O Reference"
+                    android:icon="@drawable/reference_icon">
+                </item>
+        </group>
+        <group
+                android:id="@+id/menu_bottom"
+                android:checkableBehavior="none">
+                <item
+                    android:id="@+id/nav_developer"
+                    android:icon="@drawable/developer_icon"
+                    android:title="Developer">
+                </item>
+                <item
+                    android:id="@+id/nav_rateApp"
+                    android:icon="@drawable/rate_app_icon"
+                    android:title="Rate App">
+                </item>
+                <item
+                    android:id="@+id/nav_sendFeedback"
+                    android:title="Send Feedback"
+                    android:icon="@drawable/feedback_icon">
+                </item>
+                <item
+                    android:id="@+id/nav_logOut"
+                    android:icon="@drawable/log_out"
+                    android:title="Log Out">
+                </item>
+        </group>
 </menu>

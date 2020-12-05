@@ -1,19 +1,16 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.PseudoGen" parent="Theme.MaterialComponents.DayNight">
+    <style name="Theme.PseudoGen" parent="Theme.MaterialComponents.Light">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/bright_orange</item>
         <item name="colorPrimaryVariant">@color/indigo</item>
         <item name="colorOnPrimary">@color/black</item>
-
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/light_grey</item>
         <item name="colorSecondaryVariant">@color/indigo</item>
         <item name="colorOnSecondary">@color/bright_orange</item>
-
         <item name="android:windowBackground">@drawable/background_gradient</item>
         <item name="fontFamily">@font/maven_pro_medium</item>
-        <item name="android:editTextStyle">@style/Widget.AppCompat.NewEditText</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
@@ -32,6 +29,7 @@
     <!-- Bottom Navigation Style -->
     <style name="Widget.BottomNavigationView" parent="Widget.Design.BottomNavigationView">
         <item name="fontFamily">@font/maven_pro_medium</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <!-- List View Style -->

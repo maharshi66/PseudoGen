@@ -8,12 +8,6 @@
         android:title="My List"
         android:icon="@drawable/my_list_icon"
         app:showAsAction="ifRoom"/>
-
-    <!--<item
-        android:id="@+id/action_home"
-        android:enabled="true"
-        android:title=" "
-        android:icon="@drawable/home_icon"/>-->
     <item android:id="@+id/action_data_structures"
     android:title="Data Structures"
         android:enabled="true"
