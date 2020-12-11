@@ -79,7 +79,16 @@ public class CodeListFragment extends Fragment implements OnItemClickListener{
                 listAdapter.notifyDataSetChanged();
                 break;
             case R.id.editItem:
-
+                ExpandableListView.ExpandableListContextMenuInfo postInfo = (ExpandableListView.ExpandableListContextMenuInfo) item.getMenuInfo();
+                int editPostPos = ExpandableListView.getPackedPositionGroup(postInfo.packedPosition);
+                Posts editPost = db.getPost(listDataHeader.get(editPostPos));
+                Intent intent = new Intent(getActivity().getApplicationContext(), CodeEditorTabbedActivity.class);
+                intent.putExtra("fromEditPseudocodeTitle", editPost.getTitle());
+                intent.putExtra("fromEditPseudocode", editPost.getPseudocode());
+                intent.putExtra("fromEditPseudocodeDescription", editPost.getDescription());
+                intent.putExtra("fromEditInput", editPost.getInput());
+                intent.putExtra("fromEditOutput", editPost.getOutput());
+                startActivity(intent);
                 break;
         }
         return true;

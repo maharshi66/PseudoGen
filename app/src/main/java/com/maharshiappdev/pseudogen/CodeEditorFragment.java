@@ -77,74 +77,19 @@ public class CodeEditorFragment extends Fragment{
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         super.onActivityCreated(savedInstanceState);
         inputCodeEditText = view.findViewById(R.id.inputCodeEditText);
+
+        //Intent from AlertDialog for creating new
         Intent intent = getActivity().getIntent();
         String pseudocodeTitle = intent.getStringExtra("pseudocodeTitle");
-        inputCodeEditText.setText("Algorithm: "+ pseudocodeTitle);
-        //TODO Remove this addTextChangedListener!
-        /*inputCodeEditText.addTextChangedListener(new TextWatcher() {
-            Map<String,Integer> map = new HashMap<>();
-            ForegroundColorSpan span;
-            Runnable runnable;
-            final android.os.Handler handler = new android.os.Handler();
-            public void setUpMap()
-            {
-                map.put("process",Color.GREEN);
-                map.put("endProcess",Color.GREEN);
-                map.put("char",Color.GREEN);
-                map.put("string",Color.GREEN);
-                map.put("int",Color.GREEN);
-                map.put("for",Color.GREEN);
-                map.put("while",Color.GREEN);
-                map.put("do",Color.GREEN);
-                map.put("endLoop",Color.GREEN);
-                map.put("if",Color.GREEN);
-                map.put("then",Color.GREEN);
-                map.put("else",Color.GREEN);
-                map.put("endIf",Color.GREEN);
-            }
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-            @Override
-            public void afterTextChanged(Editable editable) {
-                runnable = new Runnable() {
-                    @Override
-                    public void run() {
-                        //do some work with s.toString()
-                        setUpMap();
-                        String editString = editable.toString();
-                        //Split on white space
-                        String[] splitStrArray = editString.split("\\s");
-                        int start = 0, beginIdx, endIdx, color, count;
-                        for (int i = 0; i < splitStrArray.length; i++) {
-                            String splitStr = splitStrArray[i];
-                            if (map.containsKey(splitStr)) {
-                                count = (editString.length() - editString.replaceAll(splitStr, "").length()) / splitStr.length();
-                                color = map.get(splitStr);
-                                span = new ForegroundColorSpan(color);
-                                for(int j = 0; j < count; j++)
-                                {
-                                    beginIdx = editString.indexOf(splitStr, start);
-                                    endIdx = beginIdx + splitStr.length();
-                                    if (beginIdx > 0) {
-                                        editable.setSpan(
-                                                span,
-                                                beginIdx,
-                                                endIdx,
-                                                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                                    }
-                                    start = endIdx;
-                                }
-                            }
-                        }
-                    }
-                };
-                handler.postDelayed(runnable, 1500);
-            }
-        });*/
+        inputCodeEditText.setText("Algorithm: " + pseudocodeTitle);
+
+        //Intent from CodeList when Edit pressed
+        if(intent.hasExtra("fromEditPseudocodeTitle")
+            && intent.hasExtra("fromEditPseudocodeDescription")
+                && intent.hasExtra("fromEditPseudocode"))
+        {
+            inputCodeEditText.setText("Algorithm " + intent.getStringExtra("fromEditPseudocodeTitle"));
+        }
 
         //TODO Mark as Correct CodeEditor!
         inputCodeEditText.addTextChangedListener(new TextWatcher() {
@@ -199,7 +144,6 @@ public class CodeEditorFragment extends Fragment{
                 }
             }
         });
-
 
         BottomNavigationView navigation = getActivity().findViewById(R.id.bottomNavEditShortCuts);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);

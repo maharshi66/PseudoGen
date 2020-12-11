@@ -1,7 +1,6 @@
 package com.maharshiappdev.pseudogen;
 
 public class Posts {
-    private int id;
     private String title;
     private String description;
     private String pseudocode;
@@ -12,12 +11,11 @@ public class Posts {
 
     public Posts() {}
 
-    public Posts(int id, String title, String description,
+    public Posts(String title, String description,
                  String pseudocode, String input,
                  String output, String time,
                  String space)
     {
-        this.id = id;
         this.title = title;
         this.description = description;
         this.pseudocode = pseudocode;
@@ -25,14 +23,6 @@ public class Posts {
         this.output = output;
         this.time = time;
         this.space = space;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getTitle() {

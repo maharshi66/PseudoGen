@@ -174,8 +174,8 @@ public class CodeEditorTabbedActivity extends AppCompatActivity{
         if (!postDescription.isEmpty() && !postTitle.isEmpty()) {
 //            writeToDatabase(inputCodeTitle, inputCode);
             DatabaseHandler db = new DatabaseHandler(getApplicationContext());
-            //TODO Change id, time and space as per content in encountered in app
-            Posts post = new Posts(1, postTitle, postDescription, postPseudocode, postInput, postOutput, postTime, postSpace);
+            //TODO Change id as per content in encountered in app
+            Posts post = new Posts(postTitle, postDescription, postPseudocode, postInput, postOutput, postTime, postSpace);
             db.addPseudocodePost(post);
             db.close();
             Toast.makeText(this, "Saved!", Toast.LENGTH_SHORT).show();

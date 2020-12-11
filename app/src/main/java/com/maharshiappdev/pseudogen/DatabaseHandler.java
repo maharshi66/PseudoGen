@@ -79,18 +79,17 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close();
     }
 
-    public Posts getNote(int id){
+    public Posts getPost(String title){
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor c = db.query(TABLE_NAME, COLS_ID_TITLE_POSTS,KEY_ID +"=?",new String[]{String.valueOf(id)},null,null,null,null);
+        Cursor c = db.query(TABLE_NAME, COLS_ID_TITLE_POSTS,KEY_TITLE +"=?",new String[]{title},null,null,null,null);
         if(c != null){
             c.moveToFirst();
         }
         db.close();
 
-        /*Log.d(TAG,"Get Post Result "+ c.getString(0)+","+c.getString(1)+","+c.getString(2));*/
-        Posts post = new Posts(Integer.parseInt(c.getString(0)),
-                c.getString(1),
+//        Log.d(TAG,"Get Post Result "+ c.getString(0)+","+c.getString(1)+","+c.getString(2));
+        Posts post = new Posts(c.getString(1),
                 c.getString(2),
                 c.getString(3),
                 c.getString(4),
@@ -110,7 +109,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         {
             do{
                 Posts post = new Posts();
-                post.setId(Integer.parseInt(cursor.getString(0)));
                 post.setTitle(cursor.getString(1));
                 post.setDescription(cursor.getString(2));
                 post.setPseudocode(cursor.getString(3));
