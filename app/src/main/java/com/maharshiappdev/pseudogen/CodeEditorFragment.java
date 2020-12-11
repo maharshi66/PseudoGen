@@ -78,17 +78,11 @@ public class CodeEditorFragment extends Fragment{
         super.onActivityCreated(savedInstanceState);
         inputCodeEditText = view.findViewById(R.id.inputCodeEditText);
 
-        //Intent from AlertDialog for creating new
         Intent intent = getActivity().getIntent();
-        String pseudocodeTitle = intent.getStringExtra("pseudocodeTitle");
-        inputCodeEditText.setText("Algorithm: " + pseudocodeTitle);
-
-        //Intent from CodeList when Edit pressed
-        if(intent.hasExtra("fromEditPseudocodeTitle")
-            && intent.hasExtra("fromEditPseudocodeDescription")
-                && intent.hasExtra("fromEditPseudocode"))
+        if(intent.hasExtra("fromEditPseudocode"))
         {
-            inputCodeEditText.setText("Algorithm " + intent.getStringExtra("fromEditPseudocodeTitle"));
+            inputCodeEditText.setText(intent.getStringExtra("fromEditPseudocode"));
+            Toast.makeText(getActivity().getApplicationContext(),intent.getStringExtra("fromEditPseudocode"),Toast.LENGTH_SHORT ).show();
         }
 
         //TODO Mark as Correct CodeEditor!

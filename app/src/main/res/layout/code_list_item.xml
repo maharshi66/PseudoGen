@@ -6,11 +6,11 @@
         android:id="@+id/codeListItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/light_grey"
+        android:background="@color/code_editor_white"
         android:textColor="@color/indigo"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
         android:paddingRight="?android:attr/expandableListPreferredItemPaddingLeft"
-        android:textSize="20dp"/>
+        android:textSize="16dp"/>
 </LinearLayout>

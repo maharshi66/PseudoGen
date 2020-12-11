@@ -141,52 +141,74 @@ public class CodeEditorTabbedActivity extends AppCompatActivity{
     public String getAlgorithmTitle() {
         Intent intent = getIntent();
         String newTitle = "";
-        newTitle = intent.getStringExtra("pseudocodeTitle");
+        if(intent.hasExtra("fromEditPseudocodeTitle"))
+        {
+          newTitle = intent.getStringExtra("fromEditPseudocodeTitle");
+        }else
+        {
+            newTitle = intent.getStringExtra("pseudocodeTitle");
+        }
+
         return newTitle;
     }
 
     public String getInputCodeText() {
         Intent intent = getIntent();
         String newInputText = "";
-        newInputText = intent.getStringExtra("pseudocodeInputText");
+        if(intent.hasExtra("fromEditInput"))
+        {
+         newInputText = intent.getStringExtra("fromEditInput");
+        }else
+        {
+            newInputText = intent.getStringExtra("pseudocodeInputText");
+        }
         return newInputText;
     }
 
     public String getCodeDescriptionText() {
         Intent intent = getIntent();
-        String newInputText = "";
-        newInputText = intent.getStringExtra("pseudocodeDescription");
-        return newInputText;
+        String newDescriptionText = "";
+        if(intent.hasExtra("fromEditPseudocodeDescription"))
+        {
+         newDescriptionText = intent.getStringExtra("fromEditPseudocodeDescription");
+        }else
+        {
+            newDescriptionText = intent.getStringExtra("pseudocodeDescription");
+        }
+        return newDescriptionText;
     }
 
     public String getOutputCodeText() {
         Intent intent = getIntent();
         String newOutputText = "";
-        newOutputText = intent.getStringExtra("pseudocodeOutputText");
+        if(intent.hasExtra("fromEditOutput"))
+        {
+            newOutputText = intent.getStringExtra("fromEditOutput");
+        }else
+        {
+            newOutputText = intent.getStringExtra("pseudocodeOutputText");
+        }
         return newOutputText;
     }
 
     public void checkAndSave() {
+        //TODO Disallow duplicate names and overwrite Posts if user wants to. Cannot create duplicate
+
         final LineNumberedEditText inputCodeEditText = findViewById(R.id.inputCodeEditText);
         postPseudocode = inputCodeEditText.getText().toString();
-
-        //TODO Change Obsolte code to remove Print All Odd from Shared Pref! Save data if title, des, i/o not empty
         if (!postDescription.isEmpty() && !postTitle.isEmpty()) {
 //            writeToDatabase(inputCodeTitle, inputCode);
             DatabaseHandler db = new DatabaseHandler(getApplicationContext());
-            //TODO Change id as per content in encountered in app
             Posts post = new Posts(postTitle, postDescription, postPseudocode, postInput, postOutput, postTime, postSpace);
             db.addPseudocodePost(post);
             db.close();
             Toast.makeText(this, "Saved!", Toast.LENGTH_SHORT).show();
-        }else
-        {
-            Toast.makeText(this, "Saved Failed!", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(this, "Save Failed!", Toast.LENGTH_SHORT).show();
         }
     }
 
     //TODO Change function parameters as development changes
-    //TODO Add complexities as well (Space and Time)
     public void writeToDatabase(String title, String code) {
         //Write Pseudocode Title and corresponding code to Database
         firebaseDatabaseRef.child("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Posts").child("Code List").child(title).setValue(code);
@@ -239,33 +261,14 @@ public class CodeEditorTabbedActivity extends AppCompatActivity{
     }
 
     @Override
-    protected void onRestart() {
-        super.onRestart();
-        recreate();
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_code_editor_tabbed);
-/*        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
-        ViewPager viewPager = findViewById(R.id.view_pager);
-        viewPager.setAdapter(sectionsPagerAdapter);
-        TabLayout tabs = findViewById(R.id.tabs);
-        tabs.setupWithViewPager(viewPager);
-        tabs.getTabAt(0).setIcon(R.drawable.code_icon);
-        FloatingActionButton fab = findViewById(R.id.compileCodeButton);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            }
-        });
-*/
         Toolbar editorToolBar = findViewById(R.id.editorToolbar);
         setSupportActionBar(editorToolBar);
         postTitle = getAlgorithmTitle();
 
-        setTitle("Editor");
+        setTitle(getAlgorithmTitle());
         getSupportActionBar().setIcon(R.drawable.code_icon);
         bottomNavEditShortCuts = findViewById(R.id.bottomNavEditShortCuts);
         codeInputTextView = findViewById(R.id.codeInputTextView);

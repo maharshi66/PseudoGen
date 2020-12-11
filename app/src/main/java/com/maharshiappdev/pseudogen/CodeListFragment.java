@@ -72,6 +72,7 @@ public class CodeListFragment extends Fragment implements OnItemClickListener{
                 int groupPos = ExpandableListView.getPackedPositionGroup(info.packedPosition);
                 int childPos = ExpandableListView.getPackedPositionChild(info.packedPosition);
                 //Deletes from Database based on pseudocode title.
+
                 //TODO Careful with this. Add checks to avoid duplicate naming!!!
                 db.deletePost(listDataHeader.get(groupPos));
                 listDataHeader.remove(groupPos);
@@ -117,7 +118,6 @@ public class CodeListFragment extends Fragment implements OnItemClickListener{
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
     }
 
     public void prepareDataList()

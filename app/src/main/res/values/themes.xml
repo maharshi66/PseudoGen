@@ -34,7 +34,8 @@
 
     <!-- List View Style -->
     <style name="Widget.AppCompat.NewListView" parent="Widget.AppCompat.ListView">
-        <item name="android:background">@color/light_grey</item>
+        <item name="android:background">@color/code_editor_dark</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 
     <!-- Edit Text Style -->
