@@ -52,6 +52,7 @@ public class CodeEditorTabbedActivity extends AppCompatActivity{
     TextView codeInputTextView;
     TextView codeOutputTextView;
     boolean shortcutsChecked = true;
+    DatabaseHandler db;
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
@@ -198,11 +199,22 @@ public class CodeEditorTabbedActivity extends AppCompatActivity{
         postPseudocode = inputCodeEditText.getText().toString();
         if (!postDescription.isEmpty() && !postTitle.isEmpty()) {
 //            writeToDatabase(inputCodeTitle, inputCode);
-            DatabaseHandler db = new DatabaseHandler(getApplicationContext());
             Posts post = new Posts(postTitle, postDescription, postPseudocode, postInput, postOutput, postTime, postSpace);
-            db.addPseudocodePost(post);
+            //Check if title is present in database
+            if(db.isDuplicateTitle(postTitle))
+            {
+                Toast.makeText(this, "Pseudocode Exists!", Toast.LENGTH_SHORT).show();
+            }
+            //if present, Alert Dialog for overwriting
+            //showAlertForOverwrite()
+            //db.overwritePost(post)
+            //Toast for Overwritten and Saved!
+            else
+            {
+                db.addPseudocodePost(post);
+                Toast.makeText(this, "Saved!", Toast.LENGTH_SHORT).show();
+            }
             db.close();
-            Toast.makeText(this, "Saved!", Toast.LENGTH_SHORT).show();
         }else{
             Toast.makeText(this, "Save Failed!", Toast.LENGTH_SHORT).show();
         }
@@ -270,6 +282,7 @@ public class CodeEditorTabbedActivity extends AppCompatActivity{
 
         setTitle(getAlgorithmTitle());
         getSupportActionBar().setIcon(R.drawable.code_icon);
+        db = new DatabaseHandler(this);
         bottomNavEditShortCuts = findViewById(R.id.bottomNavEditShortCuts);
         codeInputTextView = findViewById(R.id.codeInputTextView);
         codeOutputTextView = findViewById(R.id.codeOutputTextView);

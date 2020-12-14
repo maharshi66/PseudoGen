@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -129,5 +130,25 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLE_NAME + " WHERE " + KEY_TITLE + "=\"" + title + "\";");
         db.close();
+    }
+
+    public boolean isDuplicateTitle(String title)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_NAME, COLS_ID_TITLE_POSTS, KEY_TITLE + "=?", new String[] { title }, null, null, null);
+
+        if(cursor.moveToFirst())
+        {
+            return true;
+        }else
+        {
+            return false;
+        }
+    }
+
+    public void overWritePost(Posts p)
+    {
+        //Delete post
+        //Make a fresh entry with new title, description, input, output
     }
 }
