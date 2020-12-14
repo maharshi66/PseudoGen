@@ -200,21 +200,16 @@ public class CodeEditorTabbedActivity extends AppCompatActivity{
         if (!postDescription.isEmpty() && !postTitle.isEmpty()) {
 //            writeToDatabase(inputCodeTitle, inputCode);
             Posts post = new Posts(postTitle, postDescription, postPseudocode, postInput, postOutput, postTime, postSpace);
-            //Check if title is present in database
             if(db.isDuplicateTitle(postTitle))
             {
-                Toast.makeText(this, "Pseudocode Exists!", Toast.LENGTH_SHORT).show();
-            }
-            //if present, Alert Dialog for overwriting
-            //showAlertForOverwrite()
-            //db.overwritePost(post)
-            //Toast for Overwritten and Saved!
-            else
+                createAlertForOverwrite();
+                db.close();
+            }else
             {
                 db.addPseudocodePost(post);
                 Toast.makeText(this, "Saved!", Toast.LENGTH_SHORT).show();
+                db.close();
             }
-            db.close();
         }else{
             Toast.makeText(this, "Save Failed!", Toast.LENGTH_SHORT).show();
         }
@@ -269,6 +264,28 @@ public class CodeEditorTabbedActivity extends AppCompatActivity{
                         dialog.cancel();
                     }
                 })
+                .show();
+    }
+
+    public void createAlertForOverwrite()
+    {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this, R.style.CutomAlertDialog);
+        alertDialog.setMessage("Do you want to overwrite previous save?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Open Database and overwrite where title matches
+                        db.overWritePost(postTitle, postDescription, postPseudocode, postOutput, postInput);
+                        Toast.makeText(getApplicationContext(), "Overwritten!", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                })
+                .setTitle("Pseudocode Exists")
                 .show();
     }
 

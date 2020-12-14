@@ -82,14 +82,12 @@ public class CodeEditorFragment extends Fragment{
         if(intent.hasExtra("fromEditPseudocode"))
         {
             inputCodeEditText.setText(intent.getStringExtra("fromEditPseudocode"));
-            Toast.makeText(getActivity().getApplicationContext(),intent.getStringExtra("fromEditPseudocode"),Toast.LENGTH_SHORT ).show();
         }
 
-        //TODO Mark as Correct CodeEditor!
         inputCodeEditText.addTextChangedListener(new TextWatcher() {
             ColorScheme keywords = new ColorScheme(
                     Pattern.compile(
-                            "\\b(process|endprocess|void|char|short|int|long|double|float|const|static|volatile|byte|boolean|class|interface|native|private|protected|public|final|abstract|enum|instanceof|assert|if|else|then|switch|case|default|break|goto|return|for|while|endloop|do|continue|throw|try|catch|finally|this|implements|import|true|false|null|N|)\\b"),
+                            "\\b(process|endprocess|define|initialize|solve|each|void|char|int|long|double|float|const|static|volatile|byte|boolean|class|interface|private|protected|public|final|abstract|enum|instanceof|assert|if|else|then|switch|case|default|break|goto|return|for|while|endloop|do|continue|throw|try|catch|finally|this|implements|import|true|false|null|N|Graph|List|Set|Queue|Stack|Array|BinaryTree|LinkedList|Heap|heapify|fetch|get|find)\\b"),
                     getActivity().getResources().getColor(R.color.dark_orange)
             );
 
