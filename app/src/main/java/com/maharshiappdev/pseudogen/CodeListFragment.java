@@ -13,6 +13,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.provider.ContactsContract;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -21,10 +23,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.app.ListFragment;
 import android.widget.AdapterView;
@@ -47,6 +51,8 @@ public class CodeListFragment extends Fragment implements OnItemClickListener{
     List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
     DatabaseHandler db;
+    SearchView codeListSearchView;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,6 +112,20 @@ public class CodeListFragment extends Fragment implements OnItemClickListener{
         codeListExpandableListView.setAdapter(listAdapter);
         listAdapter.notifyDataSetChanged();
         registerForContextMenu(codeListExpandableListView);
+        codeListSearchView = getView().findViewById(R.id.codeListSearchView);
+        codeListSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                listAdapter.filterData(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                listAdapter.filterData(newText);
+                return false;
+            }
+        });
     }
 
     @Override
@@ -131,11 +151,9 @@ public class CodeListFragment extends Fragment implements OnItemClickListener{
         {
             listDataHeader.add(p.getTitle());
             List<String> postChildrenList = new ArrayList<String>();
-            postChildrenList.add(p.getDescription());
-            postChildrenList.add(p.getInput());
-            postChildrenList.add(p.getOutput());
-            postChildrenList.add(p.getTime());
-            postChildrenList.add(p.getSpace());
+            postChildrenList.add("Description: " + p.getDescription());
+            postChildrenList.add("Input: " + p.getInput());
+            postChildrenList.add("Output: " + p.getOutput());
             listDataChild.put(listDataHeader.get(i), postChildrenList);
             i++;
         }

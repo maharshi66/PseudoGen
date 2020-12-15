@@ -73,9 +73,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_PSEUDOCODE, post.getPseudocode());
         values.put(KEY_INPUT, post.getInput());
         values.put(KEY_OUTPUT, post.getOutput());
-        values.put(KEY_TIME, post.getTime());
-        values.put(KEY_SPACE, post.getSpace());
-
         db.insert(TABLE_NAME, null, values);
         db.close();
     }
@@ -94,9 +91,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 c.getString(2),
                 c.getString(3),
                 c.getString(4),
-                c.getString(5),
-                c.getString(6),
-                c.getString(7));
+                c.getString(5));
         return post;
     }
 
@@ -115,8 +110,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 post.setPseudocode(cursor.getString(3));
                 post.setInput(cursor.getString(4));
                 post.setOutput(cursor.getString(5));
-                post.setTime(cursor.getString(6));
-                post.setSpace(cursor.getString(7));
                 postsList.add(post);
             }while(cursor.moveToNext());
         }
@@ -157,8 +150,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         p.setPseudocode(pseudocode);
         p.setInput(input);
         p.setOutput(output);
-        p.setTime("Time");
-        p.setSpace("Space");
         addPseudocodePost(p);
     }
 }

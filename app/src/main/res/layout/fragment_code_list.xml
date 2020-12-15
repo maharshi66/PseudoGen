@@ -4,16 +4,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:id="@+id/codeListFragment"
     tools:context=".CodeListFragment">
+    <SearchView
+        android:id="@+id/codeListSearchView"
+        android:background="@color/indigo"
+        android:textColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toTopOf="@+id/codeListExpandableListView"
+        android:layout_weight="9">
+    </SearchView>
     <ExpandableListView
         android:id="@+id/codeListExpandableListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_weight="1"
+        app:layout_constraintTop_toBottomOf="@id/codeListSearchView"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:theme="@style/Widget.AppCompat.NewListView">
     </ExpandableListView>
 </LinearLayout>

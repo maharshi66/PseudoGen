@@ -14,11 +14,4 @@
         android:icon="@drawable/datastructure_icon"
         app:showAsAction="ifRoom">
     </item>
-    <item
-        android:id="@+id/action_algorithms"
-        android:enabled="true"
-        android:layout_width="fill_parent"
-        android:title="Algorithms"
-        android:icon="@drawable/algorithm_icon"
-        app:showAsAction="ifRoom"/>
 </menu>

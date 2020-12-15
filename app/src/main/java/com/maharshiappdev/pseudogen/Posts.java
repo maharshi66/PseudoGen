@@ -6,23 +6,18 @@ public class Posts {
     private String pseudocode;
     private String input;
     private String output;
-    private String time;
-    private String space;
 
     public Posts() {}
 
     public Posts(String title, String description,
                  String pseudocode, String input,
-                 String output, String time,
-                 String space)
+                 String output)
     {
         this.title = title;
         this.description = description;
         this.pseudocode = pseudocode;
         this.input = input;
         this.output = output;
-        this.time = time;
-        this.space = space;
     }
 
     public String getTitle() {
@@ -65,19 +60,4 @@ public class Posts {
         this.output = output;
     }
 
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
-
-    public String getSpace() {
-        return space;
-    }
-
-    public void setSpace(String space) {
-        this.space = space;
-    }
 }

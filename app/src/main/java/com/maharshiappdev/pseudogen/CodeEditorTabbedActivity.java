@@ -46,8 +46,6 @@ public class CodeEditorTabbedActivity extends AppCompatActivity{
     String postDescription = "";
     String postInput = "";
     String postOutput = "";
-    String postTime = "";
-    String postSpace = "";
     BottomNavigationView bottomNavEditShortCuts;
     TextView codeInputTextView;
     TextView codeOutputTextView;
@@ -199,7 +197,7 @@ public class CodeEditorTabbedActivity extends AppCompatActivity{
         postPseudocode = inputCodeEditText.getText().toString();
         if (!postDescription.isEmpty() && !postTitle.isEmpty()) {
 //            writeToDatabase(inputCodeTitle, inputCode);
-            Posts post = new Posts(postTitle, postDescription, postPseudocode, postInput, postOutput, postTime, postSpace);
+            Posts post = new Posts(postTitle, postDescription, postPseudocode, postInput, postOutput);
             if(db.isDuplicateTitle(postTitle))
             {
                 createAlertForOverwrite();
@@ -310,9 +308,6 @@ public class CodeEditorTabbedActivity extends AppCompatActivity{
         postDescription = getCodeDescriptionText();
         postInput = getInputCodeText();
         postOutput = getOutputCodeText();
-        //TODO Change this after Analysis code written, placeholders
-        postTime = "Time";
-        postSpace = "Space";
 
         getSupportFragmentManager().beginTransaction().replace(R.id.editor_fragment_container, new CodeEditorFragment()).commit();
     }

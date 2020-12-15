@@ -28,6 +28,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -49,6 +50,9 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
     String actionBarTitle = "";
     FloatingActionButton fab_addNew;
     private DrawerLayout navDrawer;
+    AutoCompleteTextView codeListSearchEditText;
+    ArrayAdapter<String> autoCompleteArrayAdapter;
+    List<String> listDataHeaders;
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -89,8 +93,6 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
                 case R.id.action_code:
                     selectedFragment = new CodeListFragment();
                     switchFragmentCodeList(selectedFragment);
-                    break;
-                case R.id.action_algorithms:
                     break;
                 default:
                     break;
@@ -228,6 +230,11 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
         }
     }
 
+    public void dispatchInformation(List dataHeaders){
+        listDataHeaders = listDataHeaders;
+        autoCompleteArrayAdapter.notifyDataSetChanged();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -237,7 +244,7 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.setSelectedItemId(R.id.action_code);
         setTitle(actionBarTitle);
-
+        listDataHeaders = new ArrayList<>();
         fab_addNew = findViewById(R.id.fab_addNew);
         fab_addNew.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -7,12 +7,14 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class CodeListExapandableListAdapter extends BaseExpandableListAdapter {
     private Context _context;
     private List<String> _listDataHeader; // header titles
+    private List<String> _listDataHeaderOriginal; // header titles
     // child data in format of header title, child title
     private HashMap<String, List<String>> _listDataChild;
 
@@ -21,6 +23,8 @@ public class CodeListExapandableListAdapter extends BaseExpandableListAdapter {
         this._context = context;
         this._listDataHeader = listDataHeader;
         this._listDataChild = listChildData;
+        this._listDataHeaderOriginal = new ArrayList<>();
+        this._listDataHeaderOriginal.addAll(_listDataHeader);
     }
 
     @Override
@@ -97,5 +101,26 @@ public class CodeListExapandableListAdapter extends BaseExpandableListAdapter {
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return false;
+    }
+
+    //Need this to search inside the expandableListView
+    public void filterData(String query){
+
+        query = query.toLowerCase();
+        _listDataHeader.clear();
+        if(query.isEmpty())
+        {
+            _listDataHeader.addAll(_listDataHeaderOriginal);
+        }else
+        {
+            for(String str : _listDataHeaderOriginal)
+            {
+                if(str.toLowerCase().contains(query))
+                {
+                    _listDataHeader.add(str);
+                }
+            }
+            notifyDataSetChanged();
+        }
     }
 }
