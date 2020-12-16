@@ -7,15 +7,38 @@
     android:orientation="vertical"
     android:id="@+id/codeListFragment"
     tools:context=".CodeListFragment">
-    <SearchView
-        android:id="@+id/codeListSearchView"
-        android:background="@color/indigo"
-        android:textColor="@color/white"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintBottom_toTopOf="@+id/codeListExpandableListView"
-        android:layout_weight="9">
-    </SearchView>
+        android:layout_weight="9"
+        android:orientation="horizontal">
+        <SearchView
+            android:id="@+id/codeListSearchView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:theme="@style/MySearchViewStyle"
+            app:layout_constraintBottom_toTopOf="@+id/codeListExpandableListView">
+        </SearchView>
+        <ImageView
+            android:id="@+id/filterImageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:layout_weight="4"
+            app:srcCompat="@drawable/filter_icon">
+        </ImageView>
+        <ImageView
+            android:id="@+id/deleteAllImageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:layout_weight="4"
+            app:srcCompat="@drawable/delete_icon">
+        </ImageView>
+    </LinearLayout>
     <ExpandableListView
         android:id="@+id/codeListExpandableListView"
         android:layout_width="match_parent"

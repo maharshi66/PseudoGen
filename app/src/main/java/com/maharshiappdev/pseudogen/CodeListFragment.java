@@ -36,6 +36,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
 
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -102,33 +103,6 @@ public class CodeListFragment extends Fragment implements OnItemClickListener{
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        db = new DatabaseHandler(getActivity().getApplicationContext());
-        codeListExpandableListView = getView().findViewById(R.id.codeListExpandableListView);
-        prepareDataList();
-        listAdapter = new CodeListExapandableListAdapter(getActivity().getApplicationContext(), listDataHeader, listDataChild);
-        // setting list adapter
-        codeListExpandableListView.setAdapter(listAdapter);
-        listAdapter.notifyDataSetChanged();
-        registerForContextMenu(codeListExpandableListView);
-        codeListSearchView = getView().findViewById(R.id.codeListSearchView);
-        codeListSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                listAdapter.filterData(query);
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                listAdapter.filterData(newText);
-                return false;
-            }
-        });
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -162,5 +136,32 @@ public class CodeListFragment extends Fragment implements OnItemClickListener{
     private List<Posts> loadPosts(){
         postList = db.getAllPosts();
         return postList;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        db = new DatabaseHandler(getActivity().getApplicationContext());
+        codeListExpandableListView = getView().findViewById(R.id.codeListExpandableListView);
+        prepareDataList();
+        listAdapter = new CodeListExapandableListAdapter(getActivity().getApplicationContext(), listDataHeader, listDataChild);
+        codeListExpandableListView.setAdapter(listAdapter);
+        listAdapter.notifyDataSetChanged();
+
+        registerForContextMenu(codeListExpandableListView);
+        codeListSearchView = getView().findViewById(R.id.codeListSearchView);
+        codeListSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                listAdapter.filterData(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                listAdapter.filterData(newText);
+                return false;
+            }
+        });
     }
 }

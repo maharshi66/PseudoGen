@@ -53,7 +53,8 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
     AutoCompleteTextView codeListSearchEditText;
     ArrayAdapter<String> autoCompleteArrayAdapter;
     List<String> listDataHeaders;
-
+    BottomNavigationView navigation;
+    BottomNavigationView codeItemNavigation;
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId())
@@ -221,29 +222,22 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
 
     @Override
     public void onBackPressed() {
-        if(navDrawer.isDrawerOpen(GravityCompat.START))
-        {
+        if (navDrawer.isDrawerOpen(GravityCompat.START)) {
             navDrawer.closeDrawer(GravityCompat.START);
-        }else
-        {
+        } else {
             alertUserForSignOut();
         }
-    }
-
-    public void dispatchInformation(List dataHeaders){
-        listDataHeaders = listDataHeaders;
-        autoCompleteArrayAdapter.notifyDataSetChanged();
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_central);
+        setTitle(actionBarTitle);
 
-        BottomNavigationView navigation = findViewById(R.id.bottomNavView);
+        navigation = findViewById(R.id.bottomNavView);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.setSelectedItemId(R.id.action_code);
-        setTitle(actionBarTitle);
         listDataHeaders = new ArrayList<>();
         fab_addNew = findViewById(R.id.fab_addNew);
         fab_addNew.setOnClickListener(new View.OnClickListener() {

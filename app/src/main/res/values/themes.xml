@@ -14,6 +14,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="searchViewStyle">@style/MySearchViewStyle</item>
     </style>
 
     <!-- Action Bar Style -->
@@ -76,5 +77,12 @@
         <item name="colorSecondaryVariant">@color/indigo</item>
         <item name="colorOnSecondary">@color/bright_orange</item>
         <item name="fontFamily">@font/maven_pro_medium</item>
+    </style>
+
+    <style name="MySearchViewStyle" parent="Widget.AppCompat.SearchView">
+        <!-- Background for the search query section (e.g. EditText) -->
+        <item name="android:textColor">@color/code_editor_white</item>
+        <!-- Background for the actions section (e.g. voice, submit) -->
+        <item name="submitBackground">@color/code_editor_white</item>
     </style>
 </resources>
