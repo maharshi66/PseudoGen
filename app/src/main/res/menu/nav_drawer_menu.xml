@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:showIn="navigation_view">
-        <group android:id="@+id/menu_pseudocode"
+        <group android:id="@+id/menu_top"
             android:checkableBehavior="none">
                 <item android:id="@+id/nav_usingThisApp"
                     android:title="Using Pseudogen"
@@ -15,21 +16,6 @@
                 <item android:id="@+id/nav_examples"
                     android:title="Examples"
                     android:icon="@drawable/example_icon">
-                </item>
-        </group>
-        <group android:id="@+id/menu_learn"
-                android:checkableBehavior="none">
-                <item android:id="@+id/nav_roadmap"
-                    android:title="Coding Roadmap"
-                    android:icon="@drawable/roadmap_icon">
-                </item>
-                <item android:id="@+id/nav_bigO"
-                    android:title="Big O Analysis"
-                    android:icon="@drawable/analysis_icon">
-                </item>
-                <item android:id="@+id/nav_ds"
-                    android:title="Big O Reference"
-                    android:icon="@drawable/reference_icon">
                 </item>
         </group>
         <group

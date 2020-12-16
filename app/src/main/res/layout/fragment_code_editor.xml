@@ -18,7 +18,7 @@
         android:inputType="textMultiLine|textNoSuggestions"
         android:lines="50"
         android:scrollbars="vertical"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -26,6 +26,6 @@
         app:layout_constraintTop_toTopOf="parent"
         android:background="@color/code_editor_dark"
         android:textColor="@color/white"
-        android:fontFamily="@font/fira_mono_medium">
+        android:fontFamily="@font/fira_mono">
     </com.maharshiappdev.pseudogen.LineNumberedEditText>
 </FrameLayout>

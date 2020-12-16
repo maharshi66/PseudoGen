@@ -12,13 +12,4 @@
         android:layout_height="100dp"
         android:src="@drawable/pigeonlogo">
     </ImageView>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="pseudoGen"
-        android:textAlignment="center"
-        android:fontFamily="@font/audiowide"
-        android:textSize="20dp"
-        android:textColor="@color/bright_orange">
-    </TextView>
 </LinearLayout>

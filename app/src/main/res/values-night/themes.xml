@@ -23,7 +23,6 @@
         <item name="windowNoTitle">true</item>
         <item name="colorPrimary">@color/indigo</item>
         <item name="android:windowBackground">@drawable/background_gradient</item>
-        <item name="fontFamily">@font/maven_pro_medium</item>
         <item name="android:statusBarColor" tools:targetApi="l">@color/indigo</item>
     </style>
 
@@ -80,9 +79,10 @@
     </style>
 
     <style name="MySearchViewStyle" parent="Widget.AppCompat.SearchView">
-        <!-- Background for the search query section (e.g. EditText) -->
-        <item name="queryBackground">@color/code_editor_dark</item>
+        <!-- Background for the search query section (e.g. EditText) -->\
+        <item name="android:background">@color/code_editor_dark</item>
+        <item name="android:textColor">@color/code_editor_white</item>
         <!-- Background for the actions section (e.g. voice, submit) -->
-        <item name="submitBackground">@color/code_editor_white</item>
+        <item name="submitBackground">@color/bright_orange</item>
     </style>
 </resources>

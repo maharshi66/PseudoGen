@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:forceDarkAllowed="false"
     android:id="@+id/codeListFragment"
     tools:context=".CodeListFragment">
     <LinearLayout
@@ -16,35 +17,17 @@
             android:id="@+id/codeListSearchView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:theme="@style/MySearchViewStyle"
             app:layout_constraintBottom_toTopOf="@+id/codeListExpandableListView">
         </SearchView>
-        <ImageView
-            android:id="@+id/filterImageView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="20dp"
-            android:paddingBottom="20dp"
-            android:layout_weight="4"
-            app:srcCompat="@drawable/filter_icon">
-        </ImageView>
-        <ImageView
-            android:id="@+id/deleteAllImageView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="20dp"
-            android:paddingBottom="20dp"
-            android:layout_weight="4"
-            app:srcCompat="@drawable/delete_icon">
-        </ImageView>
     </LinearLayout>
     <ExpandableListView
         android:id="@+id/codeListExpandableListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        app:layout_constraintTop_toBottomOf="@id/codeListSearchView"
+        app:layout_constraintTop_toBottomOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

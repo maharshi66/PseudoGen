@@ -17,6 +17,9 @@ import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.TypefaceSpan;
 import android.util.DisplayMetrics;
 import android.view.ContextMenu;
 import android.view.Gravity;
@@ -47,7 +50,6 @@ import java.util.List;
 public class CentralActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     FragmentTransaction fragmentTransaction;
     Fragment selectedFragment = null;
-    String actionBarTitle = "";
     FloatingActionButton fab_addNew;
     private DrawerLayout navDrawer;
     AutoCompleteTextView codeListSearchEditText;
@@ -55,6 +57,7 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
     List<String> listDataHeaders;
     BottomNavigationView navigation;
     BottomNavigationView codeItemNavigation;
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId())
@@ -233,7 +236,7 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_central);
-        setTitle(actionBarTitle);
+        setTitle("pseudoGen");
 
         navigation = findViewById(R.id.bottomNavView);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -248,6 +251,7 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
         });
 
         Toolbar centralToolbar = findViewById(R.id.centralToolBar);
+        centralToolbar.inflateMenu(R.menu.code_list_top_menu);
         navDrawer = findViewById(R.id.drawerLayout);
         NavigationView navigationView = findViewById(R.id.navView);
 
