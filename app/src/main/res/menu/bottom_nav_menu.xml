@@ -2,16 +2,21 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_code"
+        android:id="@+id/action_editItem"
         android:enabled="true"
         android:layout_width="fill_parent"
-        android:title="My List"
-        android:icon="@drawable/my_list_icon"
+        android:title="Edit"
+        android:icon="@drawable/edit_item_icon"
         app:showAsAction="ifRoom"/>
-    <item android:id="@+id/action_data_structures"
-    android:title="Data Structures"
+    <item android:id="@+id/action_shareItem"
+    android:title="Share"
         android:enabled="true"
-        android:icon="@drawable/datastructure_icon"
+        android:icon="@drawable/share_icon"
+        app:showAsAction="ifRoom">
+    </item>
+    <item android:title="Delete" android:id="@+id/action_deleteItem"
+        android:enabled="true"
+        android:icon="@drawable/delete_icon"
         app:showAsAction="ifRoom">
     </item>
 </menu>

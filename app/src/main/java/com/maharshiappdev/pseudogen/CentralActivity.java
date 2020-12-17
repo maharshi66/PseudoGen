@@ -33,7 +33,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.ExpandableListView;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,19 +47,30 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class CentralActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
-    FragmentTransaction fragmentTransaction;
-    Fragment selectedFragment = null;
-    FloatingActionButton fab_addNew;
     private DrawerLayout navDrawer;
+    private int groupPos;
+    private int childPos;
+    FloatingActionButton fab_addNew;
     AutoCompleteTextView codeListSearchEditText;
     ArrayAdapter<String> autoCompleteArrayAdapter;
     List<String> listDataHeaders;
     BottomNavigationView navigation;
     BottomNavigationView codeItemNavigation;
 
+    //This has been imported from CodeListFragment! TODO remove this todo
+    ExpandableListView codeListExpandableListView;
+    CodeListExapandableListAdapter listAdapter;
+    List<Posts> postList;
+    List<String> listDataHeader;
+    HashMap<String, List<String>> listDataChild;
+    DatabaseHandler db;
+    SearchView codeListSearchView;
+
+    //NAVBAR
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId())
@@ -90,13 +103,26 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
-                case R.id.action_data_structures:
-                    selectedFragment = new HomeFragment();
-                    switchFragmentHome(selectedFragment);
+                case R.id.action_editItem:
+                    Posts editPost = db.getPost(listDataHeader.get(groupPos));
+                    Intent intent = new Intent(CentralActivity.this, CodeEditorTabbedActivity.class);
+                    intent.putExtra("fromEditPseudocodeTitle", editPost.getTitle());
+                    intent.putExtra("fromEditPseudocode", editPost.getPseudocode());
+                    intent.putExtra("fromEditPseudocodeDescription", editPost.getDescription());
+                    intent.putExtra("fromEditInput", editPost.getInput());
+                    intent.putExtra("fromEditOutput", editPost.getOutput());
+                    startActivity(intent);
+                    hideBottomNav();
                     break;
-                case R.id.action_code:
-                    selectedFragment = new CodeListFragment();
-                    switchFragmentCodeList(selectedFragment);
+                case R.id.action_shareItem:
+                    hideBottomNav();
+                    break;
+                case R.id.action_deleteItem:
+                    db.deletePost(listDataHeader.get(groupPos));
+                    listDataHeader.remove(groupPos);
+                    listDataChild.remove(childPos);
+                    listAdapter.notifyDataSetChanged();
+                    hideBottomNav();
                     break;
                 default:
                     break;
@@ -105,22 +131,29 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
         }
     };
 
-    private void switchFragmentHome(Fragment fragment)
-    {
-        fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, fragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
+    private List<Posts> loadPosts(){
+        postList = db.getAllPosts();
+        return postList;
     }
 
-    private void switchFragmentCodeList(Fragment codeListFragment)
+    public void prepareDataList()
     {
-        fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, codeListFragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
-    }
+        listDataHeader = new ArrayList<String>();
+        listDataChild = new HashMap<String, List<String>>();
+        List<Posts> uploadedPosts = loadPosts();
 
+        int i = 0;
+        for(Posts p :  uploadedPosts)
+        {
+            listDataHeader.add(p.getTitle());
+            List<String> postChildrenList = new ArrayList<String>();
+            postChildrenList.add("Description: " + p.getDescription());
+            postChildrenList.add("Input: " + p.getInput());
+            postChildrenList.add("Output: " + p.getOutput());
+            listDataChild.put(listDataHeader.get(i), postChildrenList);
+            i++;
+        }
+    }
     public void createAlertForAddNew()
     {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this, R.style.CutomAlertDialog);
@@ -232,15 +265,25 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
         }
     }
 
+    public void hideBottomNav()
+    {
+        navigation.setVisibility(View.INVISIBLE);
+
+    }
+
+    public void showBottomNav()
+    {
+        navigation.setVisibility(View.VISIBLE);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_central);
-        setTitle("pseudoGen");
-
         navigation = findViewById(R.id.bottomNavView);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        navigation.setSelectedItemId(R.id.action_code);
+        hideBottomNav();
+
         listDataHeaders = new ArrayList<>();
         fab_addNew = findViewById(R.id.fab_addNew);
         fab_addNew.setOnClickListener(new View.OnClickListener() {
@@ -258,7 +301,39 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, navDrawer, centralToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         navDrawer.addDrawerListener(toggle);
         toggle.syncState();
-
         navigationView.setNavigationItemSelectedListener(this);
+
+        db = new DatabaseHandler(getApplicationContext());
+        codeListExpandableListView = findViewById(R.id.codeListExpandableListView);
+        prepareDataList();
+        listAdapter = new CodeListExapandableListAdapter(getApplicationContext(), listDataHeader, listDataChild);
+        codeListExpandableListView.setAdapter(listAdapter);
+        listAdapter.notifyDataSetChanged();
+
+        codeListSearchView = findViewById(R.id.codeListSearchView);
+        codeListSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                listAdapter.filterData(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                listAdapter.filterData(newText);
+                return false;
+            }
+        });
+
+        codeListExpandableListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                long pos = codeListExpandableListView.getExpandableListPosition(position);
+                groupPos = ExpandableListView.getPackedPositionGroup(pos);
+                childPos = ExpandableListView.getPackedPositionChild(pos);
+                showBottomNav();
+                return false;
+            }
+        });
     }
 }

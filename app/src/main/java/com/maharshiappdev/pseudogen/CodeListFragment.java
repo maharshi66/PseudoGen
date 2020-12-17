@@ -43,6 +43,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+//TODO Delete this Fragment as no longer in use!
 public class CodeListFragment extends Fragment implements OnItemClickListener{
     View view;
     Menu deleteMenu;

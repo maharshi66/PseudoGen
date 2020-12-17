@@ -12,34 +12,42 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/code_editor_dark"
         android:orientation="vertical">
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:id="@+id/centralToolBar"
+        android:background="@color/bright_orange"
         android:theme="@style/AppTheme.NoActionBar"
         android:forceDarkAllowed="false"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         android:elevation="4dp">
-        <TextView
-            android:id="@+id/appTitleTextView"
+        <SearchView
+            android:id="@+id/codeListSearchView"
+            android:layoutDirection="rtl"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:text="pseudoGen"
-            android:fontFamily="@font/audiowide"
-            android:textColor="@color/indigo"
-            android:textSize="20dp"
-            android:gravity="start|center"
-            android:textStyle="bold">
-        </TextView>
+            android:layout_height="match_parent">
+        </SearchView>
     </androidx.appcompat.widget.Toolbar>
         <FrameLayout
-            android:id="@+id/fragment_container"
+            android:id="@+id/frameLayoutCentral"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="9"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
+            <ExpandableListView
+                android:id="@+id/codeListExpandableListView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:layout_constraintTop_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/bottomNavView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:theme="@style/Widget.AppCompat.NewListView">
+            </ExpandableListView>
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fab_addNew"
                 android:layout_width="wrap_content"
@@ -52,7 +60,6 @@
                 android:src="@drawable/edit_item_icon">
             </com.google.android.material.floatingactionbutton.FloatingActionButton>
         </FrameLayout>
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavView"
         android:layout_width="match_parent"
@@ -62,8 +69,8 @@
         android:layout_alignParentBottom="true"
         android:background="@color/black"
         app:itemBackground="@color/black"
-        app:itemIconTint="@drawable/nav_bar_selector"
-        app:itemTextColor="@drawable/nav_bar_selector"
+        app:itemIconTint="@drawable/shortcuts_selector"
+        app:itemTextColor="@drawable/shortcuts_selector"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_nav_menu"
         app:theme="@style/Widget.BottomNavigationView"/>
