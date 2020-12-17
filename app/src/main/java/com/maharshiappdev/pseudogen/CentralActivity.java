@@ -58,10 +58,9 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
     AutoCompleteTextView codeListSearchEditText;
     ArrayAdapter<String> autoCompleteArrayAdapter;
     List<String> listDataHeaders;
+    Toolbar centralToolbar;
     BottomNavigationView navigation;
     BottomNavigationView codeItemNavigation;
-
-    //This has been imported from CodeListFragment! TODO remove this todo
     ExpandableListView codeListExpandableListView;
     CodeListExapandableListAdapter listAdapter;
     List<Posts> postList;
@@ -70,7 +69,6 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
     DatabaseHandler db;
     SearchView codeListSearchView;
 
-    //NAVBAR
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId())
@@ -280,11 +278,11 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_central);
+        listDataHeaders = new ArrayList<>();
         navigation = findViewById(R.id.bottomNavView);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         hideBottomNav();
 
-        listDataHeaders = new ArrayList<>();
         fab_addNew = findViewById(R.id.fab_addNew);
         fab_addNew.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -293,8 +291,29 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
             }
         });
 
-        Toolbar centralToolbar = findViewById(R.id.centralToolBar);
+        //Options menu for toolbar
+        centralToolbar = findViewById(R.id.centralToolBar);
         centralToolbar.inflateMenu(R.menu.code_list_top_menu);
+/*        MenuItem sortByItem = centralToolbar.getMenu().findItem(R.id.action_sortBy);
+        Spinner sortBySpinner = (Spinner) sortByItem.getActionView();
+        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(this,
+                R.array.sort_by_options, android.R.layout.simple_spinner_item);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sortBySpinner.setAdapter(spinnerAdapter);*/
+
+        centralToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch(item.getItemId())
+                {
+                    case R.id.action_deleteAll:
+                        Toast.makeText(CentralActivity.this,"Deleting All!", Toast.LENGTH_SHORT).show();
+                        break;
+                }
+                return false;
+            }
+        });
+
         navDrawer = findViewById(R.id.drawerLayout);
         NavigationView navigationView = findViewById(R.id.navView);
 
