@@ -90,9 +90,9 @@ public class CodeEditorTabbedActivity extends AppCompatActivity{
                 }
                 break;
             default:
-                return false;
+                break;
         }
-        return true;
+        return false;
     }
 
     public void createAlertForBackHome()
