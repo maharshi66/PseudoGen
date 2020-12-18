@@ -7,9 +7,15 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 public class CodeListExapandableListAdapter extends BaseExpandableListAdapter {
     private Context _context;
@@ -21,10 +27,10 @@ public class CodeListExapandableListAdapter extends BaseExpandableListAdapter {
     public CodeListExapandableListAdapter(Context context, List<String> listDataHeader,
                                  HashMap<String, List<String>> listChildData) {
         this._context = context;
-        this._listDataHeader = listDataHeader;
         this._listDataChild = listChildData;
+        this._listDataHeader = listDataHeader;
         this._listDataHeaderOriginal = new ArrayList<>();
-        this._listDataHeaderOriginal.addAll(_listDataHeader);
+        this._listDataHeaderOriginal.addAll(listDataHeader);
     }
 
     @Override
@@ -78,6 +84,13 @@ public class CodeListExapandableListAdapter extends BaseExpandableListAdapter {
         lblListHeader.setTypeface(null, Typeface.BOLD);
         lblListHeader.setText(headerTitle);
 
+        if(isExpanded)
+        {
+            convertView.setBackgroundResource(R.color.blue_angel);
+        }else {
+            convertView.setBackgroundResource(R.color.app_blue);
+        }
+
         return convertView;
     }
 
@@ -103,24 +116,30 @@ public class CodeListExapandableListAdapter extends BaseExpandableListAdapter {
         return false;
     }
 
+    //Required as this updates the list after an item delete!
+    public void updateListsAfterDelete(List newList)
+    {
+        this._listDataHeaderOriginal.clear();
+        this._listDataHeaderOriginal.addAll(newList);
+    }
+
     //Need this to search inside the expandableListView
     public void filterData(String query){
-
         query = query.toLowerCase();
-        _listDataHeader.clear();
+        this._listDataHeader.clear();
         if(query.isEmpty())
         {
-            _listDataHeader.addAll(_listDataHeaderOriginal);
+            this._listDataHeader.addAll(this._listDataHeaderOriginal);
         }else
         {
-            for(String str : _listDataHeaderOriginal)
+            for(String str : this._listDataHeaderOriginal)
             {
                 if(str.toLowerCase().contains(query))
                 {
-                    _listDataHeader.add(str);
+                    this._listDataHeader.add(str);
                 }
             }
-            notifyDataSetChanged();
         }
+        notifyDataSetChanged();
     }
 }

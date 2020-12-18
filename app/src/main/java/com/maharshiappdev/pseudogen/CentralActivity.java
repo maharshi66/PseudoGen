@@ -69,6 +69,8 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
     DatabaseHandler db;
     SearchView codeListSearchView;
 
+
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId())
@@ -120,6 +122,7 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
                     listDataHeader.remove(groupPos);
                     listDataChild.remove(childPos);
                     listAdapter.notifyDataSetChanged();
+                    listAdapter.updateListsAfterDelete(listDataHeader);
                     hideBottomNav();
                     break;
                 default:
@@ -294,12 +297,6 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
         //Options menu for toolbar
         centralToolbar = findViewById(R.id.centralToolBar);
         centralToolbar.inflateMenu(R.menu.code_list_top_menu);
-/*        MenuItem sortByItem = centralToolbar.getMenu().findItem(R.id.action_sortBy);
-        Spinner sortBySpinner = (Spinner) sortByItem.getActionView();
-        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(this,
-                R.array.sort_by_options, android.R.layout.simple_spinner_item);
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sortBySpinner.setAdapter(spinnerAdapter);*/
 
         centralToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
@@ -327,8 +324,6 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
         prepareDataList();
         listAdapter = new CodeListExapandableListAdapter(getApplicationContext(), listDataHeader, listDataChild);
         codeListExpandableListView.setAdapter(listAdapter);
-        listAdapter.notifyDataSetChanged();
-
         codeListSearchView = findViewById(R.id.codeListSearchView);
         codeListSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -343,6 +338,7 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
                 return false;
             }
         });
+        listAdapter.notifyDataSetChanged();
 
         codeListExpandableListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
@@ -351,7 +347,7 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
                 groupPos = ExpandableListView.getPackedPositionGroup(pos);
                 childPos = ExpandableListView.getPackedPositionChild(pos);
                 showBottomNav();
-                return false;
+                return true;
             }
         });
     }
