@@ -296,7 +296,7 @@ public class CodeEditorTabbedActivity extends AppCompatActivity{
         postTitle = getAlgorithmTitle();
 
         setTitle(getAlgorithmTitle());
-        getSupportActionBar().setIcon(R.drawable.code_icon);
+//        getSupportActionBar().setIcon(R.drawable.code_icon);
         db = new DatabaseHandler(this);
         bottomNavEditShortCuts = findViewById(R.id.bottomNavEditShortCuts);
         codeInputTextView = findViewById(R.id.codeInputTextView);

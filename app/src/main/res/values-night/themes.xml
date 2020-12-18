@@ -38,11 +38,6 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
-    <!-- Edit Text Style -->
-    <style name="Widget.AppCompat.NewEditText" parent="Widget.AppCompat.EditText">
-        <item name="fontFamily">@font/fira_mono</item>
-    </style>
-
     <style name="Theme.PseudoGen.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -84,5 +79,9 @@
         <item name="android:textColor">@color/code_editor_white</item>
         <!-- Background for the actions section (e.g. voice, submit) -->
         <item name="submitBackground">@color/bright_orange</item>
+    </style>
+
+    <style name="MavenProTextViewStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/maven_pro_medium</item>
     </style>
 </resources>

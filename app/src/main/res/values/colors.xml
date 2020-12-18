@@ -10,7 +10,9 @@
     <color name="blue_angel">#B7CEEC</color>
     <color name="code_editor_white">#F7F9F9</color>
     <color name="code_editor_dark">#202020</color>
+    <color name="blackboard_dark">#2f4f4f</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="chalk_white">#E0DBD1</color>
     <color name="light_grey">#B8B8B8</color>
     <color name="dark_grey">#838383</color>
     <color name="deep_sky_blue">#00BFFF</color>

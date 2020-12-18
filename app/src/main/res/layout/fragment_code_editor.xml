@@ -24,8 +24,8 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/code_editor_dark"
-        android:textColor="@color/white"
+        android:background="@color/blackboard_dark"
+        android:textColor="@color/chalk_white"
         android:fontFamily="@font/fira_mono">
     </com.maharshiappdev.pseudogen.LineNumberedEditText>
 </FrameLayout>

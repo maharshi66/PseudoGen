@@ -4,15 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/code_editor_dark"
+    android:background="@color/blackboard_dark"
     android:forceDarkAllowed="false"
     tools:context=".CodeEditorTabbedActivity">
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/Theme.PseudoGen.AppBarOverlay"
+        android:background="@color/code_editor_dark"
         app:layout_constraintTop_toTopOf="parent">
+    <!--android:theme="@style/Theme.PseudoGen.AppBarOverlay"-->
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/editorToolbar"
             android:layout_width="match_parent"
@@ -21,31 +22,31 @@
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:titleTextAppearance="@style/Toolbar.TitleText">
         </androidx.appcompat.widget.Toolbar>
-        <LinearLayout
+        <GridLayout
             android:id="@+id/io_linear_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:theme="@style/CodeEditorTitleEditText"
-            android:padding="@dimen/appbar_padding"
+            android:paddingLeft="@dimen/appbar_padding"
+            android:orientation="vertical"
             android:background="@color/code_editor_dark">
             <TextView
                 android:id="@+id/codeInputTextView"
-                android:layout_weight="5"
+                android:layout_row="0"
+                android:layout_column="0"
                 android:textColor="@color/white"
-                android:textAlignment="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
             </TextView>
             <TextView
                 android:id="@+id/codeOutputTextView"
-                android:textAlignment="center"
+                android:layout_column="0"
+                android:layout_row="1"
+                android:textAlignment="viewStart"
                 android:textColor="@color/white"
-                android:layout_weight="5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
             </TextView>
-        </LinearLayout>
+        </GridLayout>
     </com.google.android.material.appbar.AppBarLayout>
     <FrameLayout
         android:id="@+id/editor_fragment_container"
