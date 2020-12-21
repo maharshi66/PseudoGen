@@ -52,6 +52,7 @@ public class CodeEditorTabbedActivity extends AppCompatActivity{
     boolean shortcutsChecked = true;
     DatabaseHandler db;
 
+
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);

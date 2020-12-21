@@ -21,6 +21,7 @@ public class CodeListExapandableListAdapter extends BaseExpandableListAdapter {
     private Context _context;
     private List<String> _listDataHeader; // header titles
     private List<String> _listDataHeaderOriginal; // header titles
+    private List<String> _listDataHeaderTags;
     // child data in format of header title, child title
     private HashMap<String, List<String>> _listDataChild;
 

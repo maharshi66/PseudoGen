@@ -21,9 +21,9 @@
     <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="colorPrimary">@color/indigo</item>
+        <item name="colorPrimary">@color/bright_orange</item>
         <item name="android:windowBackground">@drawable/background_gradient</item>
-        <item name="android:statusBarColor" tools:targetApi="l">@color/indigo</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/bright_orange</item>
     </style>
 
     <!-- Bottom Navigation Style -->

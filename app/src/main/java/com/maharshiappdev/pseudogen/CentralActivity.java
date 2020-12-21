@@ -65,6 +65,7 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
     CodeListExapandableListAdapter listAdapter;
     List<Posts> postList;
     List<String> listDataHeader;
+    List<String> listDataHeaderTags;
     HashMap<String, List<String>> listDataChild;
     DatabaseHandler db;
     SearchView codeListSearchView;
