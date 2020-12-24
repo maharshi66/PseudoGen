@@ -3,6 +3,7 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+
     <TextView
         android:id="@+id/codeListTitle"
         android:layout_width="0dp"
@@ -12,8 +13,8 @@
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:textColor="@color/white"
-        android:textSize="22dp"/>
-    <GridLayout
+        android:textSize="22dp" />
+<!--    <GridLayout
         android:layout_weight="5"
         android:layout_width="wrap_content"
         android:layout_height="100dp"
@@ -59,5 +60,5 @@
             android:layout_rowWeight="1"
             android:text="TAG 4">
         </TextView>
-    </GridLayout>
+    </GridLayout>-->
 </LinearLayout>

@@ -4,23 +4,31 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.ListFragment;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.TypefaceSpan;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -46,14 +54,21 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.prefs.Preferences;
 
 public class CentralActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private DrawerLayout navDrawer;
     private int groupPos;
     private int childPos;
+    private static final int PERMISSION_REQ_CODE = 100;
+
     FloatingActionButton fab_addNew;
     AutoCompleteTextView codeListSearchEditText;
     ArrayAdapter<String> autoCompleteArrayAdapter;
@@ -70,7 +85,17 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
     DatabaseHandler db;
     SearchView codeListSearchView;
 
-
+    public void saveToInternalStorage(String title, String description, String input, String output, String pseudocode) throws IOException {
+        FileOutputStream fOut = openFileOutput("title", Context.MODE_PRIVATE);
+        String fileText = "Algorithm: " + title + "\n"
+                + "Description: " + description + "\n"
+                + "Input: " + input + "\n"
+                + "Output: " + output + "\n"
+                + pseudocode;
+        fOut.write(fileText.getBytes());
+        fOut.close();
+        Toast.makeText(this, "saved as txt", Toast.LENGTH_SHORT).show();
+    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -116,6 +141,33 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
                     hideBottomNav();
                     break;
                 case R.id.action_shareItem:
+                    String title = "",  description = "", input = "", output = "", pseudocode = "";
+                    Posts sharePost = db.getPost(listDataHeader.get(groupPos));
+                    title = sharePost.getTitle();
+                    description = sharePost.getDescription();
+                    input = sharePost.getInput();
+                    output = sharePost.getOutput();
+                    pseudocode = sharePost.getPseudocode();
+                    //Write to external storage
+                    //TODO Open and save to external storage as a text file!
+                        if (checkPermission()) {
+                            String fileText = "";
+                            fileText= "Algorithm: " + title + "\n"
+                                    + "Description: " + description + "\n"
+                                    + "Input: " + input + "\n"
+                                    + "Output: " + output + "\n\n"
+                                    + pseudocode;
+                            //Open intent with file from external storage
+                            Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+//                            sharingIntent.setType("message/rfc822"); //for attachments
+                            sharingIntent.setType("plain/text");
+                            sharingIntent.putExtra(Intent.EXTRA_SUBJECT, title + " - pseudocode from PseudoGen");
+                            sharingIntent.putExtra(Intent.EXTRA_TEXT, fileText);
+                            startActivity(Intent.createChooser(sharingIntent, "Share pseudoode with:"));
+                        }else
+                        {
+                            requestPermission();
+                        }
                     hideBottomNav();
                     break;
                 case R.id.action_deleteItem:
@@ -276,6 +328,36 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
     public void showBottomNav()
     {
         navigation.setVisibility(View.VISIBLE);
+    }
+
+    private boolean checkPermission() {
+        int result = ContextCompat.checkSelfPermission(CentralActivity.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if (result == PackageManager.PERMISSION_GRANTED) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private void requestPermission() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(CentralActivity.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            Toast.makeText(CentralActivity.this, "Write External Storage permission allows us to create files. Please allow this permission in App Settings.", Toast.LENGTH_LONG).show();
+        } else {
+            ActivityCompat.requestPermissions(CentralActivity.this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_REQ_CODE);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSION_REQ_CODE:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Log.e("value", "Permission Granted, Now you can use local drive .");
+            } else {
+                Log.e("value", "Permission Denied, You cannot use local drive .");
+            }
+            break;
+        }
     }
 
     @Override
