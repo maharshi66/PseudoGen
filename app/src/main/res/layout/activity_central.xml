@@ -66,6 +66,7 @@
                 android:layout_margin="@dimen/fab_margin"
                 android:background="@color/bright_orange"
                 android:backgroundTint="@color/bright_orange"
+                android:tint="@color/indigo"
                 android:clickable="true"
                 android:src="@drawable/edit_item_icon">
             </com.google.android.material.floatingactionbutton.FloatingActionButton>
@@ -89,8 +90,8 @@
         android:id="@+id/navView"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        app:itemTextAppearance="@style/MavenProTextViewStyle"
         android:layout_gravity="start"
+        android:background="@drawable/background_gradient"
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/nav_drawer_menu"/>
 </androidx.drawerlayout.widget.DrawerLayout>
