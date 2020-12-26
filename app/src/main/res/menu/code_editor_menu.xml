@@ -3,13 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".CodeEditorTabbedActivity">
-
+    <item android:id="@+id/action_clearText"
+        android:title="Clear Text"
+        android:icon="@drawable/clear_text_icon"
+        app:showAsAction="ifRoom">
+    </item>
     <item android:id="@+id/checkAndSave"
         android:title="Save"
         android:icon="@drawable/save_icon"
         app:showAsAction="ifRoom">
     </item>
-
     <item android:id="@+id/settings_icon"
         android:title="Editor Settings"
         android:icon="@drawable/settings_icon"
@@ -18,6 +21,36 @@
             <item
                 android:id="@+id/action_editDetails"
                 android:title="Edit Details" />
+            <item android:id="@+id/action_theme"
+                android:title="Theme"
+                app:showAsAction="always">
+                <menu>
+                    <item android:id="@+id/theme_blackboard" android:title="Blackboard">
+                    </item>
+                    <item android:id="@+id/theme_whiteboard" android:title="Whiteboard">
+                    </item>
+                </menu>
+            </item>
+            <item android:id="@+id/action_fontChange"
+                android:title="Font"
+                app:showAsAction="always">
+                <menu>
+                    <item android:id="@+id/fontType_default" android:title="Default">
+                    </item>
+                    <item android:id="@+id/fontType_kalam" android:title="Kalam">
+                    </item>
+                </menu>
+            </item>
+            <item android:id="@+id/action_fontSizeChange"
+                android:title="Font Size"
+                app:showAsAction="always">
+                <menu>
+                    <item android:id="@+id/fontSize_small" android:title="Small">
+                    </item>
+                    <item android:id="@+id/fontSize_big" android:title="Big">
+                    </item>
+                </menu>
+            </item>
             <item
                 android:id="@+id/action_shortcuts"
                 android:title="Shortcuts"
@@ -28,5 +61,4 @@
                 android:title="Back Home" />
         </menu>
     </item>
-
 </menu>

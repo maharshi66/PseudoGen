@@ -18,6 +18,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -32,7 +33,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -46,12 +46,12 @@ public class CodeEditorTabbedActivity extends AppCompatActivity{
     String postDescription = "";
     String postInput = "";
     String postOutput = "";
+    Fragment editorFrag;
     BottomNavigationView bottomNavEditShortCuts;
     TextView codeInputTextView;
     TextView codeOutputTextView;
     boolean shortcutsChecked = true;
     DatabaseHandler db;
-
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
@@ -64,6 +64,13 @@ public class CodeEditorTabbedActivity extends AppCompatActivity{
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.code_editor_menu, menu);
+        //TODO Remove this code as it does not work: No spinner created
+        /*MenuItem item = menu.findItem(R.id.action_fontChange);
+        Spinner spinner = (Spinner) item.getActionView();
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.fonts_spinner_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);*/
         return true;
     }
 
@@ -284,7 +291,6 @@ public class CodeEditorTabbedActivity extends AppCompatActivity{
                         dialog.cancel();
                     }
                 })
-                .setTitle("Pseudocode Exists")
                 .show();
     }
 
@@ -309,7 +315,7 @@ public class CodeEditorTabbedActivity extends AppCompatActivity{
         postDescription = getCodeDescriptionText();
         postInput = getInputCodeText();
         postOutput = getOutputCodeText();
-
-        getSupportFragmentManager().beginTransaction().replace(R.id.editor_fragment_container, new CodeEditorFragment()).commit();
+        editorFrag =  new CodeEditorFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.editor_fragment_container, editorFrag).commit();
     }
 }

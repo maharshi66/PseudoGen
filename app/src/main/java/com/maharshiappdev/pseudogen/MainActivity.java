@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void startLoadingAnimation()
     {
-        loadingImageView.animate().rotation(3600).setDuration(2000);
+        loadingImageView.animate().rotation(3600).setDuration(1500);
     }
 
     public Boolean checkIfLoggedIn(FirebaseAuth user) {
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void handleLoginAndSignUp() {
-        new CountDownTimer(1500,1000)
+        new CountDownTimer(1200,1000)
         {
             @Override
             public void onTick(long millisUntilFinished) {}

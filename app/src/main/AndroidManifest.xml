@@ -16,6 +16,7 @@
         <activity android:name=".LearningWebViewActivity"></activity>
         <activity
             android:name=".CodeEditorTabbedActivity"
+            android:configChanges="uiMode"
             android:label="@string/title_activity_code_editor_tabbed"
             android:theme="@style/Theme.PseudoGen.NoActionBar">
         </activity>
@@ -35,7 +36,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

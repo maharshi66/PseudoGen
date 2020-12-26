@@ -123,6 +123,28 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
         }
         return true;
     }
+    public void createAlertForDeleteItem()
+    {
+        AlertDialog.Builder alert = new AlertDialog.Builder(CentralActivity.this);
+        alert.setMessage("Delete this item?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        db.deletePost(listDataHeader.get(groupPos));
+                        listDataHeader.remove(groupPos);
+                        listDataChild.remove(childPos);
+                        listAdapter.notifyDataSetChanged();
+                        listAdapter.updateListsAfterDelete(listDataHeader);
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                })
+                .show();
+    }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -171,11 +193,7 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
                     hideBottomNav();
                     break;
                 case R.id.action_deleteItem:
-                    db.deletePost(listDataHeader.get(groupPos));
-                    listDataHeader.remove(groupPos);
-                    listDataChild.remove(childPos);
-                    listAdapter.notifyDataSetChanged();
-                    listAdapter.updateListsAfterDelete(listDataHeader);
+                    createAlertForDeleteItem();
                     hideBottomNav();
                     break;
                 default:
@@ -373,6 +391,7 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
         fab_addNew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                hideBottomNav();
                 createAlertForAddNew();
             }
         });

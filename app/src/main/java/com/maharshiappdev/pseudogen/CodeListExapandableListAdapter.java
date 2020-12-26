@@ -87,9 +87,9 @@ public class CodeListExapandableListAdapter extends BaseExpandableListAdapter {
 
         if(isExpanded)
         {
-            convertView.setBackgroundResource(R.color.blue_angel);
+            convertView.setBackgroundResource(R.color.dark_orange);
         }else {
-            convertView.setBackgroundResource(R.color.app_blue);
+            convertView.setBackgroundResource(R.color.dark_grey);
         }
 
         return convertView;

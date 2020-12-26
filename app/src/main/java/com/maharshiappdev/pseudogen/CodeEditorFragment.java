@@ -1,17 +1,21 @@
 package com.maharshiappdev.pseudogen;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
 import android.text.Editable;
@@ -59,6 +63,107 @@ public class CodeEditorFragment extends Fragment{
         setHasOptionsMenu(true);
     }
 
+    public void clearAllText()
+    {
+        if(!inputCodeEditText.equals("")) {
+            inputCodeEditText.getText().clear();
+        }
+    }
+
+    public void setDefaultFontType()
+    {
+        Typeface fira_mono = ResourcesCompat.getFont(getContext(), R.font.fira_mono);
+        inputCodeEditText.setTypeface(fira_mono);
+    }
+
+
+    public void setDefaultFontSize()
+    {
+        inputCodeEditText.setTextSize(14);
+    }
+
+    public void setKalamFontType()
+    {
+        Typeface kalam = ResourcesCompat.getFont(getContext(), R.font.kalam);
+        inputCodeEditText.setTypeface(kalam);
+    }
+
+    public void setBigFontSize()
+    {
+        inputCodeEditText.setTextSize(18);
+    }
+
+    public void setUpDefaultEditorSettings()
+    {
+        setDefaultFontSize();
+        setDefaultFontType();
+        setBlackboardTheme();
+    }
+
+    public void setBlackboardTheme()
+    {
+        inputCodeEditText.setBackgroundResource(R.color.blackboard_dark);
+        inputCodeEditText.setTextColor(getResources().getColor(R.color.chalk_white));
+    }
+
+    public void setWhiteBoardTheme()
+    {
+        inputCodeEditText.setBackgroundResource(R.color.code_editor_white);
+        inputCodeEditText.setTextColor(getResources().getColor(R.color.deep_sky_blue));
+    }
+
+    public void createAlertForClearText()
+    {
+        AlertDialog alert = new AlertDialog.Builder(getActivity())
+                .create();
+        alert.setMessage("Do you want to clear all code?");
+        alert.setButton(DialogInterface.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                clearAllText();
+            }
+        });
+        alert.setButton(DialogInterface.BUTTON_NEGATIVE, "No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        alert.show();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        super.onOptionsItemSelected(item);
+        switch (item.getItemId())
+        {
+            case R.id.action_clearText:
+                createAlertForClearText();
+                break;
+            case R.id.fontSize_big:
+                setBigFontSize();
+                break;
+            case R.id.fontType_kalam:
+                setKalamFontType();
+                break;
+            case R.id.fontType_default:
+                setDefaultFontType();
+                break;
+            case R.id.fontSize_small:
+                setDefaultFontSize();
+                break;
+            case R.id.theme_blackboard:
+                setBlackboardTheme();
+                break;
+            case R.id.theme_whiteboard:
+                setWhiteBoardTheme();
+                break;
+            default:
+                break;
+        }
+        return true;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -77,6 +182,7 @@ public class CodeEditorFragment extends Fragment{
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         super.onActivityCreated(savedInstanceState);
         inputCodeEditText = view.findViewById(R.id.inputCodeEditText);
+        setUpDefaultEditorSettings();
 
         Intent intent = getActivity().getIntent();
         if(intent.hasExtra("fromEditPseudocode"))

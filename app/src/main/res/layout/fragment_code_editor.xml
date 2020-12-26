@@ -7,7 +7,6 @@
     tools:context=".CodeEditorFragment"
     android:forceDarkAllowed="false"
     android:id="@+id/fragment_code_editor">
-
     <com.maharshiappdev.pseudogen.LineNumberedEditText
         android:id="@+id/inputCodeEditText"
         android:layout_width="match_parent"
@@ -18,14 +17,10 @@
         android:inputType="textMultiLine|textNoSuggestions"
         android:lines="50"
         android:scrollbars="vertical"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/blackboard_dark"
-        android:textColor="@color/chalk_white"
-        android:fontFamily="@font/fira_mono">
+        app:layout_constraintTop_toTopOf="parent">
     </com.maharshiappdev.pseudogen.LineNumberedEditText>
 </FrameLayout>
