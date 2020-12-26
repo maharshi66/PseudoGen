@@ -49,6 +49,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
@@ -68,7 +71,7 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
     private int groupPos;
     private int childPos;
     private static final int PERMISSION_REQ_CODE = 100;
-
+    private AdView mAdView;
     FloatingActionButton fab_addNew;
     AutoCompleteTextView codeListSearchEditText;
     ArrayAdapter<String> autoCompleteArrayAdapter;
@@ -382,6 +385,7 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_central);
+        MobileAds.initialize(this);
         listDataHeaders = new ArrayList<>();
         navigation = findViewById(R.id.bottomNavView);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -452,5 +456,9 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
                 return true;
             }
         });
+
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 }
