@@ -236,10 +236,11 @@ public class CodeEditorTabbedActivity extends AppCompatActivity{
         final EditText descriptionEditText = dialogView.findViewById(R.id.postDescriptionEditText);
         final Spinner codeInputSpinner = dialogView.findViewById(R.id.postInputSpinner);
         final Spinner codeOutputSpinner = dialogView.findViewById(R.id.postOutputSpinner);
-        String[] dataStructures = getResources().getStringArray(R.array.data_structures);
+        String[] dataStructuresInput = getResources().getStringArray(R.array.data_structures_input);
+        String[] dataStructuresOutput = getResources().getStringArray(R.array.data_structures_output);
 
-        ArrayAdapter<String> codeInputArrayAdapter = new ArrayAdapter<String>(CodeEditorTabbedActivity.this, android.R.layout.simple_spinner_dropdown_item, dataStructures);
-        ArrayAdapter<String> codeOutputArrayAdapter = new ArrayAdapter<String>(CodeEditorTabbedActivity.this, android.R.layout.simple_spinner_dropdown_item, dataStructures);
+        ArrayAdapter<String> codeInputArrayAdapter = new ArrayAdapter<String>(CodeEditorTabbedActivity.this, android.R.layout.simple_spinner_dropdown_item, dataStructuresInput);
+        ArrayAdapter<String> codeOutputArrayAdapter = new ArrayAdapter<String>(CodeEditorTabbedActivity.this, android.R.layout.simple_spinner_dropdown_item, dataStructuresOutput);
 
         codeInputArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         codeOutputArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

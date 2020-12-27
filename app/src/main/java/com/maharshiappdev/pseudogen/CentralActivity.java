@@ -239,10 +239,11 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
         final EditText descriptionEditText = dialogView.findViewById(R.id.descriptionEditText);
         final Spinner codeInputSpinner = dialogView.findViewById(R.id.codeInputSpinner);
         final Spinner codeOutputSpinner = dialogView.findViewById(R.id.codeOutputSpinner);
-        String[] dataStructures = getResources().getStringArray(R.array.data_structures);
+        String[] dataStructuresInput = getResources().getStringArray(R.array.data_structures_input);
+        String[] dataStructuresOutput = getResources().getStringArray(R.array.data_structures_output);
 
-        ArrayAdapter<String> codeInputArrayAdapter = new ArrayAdapter<String>(CentralActivity.this, android.R.layout.simple_spinner_dropdown_item, dataStructures);
-        ArrayAdapter<String> codeOutputArrayAdapter = new ArrayAdapter<String>(CentralActivity.this, android.R.layout.simple_spinner_dropdown_item, dataStructures);
+        ArrayAdapter<String> codeInputArrayAdapter = new ArrayAdapter<String>(CentralActivity.this, android.R.layout.simple_spinner_dropdown_item, dataStructuresInput);
+        ArrayAdapter<String> codeOutputArrayAdapter = new ArrayAdapter<String>(CentralActivity.this, android.R.layout.simple_spinner_dropdown_item, dataStructuresOutput);
 
         codeInputArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         codeOutputArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -337,14 +338,13 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
         if (navDrawer.isDrawerOpen(GravityCompat.START)) {
             navDrawer.closeDrawer(GravityCompat.START);
         } else {
-            alertUserForSignOut();
+            finishAffinity();
         }
     }
 
     public void hideBottomNav()
     {
         navigation.setVisibility(View.INVISIBLE);
-
     }
 
     public void showBottomNav()

@@ -23,16 +23,49 @@
         <item>Date Modified</item>
     </string-array>
     <!--Code Input Options Strings for Spinner-->
-    <string-array name="data_structures">
+    <string-array name="data_structures_input">
         <item>Void</item>
+        <item>Value: Boolean</item>
+        <item>Value: Integer</item>
+        <item>Value: Double</item>
+        <item>Value: Float</item>
+        <item>Value: Char</item>
         <item>Array</item>
+        <item>2D Array</item>
         <item>String</item>
-        <item>Linked List</item>
+        <item>Singly Linked List</item>
+        <item>Doubly Linked List</item>
+        <item>Circular Linked List</item>
         <item>Stack</item>
         <item>Queue</item>
         <item>Dequeue</item>
-        <item>Map</item>
-        <item>Set</item>
+        <item>HashMap</item>
+        <item>HashSet</item>
+        <item>Binary Tree</item>
+        <item>Binary Search Tree</item>
+        <item>Heap</item>
+        <item>Priority Queue</item>
+        <item>Graph</item>
+    </string-array>
+
+    <string-array name="data_structures_output">
+        <item>Void</item>
+        <item>Value: Boolean</item>
+        <item>Value: Integer</item>
+        <item>Value: Double</item>
+        <item>Value: Float</item>
+        <item>Value: Char</item>
+        <item>Array</item>
+        <item>2D Array</item>
+        <item>String</item>
+        <item>Singly Linked List</item>
+        <item>Doubly Linked List</item>
+        <item>Circular Linked List</item>
+        <item>Stack</item>
+        <item>Queue</item>
+        <item>Dequeue</item>
+        <item>HashMap</item>
+        <item>HashSet</item>
         <item>Binary Tree</item>
         <item>Binary Search Tree</item>
         <item>Heap</item>

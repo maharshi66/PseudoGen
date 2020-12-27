@@ -1,16 +1,18 @@
 package com.maharshiappdev.pseudogen;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
-
+    TextView forgotPasswordTextView;
     public void signInWithEmailClicked(View view)
     {
         Intent intent = new Intent(this, EmailSignInActivity.class);

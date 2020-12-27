@@ -71,14 +71,6 @@ public class EmailSignInActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_email_sign_in);
-        usernameEditText = findViewById(R.id.usernameEditText);
-        passwordEditText = findViewById(R.id.passwordEditText);
-    }
-
     public void signInUser(String username, String password)
     {
         mAuth.signInWithEmailAndPassword(username, password)
@@ -113,23 +105,23 @@ public class EmailSignInActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                     if(task.isSuccessful())
-                     {
-                         Toast.makeText(getApplicationContext(), "Signed Up!", Toast.LENGTH_SHORT).show();
-                         //Update Database
-                         writeToDatabase(firstName, lastName, userEmail, userPassword);
-                         //TODO Switch Activity
-                         Intent intent = new Intent(EmailSignInActivity.this, CentralActivity.class);
-                         startActivity(intent);
-                     }else
-                     {
-                        try{
-                            throw task.getException();
-                        }catch (Exception e)
+                        if(task.isSuccessful())
                         {
-                            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Signed Up!", Toast.LENGTH_SHORT).show();
+                            //Update Database
+                            writeToDatabase(firstName, lastName, userEmail, userPassword);
+                            //TODO Switch Activity
+                            Intent intent = new Intent(EmailSignInActivity.this, CentralActivity.class);
+                            startActivity(intent);
+                        }else
+                        {
+                            try{
+                                throw task.getException();
+                            }catch (Exception e)
+                            {
+                                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
                         }
-                     }
                     }
                 });
     }
@@ -183,4 +175,50 @@ public class EmailSignInActivity extends AppCompatActivity {
         firebaseDatabaseRef.child("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Credentials").child("Email").setValue(userEmail);
         firebaseDatabaseRef.child("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Credentials").child("Password").setValue(userPassword);
     }
+
+    public void forgotPasswordClicked(View view)
+    {
+        AlertDialog.Builder alert = new AlertDialog.Builder(EmailSignInActivity.this);
+        alert.setMessage("Send reset password link?")
+                .setPositiveButton("Yes, send", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (!usernameEditText.getText().equals("")) {
+                            mAuth.sendPasswordResetEmail(usernameEditText.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if(task.isSuccessful()){
+                                        Toast.makeText(EmailSignInActivity.this, "Reset password email sent!", Toast.LENGTH_SHORT).show();
+                                    }else
+                                    {
+                                        Toast.makeText(EmailSignInActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                        }
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                })
+                .show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        finishAffinity();
+        finish();
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_email_sign_in);
+        usernameEditText = findViewById(R.id.usernameEditText);
+        passwordEditText = findViewById(R.id.passwordEditText);
+    }
+
 }
