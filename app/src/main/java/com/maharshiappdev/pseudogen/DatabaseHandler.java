@@ -125,6 +125,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close();
     }
 
+    public void deleteAllPosts()
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_NAME, null, null);
+    }
+
     public boolean isDuplicateTitle(String title)
     {
         SQLiteDatabase db = this.getReadableDatabase();

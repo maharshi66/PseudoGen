@@ -42,8 +42,8 @@
         android:onClick="signInClicked"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
-        android:text="Go"
-        android:theme="@style/CustomSignInButtons" />
+        android:text="Go">
+    </Button>
     <ImageView
         android:id="@+id/passwordShowHideImageView"
         android:layout_width="30dp"

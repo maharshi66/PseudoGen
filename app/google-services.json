@@ -15,11 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "103733492236-os373co94tj7nm4u72i1n5e4s3f8l4b7.apps.googleusercontent.com",
+          "client_id": "103733492236-im6ploq3rlg72jnamnkmt9gsuc7nj5oo.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.maharshiappdev.pseudogen",
-            "certificate_hash": "65d3e7e2e47859af79d2af139f5066e1d2615795"
+            "certificate_hash": "552d109b4df55799b97a2f600910016431d00a14"
           }
         },
         {
@@ -41,7 +41,8 @@
             }
           ]
         }
-      }
+      },
+      "admob_app_id": "ca-app-pub-4846620296621716~5470406229"
     }
   ],
   "configuration_version": "1"

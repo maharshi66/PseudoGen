@@ -382,6 +382,15 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
         }
     }
 
+    public void deleteAllPosts()
+    {
+        db.deleteAllPosts();
+        listDataHeader.clear();
+        listDataChild.clear();
+        listAdapter.notifyDataSetChanged();
+        listAdapter.updateListsAfterDelete(listDataHeader);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
@@ -412,7 +421,19 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
                 switch(item.getItemId())
                 {
                     case R.id.action_deleteAll:
-                        Toast.makeText(CentralActivity.this,"Deleting All!", Toast.LENGTH_SHORT).show();
+                        AlertDialog.Builder alert = new AlertDialog.Builder(CentralActivity.this);
+                        alert.setMessage("Do you want to delete all items?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                deleteAllPosts();
+                            }
+                        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        }).show();
                         break;
                 }
                 return false;
