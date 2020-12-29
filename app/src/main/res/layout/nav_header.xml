@@ -12,14 +12,35 @@
         android:layout_height="100dp"
         android:src="@drawable/pigeonlogo">
     </ImageView>
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:fontFamily="@font/maven_pro_medium"
-        android:textColor="@color/dark_orange"
-        android:textSize="17dp"
-        android:textStyle="bold"
-        android:text="PseudoGen">
-    </TextView>
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:fontFamily="@font/maven_pro_medium"
+            android:textColor="@color/dark_orange"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:text="PseudoGen">
+        </TextView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:textSize="14dp"
+            android:id="@+id/versionCodeTextView">
+        </TextView>
+        <TextView
+            android:id="@+id/displayNameTextView"
+            android:layout_width="match_parent"
+            android:paddingTop="5dp"
+            android:paddingLeft="16dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/maven_pro_medium"
+            android:textSize="14dp">
+        </TextView>
+    </LinearLayout>
 </LinearLayout>

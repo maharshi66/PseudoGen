@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
@@ -53,10 +54,16 @@ import android.widget.Toast;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+
+import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -328,7 +335,11 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
     {
         //Sign out and go to login
         FirebaseAuth.getInstance().signOut();
-        finish();
+        GoogleSignIn.getClient(
+                getApplicationContext(),
+                new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).build()
+        ).signOut();
+        finishAffinity();
         Intent intent = new Intent(CentralActivity.this, LoginActivity.class);
         startActivity(intent);
     }
@@ -442,6 +453,18 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
 
         navDrawer = findViewById(R.id.drawerLayout);
         NavigationView navigationView = findViewById(R.id.navView);
+        View headerView = navigationView.getHeaderView ( 0 );
+        TextView displayNameTextView = headerView.findViewById ( R.id.displayNameTextView );
+        displayNameTextView.setText("Hello, "+ getDisplayNameInNavbar());
+        TextView versionCodeTextView = headerView.findViewById ( R.id.versionCodeTextView );
+        String version ="";
+        try {
+            PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+             version = pInfo.versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        versionCodeTextView.setText("version: " + version);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, navDrawer, centralToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         navDrawer.addDrawerListener(toggle);
@@ -483,5 +506,15 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
+
+    }
+
+    private String getDisplayNameInNavbar() {
+        String personName = "";
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(CentralActivity.this);
+        if (acct != null) {
+             personName = acct.getGivenName();
+        }
+        return personName;
     }
 }

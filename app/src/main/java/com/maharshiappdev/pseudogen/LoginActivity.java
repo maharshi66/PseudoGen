@@ -39,6 +39,14 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        updateUI(currentUser);
+    }
+
+    @Override
     public void onBackPressed () {
         super.onBackPressed ( );
         if ( FirebaseAuth.getInstance ( ).getCurrentUser ( ) != null ) {
@@ -79,9 +87,7 @@ public class LoginActivity extends AppCompatActivity {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 firebaseAuthWithGoogle(account.getIdToken());
             } catch (ApiException e) {
-                // Google Sign In failed, update UI appropriately
-                Log.i ( "FAIL", "Log In failed", e);
-                Toast.makeText ( LoginActivity.this, "Sign in failure " + e.getMessage(), Toast.LENGTH_SHORT ).show();
+
             }
         }
     }
@@ -95,13 +101,21 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Intent intent = new Intent ( LoginActivity.this, CentralActivity.class );
-                            startActivity ( intent );
+
+                            updateUI ( user );
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText ( LoginActivity.this , "signInWithCredential:failure" +  task.getException(), Toast.LENGTH_SHORT ).show ( );
+                            updateUI ( null );
                         }
                     }
                 });
+    }
+
+    private void updateUI(FirebaseUser user) {
+        if (user != null) {
+            Intent intent = new Intent ( LoginActivity.this, CentralActivity.class );
+            startActivity ( intent );
+        } else {}
     }
 }
