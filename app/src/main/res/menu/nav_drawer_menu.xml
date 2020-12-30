@@ -6,7 +6,7 @@
         <group android:id="@+id/menu_top"
             android:checkableBehavior="none">
                 <item android:id="@+id/nav_usingThisApp"
-                    android:title="Using Pseudogen"
+                    android:title="Using PseudoGen"
                     android:icon="@drawable/using_pseudogen_icon">
                 </item>
                 <item android:id="@+id/nav_syntax"

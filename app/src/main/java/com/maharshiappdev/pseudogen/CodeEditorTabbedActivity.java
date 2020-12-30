@@ -57,6 +57,7 @@ public class CodeEditorTabbedActivity extends AppCompatActivity{
     boolean shortcutsChecked = true;
     DatabaseHandler db;
     private AdView editorAdViewBanner;
+    Boolean titleEditedState = false;
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
@@ -205,7 +206,6 @@ public class CodeEditorTabbedActivity extends AppCompatActivity{
 
     public void checkAndSave() {
         //TODO Disallow duplicate names and overwrite Posts if user wants to. Cannot create duplicate
-
         final LineNumberedEditText inputCodeEditText = findViewById(R.id.inputCodeEditText);
         postPseudocode = inputCodeEditText.getText().toString();
         if (!postDescription.isEmpty() && !postTitle.isEmpty()) {
@@ -215,7 +215,13 @@ public class CodeEditorTabbedActivity extends AppCompatActivity{
             {
                 createAlertForOverwrite();
                 db.close();
-            }else
+            }else if(titleEditedState)
+            {
+                db.overWritePost ( postTitle, postDescription, postPseudocode, postInput, postOutput );
+                titleEditedState = false;
+                Toast.makeText(this, "Saved!", Toast.LENGTH_SHORT).show();
+            }
+            else
             {
                 db.addPseudocodePost(post);
                 Toast.makeText(this, "Saved!", Toast.LENGTH_SHORT).show();
@@ -244,12 +250,6 @@ public class CodeEditorTabbedActivity extends AppCompatActivity{
         String[] dataStructuresInput = getResources().getStringArray(R.array.data_structures_input);
         String[] dataStructuresOutput = getResources().getStringArray(R.array.data_structures_output);
 
-        //load values from intent for dialog fields
-        titleEditText.setText (getAlgorithmTitle());
-        descriptionEditText.setText(getCodeDescriptionText());
-        codeInputSpinner.setSelection(setInputSpinnerSelection(dataStructuresInput));
-        codeOutputSpinner.setSelection ( setOutputSpinnerSelection(dataStructuresOutput) );
-
         ArrayAdapter<String> codeInputArrayAdapter = new ArrayAdapter<String>(CodeEditorTabbedActivity.this, android.R.layout.simple_spinner_dropdown_item, dataStructuresInput);
         ArrayAdapter<String> codeOutputArrayAdapter = new ArrayAdapter<String>(CodeEditorTabbedActivity.this, android.R.layout.simple_spinner_dropdown_item, dataStructuresOutput);
 
@@ -258,6 +258,12 @@ public class CodeEditorTabbedActivity extends AppCompatActivity{
 
         codeInputSpinner.setAdapter(codeInputArrayAdapter);
         codeOutputSpinner.setAdapter(codeOutputArrayAdapter);
+
+        //load values from intent for dialog fields
+        titleEditText.setText(getAlgorithmTitle());
+        descriptionEditText.setText(getCodeDescriptionText());
+        codeInputSpinner.setSelection(setInputSpinnerSelection(dataStructuresInput));
+        codeOutputSpinner.setSelection(setOutputSpinnerSelection(dataStructuresOutput));
 
         alertDialog.setView(dialogView)
                 .setPositiveButton("Done", new DialogInterface.OnClickListener() {
@@ -270,6 +276,10 @@ public class CodeEditorTabbedActivity extends AppCompatActivity{
 
                         if(!postTitle.isEmpty() && !postInput.isEmpty() && !postOutput.isEmpty())
                         {
+                            if(postTitle != getAlgorithmTitle ())
+                            {
+                                titleEditedState = true;
+                            }
                             getSupportActionBar().setTitle(postTitle);
                             codeInputTextView.setText("Input: \t" + postInput);
                             codeOutputTextView.setText("Output: \t" + postOutput);
@@ -309,7 +319,7 @@ public class CodeEditorTabbedActivity extends AppCompatActivity{
     private int setInputSpinnerSelection(String[] dataStructuresInput)
     {
         int selectedInputIdx = -1;
-        String selectedInputStr = getInputCodeText ();
+        String selectedInputStr = getInputCodeText();
         for(int i = 0; i < dataStructuresInput.length; i++)
         {
             if(dataStructuresInput[i].equals ( selectedInputStr ))
@@ -324,7 +334,7 @@ public class CodeEditorTabbedActivity extends AppCompatActivity{
     private int setOutputSpinnerSelection(String[] dataStructuresOutput)
     {
         int selectedOutputIdx = -1;
-        String selectedOutputStr = getOutputCodeText ();
+        String selectedOutputStr = getOutputCodeText();
         for(int i = 0; i < dataStructuresOutput.length; i++)
         {
             if(dataStructuresOutput[i].equals ( selectedOutputStr ))
