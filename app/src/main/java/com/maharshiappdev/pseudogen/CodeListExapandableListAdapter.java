@@ -85,13 +85,12 @@ public class CodeListExapandableListAdapter extends BaseExpandableListAdapter {
         lblListHeader.setTypeface(null, Typeface.BOLD);
         lblListHeader.setText(headerTitle);
 
-        if(isExpanded)
+       if(isExpanded)
         {
-            convertView.setBackgroundResource(R.color.dark_orange);
+            convertView.setBackgroundResource (R.drawable.item_rounded_corner_selected );
         }else {
-            convertView.setBackgroundResource(R.color.dark_grey);
+            convertView.setBackgroundResource(R.drawable.item_rounded_corner);
         }
-
         return convertView;
     }
 

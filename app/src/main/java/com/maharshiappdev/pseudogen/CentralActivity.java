@@ -79,7 +79,7 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
     private int groupPos;
     private int childPos;
     private static final int PERMISSION_REQ_CODE = 100;
-    private AdView mAdView;
+    private AdView centralAdViewBanner;
     FloatingActionButton fab_addNew;
     AutoCompleteTextView codeListSearchEditText;
     ArrayAdapter<String> autoCompleteArrayAdapter;
@@ -503,10 +503,9 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
             }
         });
 
-        mAdView = findViewById(R.id.adView);
+        centralAdViewBanner = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-
+        centralAdViewBanner.loadAd(adRequest);
     }
 
     private String getDisplayNameInNavbar() {

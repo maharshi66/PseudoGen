@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
@@ -52,6 +54,7 @@ public class CodeEditorTabbedActivity extends AppCompatActivity{
     TextView codeOutputTextView;
     boolean shortcutsChecked = true;
     DatabaseHandler db;
+    private AdView editorAdViewBanner;
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
@@ -319,5 +322,9 @@ public class CodeEditorTabbedActivity extends AppCompatActivity{
         postOutput = getOutputCodeText();
         editorFrag =  new CodeEditorFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.editor_fragment_container, editorFrag).commit();
+
+        editorAdViewBanner = findViewById (R.id.editorAdViewBanner);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        editorAdViewBanner.loadAd ( adRequest );
     }
 }
