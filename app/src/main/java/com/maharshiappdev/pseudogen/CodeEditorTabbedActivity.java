@@ -40,6 +40,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.maharshiappdev.pseudogen.ui.main.SectionsPagerAdapter;
 
+import java.lang.reflect.Array;
+
 public class CodeEditorTabbedActivity extends AppCompatActivity{
     private final DatabaseReference firebaseDatabaseRef = FirebaseDatabase.getInstance().getReference();
     private DrawerLayout navDrawerEditor;
@@ -242,6 +244,12 @@ public class CodeEditorTabbedActivity extends AppCompatActivity{
         String[] dataStructuresInput = getResources().getStringArray(R.array.data_structures_input);
         String[] dataStructuresOutput = getResources().getStringArray(R.array.data_structures_output);
 
+        //load values from intent for dialog fields
+        titleEditText.setText (getAlgorithmTitle());
+        descriptionEditText.setText(getCodeDescriptionText());
+        codeInputSpinner.setSelection(setInputSpinnerSelection(dataStructuresInput));
+        codeOutputSpinner.setSelection ( setOutputSpinnerSelection(dataStructuresOutput) );
+
         ArrayAdapter<String> codeInputArrayAdapter = new ArrayAdapter<String>(CodeEditorTabbedActivity.this, android.R.layout.simple_spinner_dropdown_item, dataStructuresInput);
         ArrayAdapter<String> codeOutputArrayAdapter = new ArrayAdapter<String>(CodeEditorTabbedActivity.this, android.R.layout.simple_spinner_dropdown_item, dataStructuresOutput);
 
@@ -296,6 +304,36 @@ public class CodeEditorTabbedActivity extends AppCompatActivity{
                     }
                 })
                 .show();
+    }
+
+    private int setInputSpinnerSelection(String[] dataStructuresInput)
+    {
+        int selectedInputIdx = -1;
+        String selectedInputStr = getInputCodeText ();
+        for(int i = 0; i < dataStructuresInput.length; i++)
+        {
+            if(dataStructuresInput[i].equals ( selectedInputStr ))
+            {
+                selectedInputIdx = i;
+                break;
+            }
+        }
+        return selectedInputIdx;
+    }
+
+    private int setOutputSpinnerSelection(String[] dataStructuresOutput)
+    {
+        int selectedOutputIdx = -1;
+        String selectedOutputStr = getOutputCodeText ();
+        for(int i = 0; i < dataStructuresOutput.length; i++)
+        {
+            if(dataStructuresOutput[i].equals ( selectedOutputStr ))
+            {
+                selectedOutputIdx = i;
+                break;
+            }
+        }
+        return selectedOutputIdx;
     }
 
     @Override

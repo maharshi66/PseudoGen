@@ -86,6 +86,7 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
     List<String> listDataHeaders;
     Toolbar centralToolbar;
     BottomNavigationView navigation;
+    Boolean bottomNavState = false; //false = hidden, true = showing
     BottomNavigationView codeItemNavigation;
     ExpandableListView codeListExpandableListView;
     CodeListExapandableListAdapter listAdapter;
@@ -348,18 +349,23 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
     public void onBackPressed() {
         if (navDrawer.isDrawerOpen(GravityCompat.START)) {
             navDrawer.closeDrawer(GravityCompat.START);
-        } else {
+        } else if(bottomNavState) {
+            hideBottomNav();
+        } else
+        {
             finishAffinity();
         }
     }
 
     public void hideBottomNav()
     {
+        bottomNavState = false;
         navigation.setVisibility(View.INVISIBLE);
     }
 
     public void showBottomNav()
     {
+        bottomNavState = true;
         navigation.setVisibility(View.VISIBLE);
     }
 
