@@ -45,5 +45,14 @@
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-4846620296621716~5470406229"/>
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.maharshiappdev.pseudogen.fileprovider"
+            android:grantUriPermissions="true"
+            android:exported="false">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/filepaths"/>
+        </provider>
     </application>
 </manifest>

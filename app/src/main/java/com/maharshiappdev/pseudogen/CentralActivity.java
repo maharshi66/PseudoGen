@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -68,6 +69,7 @@ import org.w3c.dom.Text;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -158,6 +160,24 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
                 .show();
     }
 
+    public File writeFileOnInternalStorage(String fileName, String fileText){
+        File dir = new File(this.getFilesDir(), "text");
+        if(!dir.exists()){
+            dir.mkdir();
+        }
+        try {
+            File fileOut = new File(dir, fileName);
+            FileWriter writer = new FileWriter (fileOut);
+            writer.append(fileText);
+            writer.flush();
+            writer.close();
+            return fileOut;
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
@@ -182,26 +202,32 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
                     input = sharePost.getInput();
                     output = sharePost.getOutput();
                     pseudocode = sharePost.getPseudocode();
-                    //Write to external storage
-                    //TODO Open and save to external storage as a text file!
-                        if (checkPermission()) {
-                            String fileText = "";
-                            fileText= "Algorithm: " + title + "\n"
-                                    + "Description: " + description + "\n"
-                                    + "Input: " + input + "\n"
-                                    + "Output: " + output + "\n\n"
-                                    + pseudocode;
-                            //Open intent with file from external storage
-                            Intent sharingIntent = new Intent(Intent.ACTION_SEND);
-//                            sharingIntent.setType("message/rfc822"); //for attachments
-                            sharingIntent.setType("plain/text");
-                            sharingIntent.putExtra(Intent.EXTRA_SUBJECT, title + " - pseudocode from PseudoGen");
-                            sharingIntent.putExtra(Intent.EXTRA_TEXT, fileText);
-                            startActivity(Intent.createChooser(sharingIntent, "Share pseudoode with:"));
-                        }else
-                        {
-                            requestPermission();
-                        }
+                    String fileText = "";
+                    String fileName = title + ".txt";
+                    fileText = "Algorithm: " + title + "\n"
+                            + "Description: " + description + "\n"
+                            + "Input: " + input + "\n"
+                            + "Output: " + output + "\n\n"
+                            + pseudocode;
+                    File shareFile = writeFileOnInternalStorage ( fileName , fileText );
+                    try {
+                        Uri fileUri = FileProvider.getUriForFile (
+                                CentralActivity.this ,
+                                "com.maharshiappdev.pseudogen.fileprovider" ,
+                                shareFile );
+                        //Open intent with file from external storage
+                        Intent sharingIntent = new Intent ( Intent.ACTION_SEND );
+//                              sharingIntent.setType("message/rfc822"); //for attachments
+                        sharingIntent.setType ( "*/*" );
+                        sharingIntent.putExtra ( Intent.EXTRA_SUBJECT , title + " - pseudocode from PseudoGen" );
+//                                sharingIntent.putExtra(Intent.EXTRA_TEXT, fileText);
+                        sharingIntent.putExtra ( Intent.EXTRA_STREAM , fileUri );
+                        startActivity ( Intent.createChooser ( sharingIntent , "Share pseudoode with:" ) );
+                    }
+                    catch ( IllegalArgumentException e ) {
+                        Log.e ( "File Selector" ,
+                                "The selected file can't be shared: " + shareFile.toString ( ) );
+                    }
                     hideBottomNav();
                     break;
                 case R.id.action_deleteItem:
