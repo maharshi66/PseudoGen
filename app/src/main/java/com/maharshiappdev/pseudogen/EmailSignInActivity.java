@@ -221,5 +221,4 @@ public class EmailSignInActivity extends AppCompatActivity {
         usernameEditText = findViewById(R.id.usernameEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
     }
-
 }
