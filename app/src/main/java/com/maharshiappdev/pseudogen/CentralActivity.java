@@ -464,6 +464,7 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
                 switch(item.getItemId())
                 {
                     case R.id.action_deleteAll:
+                        hideBottomNav();
                         AlertDialog.Builder alert = new AlertDialog.Builder(CentralActivity.this);
                         alert.setMessage("Do you want to delete all items?")
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -530,6 +531,7 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
                 long pos = codeListExpandableListView.getExpandableListPosition(position);
                 groupPos = ExpandableListView.getPackedPositionGroup(pos);
                 childPos = ExpandableListView.getPackedPositionChild(pos);
+                codeListExpandableListView.expandGroup ( groupPos );
                 showBottomNav();
                 return true;
             }
