@@ -128,14 +128,18 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
                 //Opens  Playstore for rating the app
                 Intent intent = getPackageManager().getLaunchIntentForPackage("com.android.vending");
                 startActivity(intent);
-
-                //TODO uncomment once app is on Playstore
 /*                final String appPackageName = getPackageName(); // getPackageName() from Context or Activity object
                 try {
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
                 } catch (android.content.ActivityNotFoundException anfe) {
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
                 }*/
+                break;
+            case R.id.nav_usingThisApp:
+                Intent newIntent = new Intent(CentralActivity.this, UsingPseudoGenActivity.class);
+                startActivity ( newIntent );
+                break;
+            default:
                 break;
         }
         return true;

@@ -4,10 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LearningWebViewActivity">
-    <WebView
-        android:id="@+id/learningWebView"
+    tools:context=".UsingPseudoGenActivity">
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </WebView>
+        <TextView
+            android:id="@+id/usingPseudoGenTextView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="20dp">
+        </TextView>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
