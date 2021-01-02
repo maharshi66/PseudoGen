@@ -7,5 +7,7 @@
         <item>@font/kalam</item>
         <item>@font/maven_pro_medium</item>
         <item>@font/roboto_mono</item>
+        <item>@font/source_code_pro</item>
+        <item>@font/ubuntu_mono</item>
     </array>
 </resources>

@@ -108,6 +108,7 @@ public class CodeListExapandableListAdapter extends BaseExpandableListAdapter {
                 .findViewById(R.id.codeListItem);
 
         txtListChild.setText(childText);
+        txtListChild.setBackgroundResource ( R.drawable.item_child_corner );
         return convertView;
     }
 

@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
-
   <ImageView
       android:id="@+id/logoImageView"
       android:layout_width="150dp"
@@ -18,39 +17,40 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       app:srcCompat="@drawable/pigeonlogo" />
-
   <Button
       android:id="@+id/emailButton"
-      android:layout_width="300dp"
-      android:layout_height="wrap_content"
-      android:layout_marginBottom="307dp"
+      android:layout_width="match_parent"
+      android:layout_height="40dp"
+      android:layout_marginBottom="150dp"
+      android:layout_marginLeft="15dp"
+      android:layout_marginRight="15dp"
       android:adjustViewBounds="true"
-      android:drawableLeft="@drawable/emailsignin"
+      android:drawableLeft="@drawable/emailsignin_icon"
       android:onClick="signInWithEmailClicked"
       android:scaleType="centerInside"
-      android:textSize="12dp"
       android:text="Continue with email"
-      android:backgroundTint="@color/fire_brick"
+      android:background="@drawable/googlesignin_button_shape"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.5"
       app:layout_constraintStart_toStartOf="parent" />
   <Button
       android:id="@+id/googleButton"
-      android:layout_width="300dp"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="20dp"
-      android:layout_marginBottom="197dp"
-      android:adjustViewBounds="true"
-      android:onClick="signInWithGoogleClicked"
-      android:drawableLeft="@drawable/googlesignin"
-      android:scaleType="centerInside"
+      android:layout_width="match_parent"
+      android:layout_height="40dp"
+      android:layout_marginBottom="80dp"
+      android:layout_marginLeft="15dp"
+      android:layout_marginRight="15dp"
       android:text="Continue with Google"
-      android:backgroundTint="@color/white"
+      android:background="@drawable/googlesignin_button_shape"
+      android:backgroundTint="@color/code_editor_white"
+      android:drawableLeft="@drawable/googlesignin_image"
+      android:onClick="signInWithGoogleClicked"
+      android:scaleType="fitXY"
+      android:adjustViewBounds="true"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.5"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/emailButton" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

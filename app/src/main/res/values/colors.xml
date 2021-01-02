@@ -17,6 +17,7 @@
     <color name="dark_grey">#838383</color>
     <color name="deep_sky_blue">#00BFFF</color>
     <color name="dull_yellow">#ffff84</color>
+    <color   name="dull_indigo">#d296ff</color>
     <color name="pale">#fff9d0</color>
     <color name="indigo">#4B0082</color>
     <color name="bright_orange">#FFA500</color>

@@ -22,55 +22,106 @@
         <item>Name</item>
         <item>Date Modified</item>
     </string-array>
+
     <!--Code Input Options Strings for Spinner-->
     <string-array name="data_structures_input">
         <item>Void</item>
-        <item>Value: Boolean</item>
-        <item>Value: Integer</item>
-        <item>Value: Double</item>
-        <item>Value: Float</item>
-        <item>Value: Char</item>
-        <item>Array</item>
-        <item>2D Array</item>
+        <item>Boolean</item>
+        <item>Integer Value</item>
+        <item>Double Value</item>
+        <item>Character</item>
         <item>String</item>
+        <item>Array</item>
+        <item>Array of Booleans</item>
+        <item>Array of Integers</item>
+        <item>Array of Doubles</item>
+        <item>Array of Characters</item>
+        <item>Array of Strings</item>
+        <item>Array of Objects</item>
+        <item>Dynamic Array</item>
+        <item>2D Array (Matrix)</item>
+        <item>Object</item>
+        <item>List</item>
         <item>Singly Linked List</item>
         <item>Doubly Linked List</item>
         <item>Circular Linked List</item>
+        <item>Tuple</item>
         <item>Stack</item>
         <item>Queue</item>
         <item>Dequeue</item>
-        <item>HashMap</item>
-        <item>HashSet</item>
+        <item>Map</item>
+        <item>Multi-Map</item>>
+        <item>Set</item>
+        <item>Multi-Set</item>
+        <item>Disjoint-Set (Union)</item>
+        <item>Dictionary</item>
+        <item>Tree</item>
         <item>Binary Tree</item>
         <item>Binary Search Tree</item>
+        <item>B-Tree</item>
+        <item>AVL Tree</item>
+        <item>Red-Black Tree</item>
+        <item>Weight Balanced Tree</item>
         <item>Heap</item>
+        <item>Binary Heap</item>
         <item>Priority Queue</item>
         <item>Graph</item>
+        <item>Undirected Graph</item>
+        <item>Directed Graph</item>
+        <item>Directed Acyclic Graph</item>
+        <item>Weighted Graph</item>
+        <item>Adjacency Matrix</item>
+        <item>Adjacency List</item>
     </string-array>
 
     <string-array name="data_structures_output">
         <item>Void</item>
-        <item>Value: Boolean</item>
-        <item>Value: Integer</item>
-        <item>Value: Double</item>
-        <item>Value: Float</item>
-        <item>Value: Char</item>
-        <item>Array</item>
-        <item>2D Array</item>
+        <item>Boolean</item>
+        <item>Integer Value</item>
+        <item>Double Value</item>
+        <item>Character</item>
         <item>String</item>
+        <item>Array</item>
+        <item>Array of Booleans</item>
+        <item>Array of Integers</item>
+        <item>Array of Doubles</item>
+        <item>Array of Characters</item>
+        <item>Array of Strings</item>
+        <item>Array of Objects</item>
+        <item>Dynamic Array</item>
+        <item>2D Array (Matrix)</item>
+        <item>Object</item>
+        <item>List</item>
         <item>Singly Linked List</item>
         <item>Doubly Linked List</item>
         <item>Circular Linked List</item>
+        <item>Tuple</item>
         <item>Stack</item>
         <item>Queue</item>
         <item>Dequeue</item>
-        <item>HashMap</item>
-        <item>HashSet</item>
+        <item>Map</item>
+        <item>Multi-Map</item>>
+        <item>Set</item>
+        <item>Multi-Set</item>
+        <item>Disjoint-Set (Union)</item>
+        <item>Dictionary</item>
+        <item>Tree</item>
         <item>Binary Tree</item>
         <item>Binary Search Tree</item>
+        <item>B-Tree</item>
+        <item>AVL Tree</item>
+        <item>Red-Black Tree</item>
+        <item>Weight Balanced Tree</item>
         <item>Heap</item>
+        <item>Binary Heap</item>
         <item>Priority Queue</item>
         <item>Graph</item>
+        <item>Undirected Graph</item>
+        <item>Directed Graph</item>
+        <item>Directed Acyclic Graph</item>
+        <item>Weighted Graph</item>
+        <item>Adjacency Matrix</item>
+        <item>Adjacency List</item>
     </string-array>
 
     <string name="hint_input_resource">Input</string>

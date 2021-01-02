@@ -46,7 +46,6 @@ import java.lang.reflect.Array;
 
 public class CodeEditorTabbedActivity extends AppCompatActivity{
     private final DatabaseReference firebaseDatabaseRef = FirebaseDatabase.getInstance().getReference();
-    private DrawerLayout navDrawerEditor;
     String postTitle = "";
     String postPseudocode = "";
     String postDescription = "";
@@ -113,7 +112,7 @@ public class CodeEditorTabbedActivity extends AppCompatActivity{
 
     public void createAlertForBackHome()
     {
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this, R.style.CutomAlertDialog);
         alertDialog.setTitle("Exit Editor")
                 .setCancelable(true)
                 .setMessage("Do you want to exit the editor?")
@@ -219,7 +218,7 @@ public class CodeEditorTabbedActivity extends AppCompatActivity{
                 db.close();
             }else if(titleEditedState)
             {
-                db.overWritePost ( postTitle, postDescription, postPseudocode, postInput, postOutput );
+                db.overWritePostWithNewTitle( getAlgorithmTitle (),postTitle, postDescription, postPseudocode, postInput, postOutput );
                 titleEditedState = false;
                 Toast.makeText(this, "Saved!", Toast.LENGTH_SHORT).show();
             }
@@ -276,12 +275,10 @@ public class CodeEditorTabbedActivity extends AppCompatActivity{
                         postInput = codeInputSpinner.getSelectedItem().toString();
                         postOutput = codeOutputSpinner.getSelectedItem().toString();
 
+                        if(postTitle != getAlgorithmTitle()){titleEditedState = true;}
+
                         if(!postTitle.isEmpty() && !postInput.isEmpty() && !postOutput.isEmpty())
                         {
-                            if(postTitle != getAlgorithmTitle ())
-                            {
-                                titleEditedState = true;
-                            }
                             getSupportActionBar().setTitle(postTitle);
                             codeInputTextView.setText("Input: \t" + postInput);
                             codeOutputTextView.setText("Output: \t" + postOutput);
@@ -305,7 +302,7 @@ public class CodeEditorTabbedActivity extends AppCompatActivity{
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //Open Database and overwrite where title matches
-                        db.overWritePost(postTitle, postDescription, postPseudocode, postOutput, postInput);
+                        db.overWritePost(postTitle, postDescription, postPseudocode, postInput, postOutput);
                         Toast.makeText(getApplicationContext(), "Overwritten!", Toast.LENGTH_SHORT).show();
                     }
                 })

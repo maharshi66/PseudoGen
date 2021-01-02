@@ -38,8 +38,10 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -80,6 +82,7 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
     private DrawerLayout navDrawer;
     private int groupPos;
     private int childPos;
+    private int lastExpandedPostion = -1;
     private static final int PERMISSION_REQ_CODE = 100;
     private AdView centralAdViewBanner;
     FloatingActionButton fab_addNew;
@@ -139,7 +142,7 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
     }
     public void createAlertForDeleteItem()
     {
-        AlertDialog.Builder alert = new AlertDialog.Builder(CentralActivity.this);
+        AlertDialog.Builder alert = new AlertDialog.Builder(CentralActivity.this, R.style.CutomAlertDialog);
         alert.setMessage("Delete this item?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
@@ -264,6 +267,7 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
             i++;
         }
     }
+
     public void createAlertForAddNew()
     {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this, R.style.CutomAlertDialog);
@@ -320,27 +324,27 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
                     }
                 })
                 .show();
-/*        AlertDialog dialog = alertDialog.create();
-        dialog.show();
 
-        //TODO Helps Increase Size of the Dialog but doesnt extend the View with it. FIX!
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int displayWidth = displayMetrics.widthPixels;
-        int displayHeight = displayMetrics.heightPixels;
+        codeInputSpinner.setOnTouchListener ( new View.OnTouchListener ( ) {
+            @Override
+            public boolean onTouch ( View v , MotionEvent event ) {
+                hideKeyboard (v);
+                return false;
+            }
+        } );
 
-        WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
-        layoutParams.copyFrom(dialog.getWindow().getAttributes());
-        int dialogWindowWidth = (int) (displayWidth);
-        int dialogWindowHeight = (int) (displayHeight * 0.80f);
-        layoutParams.width = dialogWindowWidth;
-        layoutParams.height = dialogWindowHeight;
-        dialog.getWindow().setAttributes(layoutParams);*/
+        codeOutputSpinner.setOnTouchListener ( new View.OnTouchListener ( ) {
+            @Override
+            public boolean onTouch ( View v , MotionEvent event ) {
+                hideKeyboard (v);
+                return false;
+            }
+        } );
     }
 
     public void alertUserForSignOut()
     {
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(CentralActivity.this);
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(CentralActivity.this, R.style.CutomAlertDialog);
         alertDialog.setTitle("Sign Out")
                 .setMessage("Are you sure you want to sign out?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -432,6 +436,23 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
         listDataChild.clear();
         listAdapter.notifyDataSetChanged();
         listAdapter.updateListsAfterDelete(listDataHeader);
+    }
+
+
+    private String getDisplayNameInNavbar() {
+        String personName = "";
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(CentralActivity.this);
+        if (acct != null) {
+            personName = acct.getGivenName();
+        }
+        return personName;
+    }
+
+    public void hideKeyboard(View v)
+    {
+        InputMethodManager imm = (InputMethodManager) getApplicationContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
+        //Find the currently focused view, so we can grab the correct window token from it.
+        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
     }
 
     @Override
@@ -537,17 +558,29 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
             }
         });
 
+        //Collapses other list items except for the selected one
+        codeListExpandableListView.setOnGroupExpandListener ( new ExpandableListView.OnGroupExpandListener ( ) {
+            @Override
+            public void onGroupExpand ( int groupPosition ) {
+                if(lastExpandedPostion != -1 && groupPosition != lastExpandedPostion)
+                {
+                    codeListExpandableListView.collapseGroup ( lastExpandedPostion );
+                }
+                lastExpandedPostion = groupPosition;
+            }
+        } );
+
+        //hides bottom nav on collapsing group
+        codeListExpandableListView.setOnGroupCollapseListener ( new ExpandableListView.OnGroupCollapseListener ( ) {
+            @Override
+            public void onGroupCollapse ( int groupPosition ) {
+                hideBottomNav ();
+            }
+        } );
+
         centralAdViewBanner = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         centralAdViewBanner.loadAd(adRequest);
     }
 
-    private String getDisplayNameInNavbar() {
-        String personName = "";
-        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(CentralActivity.this);
-        if (acct != null) {
-             personName = acct.getGivenName();
-        }
-        return personName;
-    }
 }

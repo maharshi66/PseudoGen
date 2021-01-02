@@ -8,6 +8,7 @@
     android:forceDarkAllowed="false"
     android:background="@drawable/editor_border_bg"
     android:id="@+id/fragment_code_editor">
+
     <com.maharshiappdev.pseudogen.LineNumberedEditText
         android:id="@+id/inputCodeEditText"
         android:layout_width="match_parent"
@@ -23,6 +24,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-    </com.maharshiappdev.pseudogen.LineNumberedEditText>
+        app:layout_constraintTop_toTopOf="parent"></com.maharshiappdev.pseudogen.LineNumberedEditText>
 </FrameLayout>

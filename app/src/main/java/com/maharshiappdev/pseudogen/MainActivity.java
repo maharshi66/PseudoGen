@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 
 import android.app.UiModeManager;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation ( ActivityInfo.SCREEN_ORIENTATION_PORTRAIT );
         setContentView(R.layout.activity_main);
         loadingImageView = findViewById(R.id.loadingImageView);
         appNameTextView = findViewById(R.id.appNameTextView);

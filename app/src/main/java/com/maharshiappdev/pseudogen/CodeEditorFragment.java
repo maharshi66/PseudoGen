@@ -72,10 +72,15 @@ public class CodeEditorFragment extends Fragment{
 
     public void setDefaultFontType()
     {
-        Typeface fira_mono = ResourcesCompat.getFont(getContext(), R.font.fira_mono);
-        inputCodeEditText.setTypeface(fira_mono);
+        Typeface default_font = ResourcesCompat.getFont(getContext(), R.font.source_code_pro);
+        inputCodeEditText.setTypeface(default_font);
     }
 
+    public void setFiraMonoFontType()
+    {
+        Typeface firaFont = ResourcesCompat.getFont(getContext(), R.font.fira_mono);
+        inputCodeEditText.setTypeface(firaFont);
+    }
 
     public void setDefaultFontSize()
     {
@@ -86,6 +91,18 @@ public class CodeEditorFragment extends Fragment{
     {
         Typeface kalam = ResourcesCompat.getFont(getContext(), R.font.kalam);
         inputCodeEditText.setTypeface(kalam);
+    }
+
+    public void setSourceCodeFontType()
+    {
+        Typeface sourceCodePro = ResourcesCompat.getFont(getContext(), R.font.source_code_pro);
+        inputCodeEditText.setTypeface(sourceCodePro);
+    }
+
+    public void setUbuntuFontType()
+    {
+        Typeface ubuntu = ResourcesCompat.getFont(getContext(), R.font.ubuntu_mono);
+        inputCodeEditText.setTypeface(ubuntu);
     }
 
     public void setBigFontSize()
@@ -146,8 +163,14 @@ public class CodeEditorFragment extends Fragment{
             case R.id.fontType_kalam:
                 setKalamFontType();
                 break;
-            case R.id.fontType_default:
-                setDefaultFontType();
+            case R.id.fontType_sourceCodePro:
+                setSourceCodeFontType ();
+                break;
+            case R.id.fontType_ubuntu:
+                setUbuntuFontType ();
+                break;
+            case R.id.fontType_fira:
+                setFiraMonoFontType();
                 break;
             case R.id.fontSize_small:
                 setDefaultFontSize();

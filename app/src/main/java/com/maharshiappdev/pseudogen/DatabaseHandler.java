@@ -158,4 +158,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         p.setOutput(output);
         addPseudocodePost(p);
     }
+
+    public void overWritePostWithNewTitle(String oldTitle,String newTitle, String description, String pseudocode, String input, String output)
+    {
+        deletePost(oldTitle);
+        Posts p = new Posts();
+        p.setTitle(newTitle);
+        p.setDescription(description);
+        p.setPseudocode(pseudocode);
+        p.setInput(input);
+        p.setOutput(output);
+        addPseudocodePost(p);
+    }
 }

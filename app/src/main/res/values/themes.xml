@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.PseudoGen" parent="Theme.MaterialComponents.Light">
+    <style name="Theme.PseudoGen" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/bright_orange</item>
         <item name="colorPrimaryVariant">@color/bright_orange</item>
@@ -12,7 +12,7 @@
         <item name="fontFamily">@font/maven_pro_medium</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:forceDarkAllowed">false</item>
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
         <item name="itemTextColor">@color/dark_grey</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">@color/black</item>
@@ -57,7 +57,7 @@
 
     <!--Alert Dialog-->
     <style name="CutomAlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <item name="android:background">@color/light_grey</item>
+        <item name="android:background">@color/code_editor_white</item>
     </style>
 
     <!--Tool Bar Custom Code Editor-->

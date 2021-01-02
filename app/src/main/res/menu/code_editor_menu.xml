@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".CodeEditorTabbedActivity">
     <item android:id="@+id/action_clearText"
-        android:title="Clear Text"
+        android:title="Clear text"
         android:icon="@drawable/clear_text_icon"
         app:showAsAction="ifRoom">
     </item>
@@ -14,13 +14,13 @@
         app:showAsAction="ifRoom">
     </item>
     <item android:id="@+id/settings_icon"
-        android:title="Editor Settings"
+        android:title="Editor settings"
         android:icon="@drawable/settings_icon"
         app:showAsAction="ifRoom">
         <menu>
             <item
                 android:id="@+id/action_editDetails"
-                android:title="Edit Details" />
+                android:title="Edit details" />
             <item android:id="@+id/action_theme"
                 android:title="Theme"
                 app:showAsAction="always">
@@ -32,22 +32,26 @@
                 </menu>
             </item>
             <item android:id="@+id/action_fontChange"
-                android:title="Font"
+                android:title="Font type"
                 app:showAsAction="always">
                 <menu>
-                    <item android:id="@+id/fontType_default" android:title="Default">
+                    <item android:id="@+id/fontType_fira" android:title="Fira">
                     </item>
+                    <item android:id="@+id/fontType_sourceCodePro"
+                        android:title="Source Code"></item>
                     <item android:id="@+id/fontType_kalam" android:title="Kalam">
                     </item>
+                    <item android:id="@+id/fontType_ubuntu"
+                        android:title="Ubuntu"></item>
                 </menu>
             </item>
             <item android:id="@+id/action_fontSizeChange"
-                android:title="Font Size"
+                android:title="Font size"
                 app:showAsAction="always">
                 <menu>
                     <item android:id="@+id/fontSize_small" android:title="Small">
                     </item>
-                    <item android:id="@+id/fontSize_big" android:title="Big">
+                    <item android:id="@+id/fontSize_big" android:title="Large">
                     </item>
                 </menu>
             </item>
@@ -58,7 +62,7 @@
                 android:actionLayout="@layout/toggle_switch_shortcuts"/>
             <item
                 android:id="@+id/action_backHome"
-                android:title="Back Home" />
+                android:title="Exit" />
         </menu>
     </item>
 </menu>
