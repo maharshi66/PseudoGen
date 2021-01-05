@@ -2,24 +2,25 @@ package com.maharshiappdev.pseudogen;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class ExamplesExpandableListAdapter extends BaseExpandableListAdapter {
+public class ChallengesExpandableListAdapter extends BaseExpandableListAdapter {
 
     private Context _context;
-    private List <String> _listDataHeader; // header titles
+    private List < Pair <String, Boolean> >_listDataHeader; // header titles
     // child data in format of header title, child title
-    private HashMap <String, List<String>> _listDataChild;
+    private HashMap < Pair < String, Boolean >, List < String > > _listDataChild;
 
-    public ExamplesExpandableListAdapter (Context context, List<String> listDataHeader,HashMap<String, List<String>> listChildData) {
+    public ChallengesExpandableListAdapter ( Context context, List < Pair < String, Boolean > > listDataHeader, HashMap < Pair < String, Boolean >, List < String > > listChildData) {
         this._context = context;
         this._listDataChild = listChildData;
         this._listDataHeader = listDataHeader;
@@ -63,18 +64,20 @@ public class ExamplesExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView ( int groupPosition , boolean isExpanded , View convertView , ViewGroup parent ) {
-        String headerTitle = (String) getGroup(groupPosition);
+        Pair<String, Boolean> headerPair = (Pair < String, Boolean >) getGroup(groupPosition);
+        String headerTitle = headerPair.first;
+        Boolean headerState = headerPair.second;
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this._context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = infalInflater.inflate(R.layout.example_code_title, null);
         }
 
-        TextView lblListHeader = (TextView) convertView
-                .findViewById(R.id.exampleTitle);
+        CheckBox lblListHeader = (CheckBox) convertView
+                .findViewById(R.id.exampleTitleCheckBox);
         lblListHeader.setTypeface(null, Typeface.BOLD);
         lblListHeader.setText(headerTitle);
-
+        lblListHeader.setChecked ( headerState );
         if(isExpanded)
         {
             convertView.setBackgroundResource (R.drawable.item_rounded_corner_selected );

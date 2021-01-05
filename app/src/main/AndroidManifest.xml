@@ -15,15 +15,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PseudoGen">
-        <activity android:name=".ExamplesActivity"></activity>
+        <activity android:name=".ChallengesActivity" />
         <activity
             android:name=".UsingPseudoGenActivity"
-            android:theme="@style/Theme.PseudoGen"></activity>
+            android:theme="@style/Theme.PseudoGen" />
         <activity
             android:name=".CodeEditorTabbedActivity"
             android:configChanges="uiMode"
             android:label="@string/title_activity_code_editor_tabbed"
-            android:theme="@style/Theme.PseudoGen"></activity>
+            android:theme="@style/Theme.PseudoGen" />
         <activity
             android:name=".CentralActivity"
             android:configChanges="uiMode"

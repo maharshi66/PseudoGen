@@ -1,37 +1,33 @@
 package com.maharshiappdev.pseudogen;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Pair;
 import android.widget.ExpandableListView;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
-public class ExamplesActivity extends AppCompatActivity {
-    List<String> listDataHeader;
-    HashMap <String, List <String> > listDataChild;
+public class ChallengesActivity extends AppCompatActivity {
+    List< Pair <String, Boolean> > listDataHeader;
+    HashMap < Pair < String, Boolean >, List < String > > listDataChild;
     ExpandableListView listView;
-    ExamplesExpandableListAdapter listAdapter;
+    ChallengesExpandableListAdapter listAdapter;
     private AdView examplesAdViewBanner;
     private int lastExpandedPostion = -1;
 
     @Override
     protected void onCreate ( Bundle savedInstanceState ) {
         super.onCreate ( savedInstanceState );
-        setContentView ( R.layout.activity_examples );
+        setContentView ( R.layout.activity_challenges );
         listView = findViewById(R.id.examplesExpandableListView);
         prepareList ();
-        listAdapter = new ExamplesExpandableListAdapter (getApplicationContext(), listDataHeader, listDataChild);
+        listAdapter = new ChallengesExpandableListAdapter (getApplicationContext(), listDataHeader, listDataChild);
         listView.setAdapter ( listAdapter );
         listAdapter.notifyDataSetChanged ();
 
@@ -59,20 +55,35 @@ public class ExamplesActivity extends AppCompatActivity {
 
     public void prepareList()
     {
-        listDataHeader = new ArrayList<String>();
-        listDataChild = new HashMap<String, List<String>>();
+        listDataHeader = new ArrayList <> ();
+        listDataChild = new HashMap < Pair < String, Boolean >, List < String > > ();
         List<Posts> uploadedPosts = new ArrayList <Posts> (  );
+        String revll =
+                "process\n" +
+                "LinkedList has nodes with a value and a pointer to next element\n"+
+                "\tInitialize prev pointer as null\n"+
+                "\tInitialize curr pointer as head\n" +
+                "\tInitialize prev pointer as null\n" +
+                "\twhile curr != null\n" +
+                "\t\tnext = curr.next\n" +
+                "\t\tcurr.next = prev\n" +
+                "\t\tcurr = next\n" +
+                "\tendloop\n" +
+                "endprocess";
+
         Posts p1 = new Posts (  );
         p1.setTitle ( "Reverse Linked List" );
         p1.setInput ( "Singly Linked List" );
         p1.setOutput ( "Singly Linked List" );
         p1.setDescription ( "Given a singly linked list of elements, reverse its contents and return the new list." );
+        p1.setPseudocode ( revll  );
         uploadedPosts.add ( p1 );
         int i = 0;
 
         for(Posts p :  uploadedPosts)
         {
-            listDataHeader.add(p.getTitle());
+            Pair<String, Boolean> pair = new Pair <> ( p.getTitle (), false );
+            listDataHeader.add ( pair );
             List<String> postChildrenList = new ArrayList<String>();
             postChildrenList.add("Description: " + p.getDescription());
             postChildrenList.add("Input: " + p.getInput());

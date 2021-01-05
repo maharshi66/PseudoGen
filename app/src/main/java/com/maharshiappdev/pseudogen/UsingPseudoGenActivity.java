@@ -38,9 +38,9 @@ public class UsingPseudoGenActivity extends AppCompatActivity {
                     "<h3>Statements</h3>\n" +
                     "<p>Each line is a specific instruction and these can be referred to as statements. They are intended to be read from top to bottom.</p>"+
                     "<h4>Keywords</h4>\n" +
-                    "<p>Keywords are preloaded texts that can be used to represent commands or parameters. Following is a list of keywords that commonly used when writing pseudocode </p>"+
+                    "<p>Keywords are preloaded texts that can be used to represent commands or parameters. Look at the table at the end for more details</p> " +
                     "<h4>Operators</h4>\n" +
-                    "<p>Operators form an integral part of any algorithm in order to manipulate data. Following are the common operators for mathematical calculations:</p>"+
+                    "<p>Operators form an integral part of any algorithm in order to manipulate data. Look at the table at the end for more details</p>"+
                     "<h3>Conditional Statements</h3>\n" +
                     "<p>Conditional statements help implement a decision flowchart in any programming language. When writing pseudocode" +
                     ", statements can be enclosed between <b>if...else...endif</b> and can be evaluated accordingly</p>"+

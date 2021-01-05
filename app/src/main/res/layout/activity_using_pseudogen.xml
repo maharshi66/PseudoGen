@@ -4,15 +4,123 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/code_editor_white"
     tools:context=".UsingPseudoGenActivity">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <TextView
-            android:id="@+id/usingPseudoGenTextView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="20dp">
-        </TextView>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/usingPseudoGenTextView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="20dp">
+            </TextView>
+            <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:padding="20dp"
+                android:layout_height="match_parent"
+                android:stretchColumns="1">
+                <TableRow>
+                    <TextView
+                        android:layout_column="0"
+                        android:text="KEYWORDS"
+                        android:padding="3dip">
+                    </TextView>
+                </TableRow>
+                <TableRow>
+                    <TextView
+                        android:layout_column="0"
+                        android:layout_height="wrap_content"
+                        android:text="process, endprocess"
+                        android:padding="3dip" />
+                    <TextView
+                        android:layout_column="0"
+                        android:gravity="right"
+                        android:layout_height="wrap_content"
+                        android:text="Start and End statements"
+                        android:padding="3dip" />
+                </TableRow>
+                <View
+                    android:layout_height="2dip"
+                    android:background="#FF909090" />
+                <TableRow>
+                    <TextView
+                        android:layout_column="0"
+                        android:text="Initialize, Let"
+                        android:padding="3dip" />
+                    <TextView
+                        android:text="Initialize, declare"
+                        android:gravity="right"
+                        android:padding="3dip" />
+                </TableRow>
+                <View
+                    android:layout_height="2dip"
+                    android:background="#FF909090" />
+                <TableRow>
+                    <TextView
+                        android:layout_column="0"
+                        android:text="if, then, else"
+                        android:padding="3dip" />
+                    <TextView
+                        android:text="Conditional Statements"
+                        android:gravity="right"
+                        android:padding="3dip" />
+                </TableRow>
+
+                <View
+                    android:layout_height="2dip"
+                    android:background="#FF909090" />
+                <TableRow>
+                    <TextView
+                        android:text="for, endloop"
+                        android:padding="3dip" />
+                    <TextView
+                        android:text="Iteration with for"
+                        android:gravity="right"
+                        android:padding="3dip" />
+                </TableRow>
+                <View
+                    android:layout_height="2dip"
+                    android:background="#FF909090" />
+                <TableRow>
+                    <TextView
+                        android:text="do, while, endwhile"
+                        android:padding="3dip" />
+                    <TextView
+                        android:text="Iteration with while"
+                        android:gravity="right"
+                        android:padding="3dip" />
+                </TableRow>
+                <TableRow>
+                    <TextView
+                        android:text="repeat, until"
+                        android:padding="3dip" />
+                    <TextView
+                        android:text="Iteration with post condition"
+                        android:gravity="right"
+                        android:padding="3dip" />
+                </TableRow>
+                <View
+                    android:layout_height="2dip"
+                    android:background="#FF909090" />
+                <TableRow>
+                    <TextView
+                        android:layout_column="0"
+                        android:text="function, call"
+                        android:padding="3dip" />
+                    <TextView
+                        android:text="Create adn call the function"
+                        android:gravity="right"
+                        android:padding="3dip" />
+                </TableRow>
+                <View
+                    android:layout_height="2dip"
+                    android:background="#FF909090" />
+            </TableLayout>
+        </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

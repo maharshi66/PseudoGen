@@ -142,7 +142,7 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
                 startActivity ( newIntent );
                 break;
             case R.id.nav_examples:
-                Intent exampleIntent = new Intent ( CentralActivity.this, ExamplesActivity.class );
+                Intent exampleIntent = new Intent ( CentralActivity.this, ChallengesActivity.class );
                 startActivity ( exampleIntent );
             default:
                 break;
