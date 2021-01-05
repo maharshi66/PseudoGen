@@ -64,6 +64,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.EmailAuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 
 import org.w3c.dom.Text;
@@ -139,6 +141,9 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
                 Intent newIntent = new Intent(CentralActivity.this, UsingPseudoGenActivity.class);
                 startActivity ( newIntent );
                 break;
+            case R.id.nav_examples:
+                Intent exampleIntent = new Intent ( CentralActivity.this, ExamplesActivity.class );
+                startActivity ( exampleIntent );
             default:
                 break;
         }
@@ -348,22 +353,25 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
 
     public void alertUserForSignOut()
     {
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(CentralActivity.this, R.style.CutomAlertDialog);
-        alertDialog.setTitle("Sign Out")
-                .setMessage("Are you sure you want to sign out?")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        signOut();
-                    }
-                })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                })
-                .show();
+        if(FirebaseAuth.getInstance ().getCurrentUser () != null) {
+
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder ( CentralActivity.this , R.style.CutomAlertDialog );
+            alertDialog.setTitle ( "Sign Out" )
+                    .setMessage ( "Are you sure you want to sign out?" )
+                    .setPositiveButton ( "Yes" , new DialogInterface.OnClickListener ( ) {
+                        @Override
+                        public void onClick ( DialogInterface dialog , int which ) {
+                            signOut ( );
+                        }
+                    } )
+                    .setNegativeButton ( "No" , new DialogInterface.OnClickListener ( ) {
+                        @Override
+                        public void onClick ( DialogInterface dialog , int which ) {
+                            dialog.cancel ( );
+                        }
+                    } )
+                    .show ( );
+        }
     }
 
     public void signOut()
@@ -388,6 +396,7 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
         } else
         {
             finishAffinity();
+            finish ();
         }
     }
 
@@ -442,12 +451,19 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
         listAdapter.updateListsAfterDelete(listDataHeader);
     }
 
-
     private String getDisplayNameInNavbar() {
-        String personName = "";
+        String personName = "Guest";
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(CentralActivity.this);
         if (acct != null) {
             personName = acct.getGivenName();
+        }else
+        {
+            if(FirebaseAuth.getInstance ().getCurrentUser () != null)
+            {
+                String temp = FirebaseAuth.getInstance ().getCurrentUser ().getEmail ();
+                String[] splitStr = temp.split ( "@" );
+                personName = splitStr[0];
+            }
         }
         return personName;
     }

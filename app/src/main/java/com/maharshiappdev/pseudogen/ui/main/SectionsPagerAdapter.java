@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.maharshiappdev.pseudogen.CodeAnalysisFragment;
 import com.maharshiappdev.pseudogen.CodeEditorFragment;
 import com.maharshiappdev.pseudogen.R;
 
@@ -39,7 +38,6 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
                 break;
             case 1:
-                fragment = new CodeAnalysisFragment();
                 break;
             default:
                 break;

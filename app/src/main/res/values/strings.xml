@@ -145,7 +145,7 @@
     </string>
 
     <string-array name="fonts_spinner_array">
-    <item>Small</item>
-    <item>Big</item>
+        <item>Small</item>
+        <item>Big</item>
     </string-array>
 </resources>

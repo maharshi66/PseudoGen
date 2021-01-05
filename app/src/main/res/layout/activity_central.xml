@@ -46,7 +46,9 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:paddingLeft="10dp"
+            android:padding="5dp"
+            android:textColor="@color/indigo"
+            android:textAlignment="center"
             android:text="Y O U R  L I S T"
             android:textSize="16dp">
         </TextView>
@@ -64,7 +66,7 @@
                 android:choiceMode="singleChoice"
                 android:padding="10dp"
                 android:layout_weight="1"
-                android:divider="@android:color/transparent"
+                android:divider="@android:color/darker_gray"
                 android:dividerHeight="10.0sp"
                 app:layout_constraintTop_toBottomOf="parent"
                 app:layout_constraintBottom_toTopOf="@+id/bottomNavView"
@@ -103,7 +105,9 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="@drawable/background_gradient"
+        android:layout_marginBottom="10dp"
+        android:background="@color/light_grey"
+        app:itemBackground="@drawable/nav_drawer_item_bg"
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/nav_drawer_menu"/>
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -24,9 +24,9 @@
         android:enabled="true">
     </item>
     <item
-        android:id="@+id/action_semicolon"
+        android:id="@+id/action_assignment"
         android:layout_width="fill_parent"
         android:enabled="true"
-        android:title=";"
+        android:title="="
         app:showAsAction="ifRoom" />
 </menu>

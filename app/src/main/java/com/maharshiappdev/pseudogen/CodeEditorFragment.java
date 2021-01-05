@@ -284,12 +284,12 @@ public class CodeEditorFragment extends Fragment{
                     inputCodeEditText.getText().replace(Math.min(start, end), Math.max(start, end),
                             tab, 0, tab.length());
                     break;
-                case R.id.action_semicolon:
-                    String semicolon = ";";
+                case R.id.action_assignment:
+                    String assignmentOperator = "<-";
                     start = Math.max(inputCodeEditText.getSelectionStart(), 0);
                     end = Math.max(inputCodeEditText.getSelectionEnd(), 0);
                     inputCodeEditText.getText().replace(Math.min(start, end), Math.max(start, end),
-                            semicolon, 0, semicolon.length());
+                            assignmentOperator, 0, assignmentOperator.length());
                     break;
                 case R.id.action_ifelse:
                     String ifElse = "if\nelse";

@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.maharshiappdev.pseudogen">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.GET_ACCOUNTS"></uses-permission>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -13,15 +15,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PseudoGen">
-        <activity android:name=".UsingPseudoGenActivity"
-            android:theme="@style/Theme.PseudoGen">
-        </activity>
+        <activity android:name=".ExamplesActivity"></activity>
+        <activity
+            android:name=".UsingPseudoGenActivity"
+            android:theme="@style/Theme.PseudoGen"></activity>
         <activity
             android:name=".CodeEditorTabbedActivity"
             android:configChanges="uiMode"
             android:label="@string/title_activity_code_editor_tabbed"
-            android:theme="@style/Theme.PseudoGen">
-        </activity>
+            android:theme="@style/Theme.PseudoGen"></activity>
         <activity
             android:name=".CentralActivity"
             android:configChanges="uiMode"
@@ -36,6 +38,7 @@
             android:theme="@style/Theme.PseudoGen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -45,15 +48,17 @@
             android:resource="@array/preloaded_fonts" />
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-4846620296621716~5470406229"/>
+            android:value="ca-app-pub-4846620296621716~5470406229" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.maharshiappdev.pseudogen.fileprovider"
-            android:grantUriPermissions="true"
-            android:exported="false">
+            android:exported="false"
+            android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/filepaths"/>
+                android:resource="@xml/filepaths" />
         </provider>
     </application>
+
 </manifest>
