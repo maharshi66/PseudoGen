@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:background="@color/code_editor_dark"
     android:layout_height="match_parent"
-    tools:context=".ExamplesActivity">
+    tools:context=".ChallengesActivity">
     <com.google.android.gms.ads.AdView
         android:id="@+id/examplesAdView"
         android:layout_gravity="center_horizontal"
@@ -21,7 +21,7 @@
         android:id="@+id/examplesHeaderTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="E X A M P L E S"
+        android:text="C H A L L E N G E S"
         android:textColor="@color/indigo"
         android:textSize="16dp"
         android:padding="10dp"

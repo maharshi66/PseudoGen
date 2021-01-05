@@ -141,9 +141,9 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
                 Intent newIntent = new Intent(CentralActivity.this, UsingPseudoGenActivity.class);
                 startActivity ( newIntent );
                 break;
-            case R.id.nav_examples:
-                Intent exampleIntent = new Intent ( CentralActivity.this, ChallengesActivity.class );
-                startActivity ( exampleIntent );
+            case R.id.nav_challenges:
+                Intent challengesIntent = new Intent ( CentralActivity.this, ChallengesActivity.class );
+                startActivity ( challengesIntent );
             default:
                 break;
         }
@@ -299,6 +299,8 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
         codeOutputSpinner.setAdapter(codeOutputArrayAdapter);
 
         alertDialog.setView(dialogView)
+                .setTitle ( "Add Details" )
+                .setMessage ( "*All fields are required" )
                 .setPositiveButton("Go", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

@@ -6,16 +6,20 @@
         <group
                 android:id="@+id/menu_bottom"
                 android:checkableBehavior="none">
-                <item android:id="@+id/nav_privacyPolicy" android:title="Privacy Policy">
+                <item android:id="@+id/nav_privacyPolicy"
+                    android:title="Privacy Policy"
+                    android:icon="@drawable/privacy_icon">
                 </item>
-                <item android:id="@+id/nav_termsConditions" android:title="Terms of Use">
+                <item android:id="@+id/nav_termsConditions"
+                    android:title="Terms of Use"
+                    android:icon="@drawable/terms_conditions_icon">
                 </item>
                 <item android:id="@+id/nav_usingThisApp"
                     android:title="Using PseudoGen"
                     android:icon="@drawable/using_pseudogen_icon">
                 </item>
-                <item android:id="@+id/nav_examples"
-                    android:title="Examples"
+                <item android:id="@+id/nav_challenges"
+                    android:title="Challenges"
                     android:icon="@drawable/example_icon">
                 </item>
                 <item
