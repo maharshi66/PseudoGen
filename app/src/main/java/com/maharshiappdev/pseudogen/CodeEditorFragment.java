@@ -125,8 +125,8 @@ public class CodeEditorFragment extends Fragment{
 
     public void setWhiteBoardTheme()
     {
-        inputCodeEditText.setBackgroundResource(R.color.code_editor_white);
-        inputCodeEditText.setTextColor(getResources().getColor(R.color.deep_sky_blue));
+        inputCodeEditText.setBackgroundResource(R.color.chalk_white);
+        inputCodeEditText.setTextColor(getResources().getColor(R.color.code_editor_dark));
     }
 
     public void createAlertForClearText()
@@ -211,18 +211,20 @@ public class CodeEditorFragment extends Fragment{
         if(intent.hasExtra("fromEditPseudocode"))
         {
             inputCodeEditText.setText(intent.getStringExtra("fromEditPseudocode"));
+        }else{
+            inputCodeEditText.setText("process\n\n\nendprocess");
         }
 
         inputCodeEditText.addTextChangedListener(new TextWatcher() {
             ColorScheme keywords = new ColorScheme(
                     Pattern.compile(
-                            "\\b(process|endprocess|define|initialize|solve|each|void|char|int|long|double|float|const|static|volatile|byte|boolean|class|interface|private|protected|public|final|abstract|enum|instanceof|assert|if|else|then|switch|case|default|break|goto|return|for|while|endloop|do|continue|throw|try|catch|finally|this|implements|import|true|false|null|N|Graph|List|Set|Queue|Stack|Array|BinaryTree|LinkedList|Heap|heapify|fetch|get|find)\\b"),
+                            "\\b(process|endprocess|initialize|solve|each|void|char|int|long|double|float|const|static|volatile|byte|boolean|class|interface|private|protected|public|final|abstract|enum|instanceof|assert|if|else|then|switch|case|default|break|goto|return|for|while|endloop|do|continue|throw|try|catch|finally|this|implements|import|true|false|null|N|Graph|List|Set|Queue|Stack|Array|BinaryTree|LinkedList|Heap|Heapify|fetch|get|find|call|function|endwhile|Let|let)\\b"),
                     getActivity().getResources().getColor(R.color.dark_orange)
             );
 
             ColorScheme numbers = new ColorScheme(
                     Pattern.compile("(\\b(\\d*[.]?\\d+)\\b)"),
-                    Color.BLUE
+                    getActivity().getResources().getColor(R.color.app_blue)
             );
             final ColorScheme[] schemes = { keywords, numbers };
             @Override
@@ -285,28 +287,28 @@ public class CodeEditorFragment extends Fragment{
                             tab, 0, tab.length());
                     break;
                 case R.id.action_assignment:
-                    String assignmentOperator = "<-";
+                    String assignmentOperator = " ()";
                     start = Math.max(inputCodeEditText.getSelectionStart(), 0);
                     end = Math.max(inputCodeEditText.getSelectionEnd(), 0);
                     inputCodeEditText.getText().replace(Math.min(start, end), Math.max(start, end),
                             assignmentOperator, 0, assignmentOperator.length());
                     break;
                 case R.id.action_ifelse:
-                    String ifElse = "if\nelse";
+                    String ifElse = " if\n\n else";
                     start = Math.max(inputCodeEditText.getSelectionStart(), 0);
                     end = Math.max(inputCodeEditText.getSelectionEnd(), 0);
                     inputCodeEditText.getText().replace(Math.min(start, end), Math.max(start, end),
                             ifElse, 0, ifElse.length());
                     break;
                 case R.id.action_for:
-                    String for_str = "for\nendloop";
+                    String for_str = " for\n\n endloop";
                     start = Math.max(inputCodeEditText.getSelectionStart(), 0);
                     end = Math.max(inputCodeEditText.getSelectionEnd(), 0);
                     inputCodeEditText.getText().replace(Math.min(start, end), Math.max(start, end),
                             for_str, 0, for_str.length());
                     break;
                 case R.id.action_while:
-                    String while_str = "while\nendloop";
+                    String while_str = " while\n\n endwhile";
                     start = Math.max(inputCodeEditText.getSelectionStart(), 0);
                     end = Math.max(inputCodeEditText.getSelectionEnd(), 0);
                     inputCodeEditText.getText().replace(Math.min(start, end), Math.max(start, end),

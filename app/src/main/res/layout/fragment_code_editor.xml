@@ -19,10 +19,12 @@
         android:hint="Add pseudocode here..."
         android:inputType="textMultiLine|textNoSuggestions"
         android:lines="50"
-        android:scrollbars="vertical|horizontal"
+        android:scrollbars="vertical"
+        android:scrollHorizontally="true"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></com.maharshiappdev.pseudogen.LineNumberedEditText>
+        app:layout_constraintTop_toTopOf="parent">
+    </com.maharshiappdev.pseudogen.LineNumberedEditText>
 </FrameLayout>

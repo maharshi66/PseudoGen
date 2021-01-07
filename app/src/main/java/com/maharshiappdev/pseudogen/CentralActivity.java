@@ -10,79 +10,60 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
-import android.Manifest;
 import android.app.Activity;
-import android.app.ListFragment;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.TypefaceSpan;
-import android.util.DisplayMetrics;
+import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.ContextMenu;
-import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
-import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.auth.EmailAuthCredential;
-import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 
-import org.w3c.dom.Text;
-
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.prefs.Preferences;
 
 public class CentralActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private DrawerLayout navDrawer;
+    SharedPreferences mPrefs;
+    final String welcomeDialogShownPref = "welcomeDialogShown";
+    private Boolean welcomeDialogShown;
     private int groupPos;
     private int childPos;
     private int lastExpandedPostion = -1;
@@ -106,7 +87,6 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
     HashMap<String, List<String>> listDataChild;
     DatabaseHandler db;
     SearchView codeListSearchView;
-
 
     public void saveToInternalStorage(String title, String description, String input, String output, String pseudocode) throws IOException {
         FileOutputStream fOut = openFileOutput("title", Context.MODE_PRIVATE);
@@ -487,20 +467,38 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_central);
-        MobileAds.initialize(this);
 
+        mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        welcomeDialogShown = mPrefs.getBoolean ( welcomeDialogShownPref, false );
+        if(!welcomeDialogShown)
+        {
+            createDialogForWelcome ();
+            SharedPreferences.Editor editor = mPrefs.edit();
+            editor.putBoolean(welcomeDialogShownPref, true);
+            editor.commit();
+        }
+
+        MobileAds.initialize(this);
         centralInterstitialAd = new InterstitialAd(this);
         centralInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
         Intent intent = getIntent ();
-        enableInterstitialAd = intent.getBooleanExtra ( "enableInterstitial", true );
+        enableInterstitialAd = intent.getBooleanExtra ( "enableInterstitial", false);
         centralInterstitialAd.loadAd(new AdRequest.Builder().build());
-        if (centralInterstitialAd.isLoaded()) {
-            centralInterstitialAd.show();
-        }
-/*        if(enableInterstitialAd)
-        {
 
-        }*/
+        centralInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded () {
+                if(enableInterstitialAd == true){
+                    centralInterstitialAd.show ();
+                }
+            }
+
+            @Override
+            public void onAdClosed () {
+                enableInterstitialAd = false;
+                centralInterstitialAd.loadAd(new AdRequest.Builder().build());
+            }
+        });
 
         listDataHeaders = new ArrayList<>();
         navigation = findViewById(R.id.bottomNavView);
@@ -622,5 +620,17 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
         centralAdViewBanner = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         centralAdViewBanner.loadAd(adRequest);
+    }
+
+    private void createDialogForWelcome () {
+
+        AlertDialog.Builder welcomeAlert = new AlertDialog.Builder ( this, R.style.CutomAlertDialog);
+        LayoutInflater layoutInflater = this.getLayoutInflater();
+        final View dialogView = layoutInflater.inflate(R.layout.welcome_to_app_dialog, null);
+        welcomeAlert.setTitle ( "Welcome to PseudoGen!" );
+        welcomeAlert.setView ( dialogView );
+        final TextView welcomeMessageTextView = dialogView.findViewById ( R.id.welcomeMessageTextView );
+        welcomeMessageTextView.setText ( "Thank you for downloading PseudoGen! We hope you find this app useful and use it to edit, store, and share pseudocode. Please rate us on Google Playstore so that we can improve this app.\nHappy pseudocoding!" );
+        welcomeAlert.show ();
     }
 }

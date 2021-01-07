@@ -175,7 +175,6 @@ public class ChallengesActivity extends AppCompatActivity {
         } );
 
         registerForContextMenu ( listView );
-
         examplesAdViewBanner = findViewById(R.id.examplesAdView);
         AdRequest adRequest = new AdRequest.Builder().build();
         examplesAdViewBanner.loadAd(adRequest);
