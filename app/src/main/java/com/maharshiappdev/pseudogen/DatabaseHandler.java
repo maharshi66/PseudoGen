@@ -229,4 +229,76 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         c.close ();
         return state;
     }
+
+    public void createTable(String tableName)
+    {
+        SQLiteDatabase db = getWritableDatabase ();
+        String tName = formatTableNameString ( tableName );
+        String CREATE_CHALLENGES_TABLE_USER = "CREATE TABLE IF NOT EXISTS" + tName  + "("
+                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + KEY_TITLE + " TEXT NOT NULL,"
+                + KEY_DES + " TEXT,"
+                + KEY_INPUT + " TEXT,"
+                + KEY_OUTPUT + " TEXT,"
+                + KEY_COMPLETE + " INTEGER"
+                + ")";
+
+        db.execSQL (CREATE_CHALLENGES_TABLE_USER);
+        db.close ();
+    }
+
+    public void addChallenge(Posts post, String tableName)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        tableName = formatTableNameString ( tableName );
+        ContentValues values = new ContentValues();
+        values.put(KEY_TITLE, post.getTitle());
+        values.put(KEY_DES, post.getDescription());
+        values.put(KEY_INPUT, post.getInput());
+        values.put(KEY_OUTPUT, post.getOutput());
+        values.put(KEY_COMPLETE, 0);
+        db.insert(tableName, null, values);
+        db.close();
+    }
+
+    public void markChallengeComplete(String title, String tableName)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(KEY_COMPLETE, 1);
+        tableName = formatTableNameString ( tableName );
+        db.update(tableName, cv, KEY_TITLE + "= ?", new String[]{title});
+        db.close ();
+    }
+
+    public void markChallengeIncomplete(String title, String tableName)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        tableName = formatTableNameString ( tableName );
+        ContentValues cv = new ContentValues();
+        cv.put(KEY_COMPLETE, 0);
+        db.update(tableName, cv, KEY_TITLE + "= ?", new String[]{title});
+        db.close ();
+    }
+
+    public String formatTableNameString(String tableName)
+    {
+        tableName.toLowerCase ();
+        tableName.replaceAll("[0-9]","");
+        tableName = "[" +tableName + "]";
+        return tableName;
+    }
+
+    public int getCheckedState(String title, String tableName)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        tableName = formatTableNameString ( tableName );
+        int state = 0;
+        Cursor c = db.query(tableName, COLS_ID_TITLE_CHALLENGES,KEY_TITLE +"=?",new String[]{title},null,null,null,null);
+        if(c.moveToFirst ()){
+            state = c.getInt ( 5 );
+        }
+        c.close ();
+        return state;
+    }
 }

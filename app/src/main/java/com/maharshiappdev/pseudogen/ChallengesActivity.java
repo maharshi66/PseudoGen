@@ -14,6 +14,9 @@ import android.widget.ExpandableListView;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -81,7 +84,7 @@ public class ChallengesActivity extends AppCompatActivity {
                     List<String> currChildren = listDataChild.get ( listDataHeader.get ( groupPos ) );
                     listDataHeader.set ( groupPos, pair );
                     listDataChild.put ( pair, currChildren);
-                    db.markChallengeComplete ( pair.first);
+                    db.markChallengeComplete ( pair.first, getUsernameForTable ());
                     listAdapter.notifyDataSetChanged ();
                 }catch ( Exception e )
                 {
@@ -95,7 +98,7 @@ public class ChallengesActivity extends AppCompatActivity {
                     List<String> currChildren = listDataChild.get ( listDataHeader.get ( groupPos ) );
                     listDataHeader.set ( groupPos, pair );
                     listDataChild.put ( pair, currChildren);
-                    db.markChallengeIncomplete ( pair.first);
+                    db.markChallengeIncomplete ( pair.first, getUsernameForTable ());
                     listAdapter.notifyDataSetChanged ();
                 }catch ( Exception e )
                 {
@@ -117,7 +120,7 @@ public class ChallengesActivity extends AppCompatActivity {
         p1.setOutput ( "Singly Linked List" );
         p1.setDescription ( "Given a singly linked list of elements, reverse its contents and return the new list." );
         newListOfPosts.add ( p1 );
-        db.addChallenge ( p1);
+        db.addChallenge ( p1, getUsernameForTable ());
         return newListOfPosts ;
     }
 
@@ -128,7 +131,7 @@ public class ChallengesActivity extends AppCompatActivity {
 
         for(Posts p :  uploadedPosts)
         {
-            int intValue = db.getCheckedState ( p.getTitle ());
+            int intValue = db.getCheckedState ( p.getTitle (), getUsernameForTable ());
             Boolean state;
             if (intValue >= 1) {
                 state = true;
@@ -152,6 +155,7 @@ public class ChallengesActivity extends AppCompatActivity {
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.activity_challenges );
         db = new DatabaseHandler (getApplicationContext());
+        db.createTable ( getUsernameForTable () );
 
         solvedHashMap = new HashMap <Integer, Boolean> (); //Contains the Position-State pair for solved challenges
         listView = findViewById(R.id.examplesExpandableListView);
@@ -178,5 +182,22 @@ public class ChallengesActivity extends AppCompatActivity {
         examplesAdViewBanner = findViewById(R.id.examplesAdView);
         AdRequest adRequest = new AdRequest.Builder().build();
         examplesAdViewBanner.loadAd(adRequest);
+    }
+
+    private String getUsernameForTable () {
+        String personName = "guest";
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(ChallengesActivity.this);
+        if (acct != null) {
+            personName = acct.getGivenName();
+        }else
+        {
+            if( FirebaseAuth.getInstance ().getCurrentUser () != null)
+            {
+                String temp = FirebaseAuth.getInstance ().getCurrentUser ().getEmail ();
+                String[] splitStr = temp.split ( "@" );
+                personName = splitStr[0];
+            }
+        }
+        return personName;
     }
 }
