@@ -81,7 +81,7 @@ public class ChallengesActivity extends AppCompatActivity {
                     List<String> currChildren = listDataChild.get ( listDataHeader.get ( groupPos ) );
                     listDataHeader.set ( groupPos, pair );
                     listDataChild.put ( pair, currChildren);
-                    db.markChallengeIncomplete ( pair.first);
+                    db.markChallengeComplete ( pair.first);
                     listAdapter.notifyDataSetChanged ();
                 }catch ( Exception e )
                 {
