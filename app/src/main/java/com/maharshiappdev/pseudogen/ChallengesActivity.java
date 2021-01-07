@@ -31,7 +31,6 @@ public class ChallengesActivity extends AppCompatActivity {
     private AdView examplesAdViewBanner;
     private int groupPos;
     private int lastExpandedPostion = -1;
-    private String _tableName = "";
     DatabaseHandler db;
 
     @Override
@@ -79,9 +78,11 @@ public class ChallengesActivity extends AppCompatActivity {
                 try{
                     Pair <String, Boolean> currPair = listDataHeader.get ( groupPos );
                     Pair <String, Boolean> pair = new Pair <> ( currPair.first, true );
+                    List<String> currChildren = listDataChild.get ( listDataHeader.get ( groupPos ) );
                     listDataHeader.set ( groupPos, pair );
-                    listAdapter.updateCheckAtPosition(groupPos, pair.first, pair.second);
-                    db.markChallengeComplete ( pair.first );
+                    listDataChild.put ( pair, currChildren);
+                    db.markChallengeIncomplete ( pair.first);
+                    listAdapter.notifyDataSetChanged ();
                 }catch ( Exception e )
                 {
                     e.printStackTrace ();
@@ -91,9 +92,11 @@ public class ChallengesActivity extends AppCompatActivity {
                 try{
                     Pair <String, Boolean> currPair = listDataHeader.get ( groupPos );
                     Pair <String, Boolean> pair = new Pair <> ( currPair.first, false );
+                    List<String> currChildren = listDataChild.get ( listDataHeader.get ( groupPos ) );
                     listDataHeader.set ( groupPos, pair );
-                    listAdapter.updateCheckAtPosition(groupPos, pair.first, pair.second);
+                    listDataChild.put ( pair, currChildren);
                     db.markChallengeIncomplete ( pair.first);
+                    listAdapter.notifyDataSetChanged ();
                 }catch ( Exception e )
                 {
                     e.printStackTrace ();

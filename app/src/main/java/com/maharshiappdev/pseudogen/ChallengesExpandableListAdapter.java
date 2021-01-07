@@ -116,7 +116,8 @@ public class ChallengesExpandableListAdapter extends BaseExpandableListAdapter {
         {
             if(i == pos)
             {
-                _listDataHeader.set ( pos,new Pair<String, Boolean> (title, state));
+                Pair<String, Boolean> newPair = new Pair <> ( title, state );
+                _listDataHeader.set ( pos,newPair);
             }
         }
         notifyDataSetChanged ();
