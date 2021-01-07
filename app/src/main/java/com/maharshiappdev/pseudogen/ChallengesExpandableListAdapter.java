@@ -19,7 +19,7 @@ public class ChallengesExpandableListAdapter extends BaseExpandableListAdapter {
     private List < Pair <String, Boolean> >_listDataHeader; // header titles
     // child data in format of header title, child title
     private HashMap < Pair < String, Boolean >, List < String > > _listDataChild;
-
+    CheckBox lblListHeader;
     public ChallengesExpandableListAdapter ( Context context, List < Pair < String, Boolean > > listDataHeader, HashMap < Pair < String, Boolean >, List < String > > listChildData) {
         this._context = context;
         this._listDataChild = listChildData;
@@ -70,10 +70,10 @@ public class ChallengesExpandableListAdapter extends BaseExpandableListAdapter {
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this._context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = infalInflater.inflate(R.layout.example_code_title, null);
+            convertView = infalInflater.inflate(R.layout.challenge_code_title , null);
         }
 
-        CheckBox lblListHeader = (CheckBox) convertView
+        lblListHeader = (CheckBox) convertView
                 .findViewById(R.id.exampleTitleCheckBox);
         lblListHeader.setTypeface(null, Typeface.BOLD);
         lblListHeader.setText(headerTitle);
@@ -94,7 +94,7 @@ public class ChallengesExpandableListAdapter extends BaseExpandableListAdapter {
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this._context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = infalInflater.inflate(R.layout.example_code_item, null);
+            convertView = infalInflater.inflate(R.layout.challenge_code_item , null);
         }
 
         TextView txtListChild = (TextView) convertView
@@ -102,10 +102,23 @@ public class ChallengesExpandableListAdapter extends BaseExpandableListAdapter {
 
         txtListChild.setText(childText);
         txtListChild.setBackgroundResource ( R.drawable.item_child_corner );
-        return convertView;    }
+        return convertView;
+    }
 
     @Override
     public boolean isChildSelectable ( int groupPosition , int childPosition ) {
         return false;
+    }
+
+    public void updateCheckAtPosition(int pos, String title, Boolean state)
+    {
+        for(int i = 0; i < _listDataHeader.size (); i++)
+        {
+            if(i == pos)
+            {
+                _listDataHeader.set ( pos,new Pair<String, Boolean> (title, state));
+            }
+        }
+        notifyDataSetChanged ();
     }
 }

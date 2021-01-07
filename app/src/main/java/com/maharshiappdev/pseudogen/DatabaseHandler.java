@@ -17,6 +17,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 4;
     private static final String DATABASE_NAME = "posts_manager";
     private static final String TABLE_NAME = "posts";
+    private static final String TABLE_NAME_CHALLENGES = "challenges";
 
     // Coloumn Names
     private static final String KEY_ID = "id";
@@ -27,9 +28,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_OUTPUT = "output";
     private static final String KEY_TIME = "time";
     private static final String KEY_SPACE = "space";
+    private static final String KEY_COMPLETE = "complete";
+
 
     //Column Combinations
     private static final String[] COLS_ID_TITLE_POSTS = new String[] {KEY_ID,KEY_TITLE,KEY_DES, KEY_PSEUDOCODE, KEY_INPUT, KEY_OUTPUT, KEY_TIME, KEY_SPACE};
+    private static final String[] COLS_ID_TITLE_CHALLENGES = new String[] {KEY_ID,KEY_TITLE, KEY_DES, KEY_INPUT, KEY_OUTPUT, KEY_COMPLETE};
 
     public DatabaseHandler(Context context)
     {
@@ -49,7 +53,18 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                         + KEY_TIME + " TEXT,"
                         + KEY_SPACE + " TEXT"
                         + ")";
+
+        String CREATE_CHALLENGES_TABLE = "CREATE TABLE " + TABLE_NAME_CHALLENGES + "("
+                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + KEY_TITLE + " TEXT NOT NULL,"
+                + KEY_DES + " TEXT,"
+                + KEY_INPUT + " TEXT,"
+                + KEY_OUTPUT + " TEXT,"
+                + KEY_COMPLETE + " INTEGER"
+                + ")";
+
         db.execSQL(CREATE_POSTS_TABLE);
+        db.execSQL(CREATE_CHALLENGES_TABLE);
     }
 
     @Override
@@ -169,5 +184,49 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         p.setInput(input);
         p.setOutput(output);
         addPseudocodePost(p);
+    }
+
+    public void addChallenge(Posts post)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(KEY_TITLE, post.getTitle());
+        values.put(KEY_DES, post.getDescription());
+        values.put(KEY_INPUT, post.getInput());
+        values.put(KEY_OUTPUT, post.getOutput());
+        values.put(KEY_COMPLETE, 0);
+        db.insert(TABLE_NAME_CHALLENGES, null, values);
+        db.close();
+    }
+
+    public void markChallengeComplete(String title)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(KEY_COMPLETE, 1);
+        db.update(TABLE_NAME_CHALLENGES, cv, KEY_TITLE + "= ?", new String[]{title});
+        db.close ();
+    }
+
+    public void markChallengeIncomplete(String title)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(KEY_COMPLETE, 0);
+        db.update(TABLE_NAME_CHALLENGES, cv, KEY_TITLE + "= ?", new String[]{title});
+        db.close ();
+    }
+
+    public int getCheckedState(String title)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        int state = 0;
+        Cursor c = db.query(TABLE_NAME_CHALLENGES, COLS_ID_TITLE_CHALLENGES,KEY_TITLE +"=?",new String[]{title},null,null,null,null);
+        if(c.moveToFirst ()){
+            state = c.getInt ( 5 );
+        }
+        c.close ();
+        return state;
     }
 }

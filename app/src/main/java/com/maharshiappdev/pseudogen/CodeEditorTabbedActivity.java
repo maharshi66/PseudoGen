@@ -120,6 +120,7 @@ public class CodeEditorTabbedActivity extends AppCompatActivity{
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(CodeEditorTabbedActivity.this, CentralActivity.class);
+                        intent.putExtra ( "enableInterstitial", true );
                         startActivity(intent);
                     }
                 })
@@ -158,7 +159,11 @@ public class CodeEditorTabbedActivity extends AppCompatActivity{
         if(intent.hasExtra("fromEditPseudocodeTitle"))
         {
           newTitle = intent.getStringExtra("fromEditPseudocodeTitle");
-        }else
+        }else if(intent.hasExtra("challengeTitle"))
+        {
+            newTitle = intent.getStringExtra("challengeTitle");
+        }
+        else
         {
             newTitle = intent.getStringExtra("pseudocodeTitle");
         }
@@ -172,7 +177,11 @@ public class CodeEditorTabbedActivity extends AppCompatActivity{
         if(intent.hasExtra("fromEditInput"))
         {
          newInputText = intent.getStringExtra("fromEditInput");
-        }else
+        }else if(intent.hasExtra("challengeInput"))
+        {
+            newInputText = intent.getStringExtra("challengeInput");
+        }
+        else
         {
             newInputText = intent.getStringExtra("pseudocodeInputText");
         }
@@ -185,7 +194,11 @@ public class CodeEditorTabbedActivity extends AppCompatActivity{
         if(intent.hasExtra("fromEditPseudocodeDescription"))
         {
          newDescriptionText = intent.getStringExtra("fromEditPseudocodeDescription");
-        }else
+        }else if(intent.hasExtra("challengeDescription"))
+        {
+            newDescriptionText = intent.getStringExtra("challengeDescription");
+        }
+        else
         {
             newDescriptionText = intent.getStringExtra("pseudocodeDescription");
         }
@@ -198,7 +211,11 @@ public class CodeEditorTabbedActivity extends AppCompatActivity{
         if(intent.hasExtra("fromEditOutput"))
         {
             newOutputText = intent.getStringExtra("fromEditOutput");
-        }else
+        }else if(intent.hasExtra("challengeOutput"))
+        {
+            newOutputText = intent.getStringExtra("challengeOutput");
+        }
+        else
         {
             newOutputText = intent.getStringExtra("pseudocodeOutputText");
         }

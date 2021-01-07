@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<item android:id="@+id/action_solveChallenge"
+    android:title="Solve">
+</item>
+        <item android:id="@+id/action_markAsComplete" android:title="Mark Complete">
+        </item>
+        <item android:id="@+id/action_uncheckChallenge" android:title="Mark Incomplete">
+        </item>
+</menu>

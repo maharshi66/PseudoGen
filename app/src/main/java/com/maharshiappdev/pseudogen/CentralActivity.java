@@ -56,6 +56,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -87,6 +88,8 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
     private int lastExpandedPostion = -1;
     private static final int PERMISSION_REQ_CODE = 100;
     private AdView centralAdViewBanner;
+    private InterstitialAd centralInterstitialAd;
+    private Boolean enableInterstitialAd = false;
     FloatingActionButton fab_addNew;
     AutoCompleteTextView codeListSearchEditText;
     ArrayAdapter<String> autoCompleteArrayAdapter;
@@ -103,6 +106,7 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
     HashMap<String, List<String>> listDataChild;
     DatabaseHandler db;
     SearchView codeListSearchView;
+
 
     public void saveToInternalStorage(String title, String description, String input, String output, String pseudocode) throws IOException {
         FileOutputStream fOut = openFileOutput("title", Context.MODE_PRIVATE);
@@ -143,6 +147,7 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
                 break;
             case R.id.nav_challenges:
                 Intent challengesIntent = new Intent ( CentralActivity.this, ChallengesActivity.class );
+                challengesIntent.putExtra ( "tableName", getDisplayNameInNavbar ().toLowerCase () );
                 startActivity ( challengesIntent );
             default:
                 break;
@@ -483,6 +488,20 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_central);
         MobileAds.initialize(this);
+
+        centralInterstitialAd = new InterstitialAd(this);
+        centralInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        Intent intent = getIntent ();
+        enableInterstitialAd = intent.getBooleanExtra ( "enableInterstitial", true );
+        centralInterstitialAd.loadAd(new AdRequest.Builder().build());
+        if (centralInterstitialAd.isLoaded()) {
+            centralInterstitialAd.show();
+        }
+/*        if(enableInterstitialAd)
+        {
+
+        }*/
+
         listDataHeaders = new ArrayList<>();
         navigation = findViewById(R.id.bottomNavView);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -604,5 +623,4 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
         AdRequest adRequest = new AdRequest.Builder().build();
         centralAdViewBanner.loadAd(adRequest);
     }
-
 }
