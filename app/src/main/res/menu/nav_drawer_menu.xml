@@ -6,6 +6,10 @@
         <group
                 android:id="@+id/menu_bottom"
                 android:checkableBehavior="none">
+                <item android:id="@+id/nav_signIn"
+                    android:title="Sign In"
+                    android:icon="@drawable/log_out">
+                </item>
                 <item android:id="@+id/nav_privacyPolicy"
                     android:title="Privacy Policy"
                     android:icon="@drawable/privacy_icon">
@@ -22,10 +26,18 @@
                     android:title="Challenges"
                     android:icon="@drawable/example_icon">
                 </item>
+                <item android:id="@+id/nav_editorSettings"
+                    android:title="Editor Settings"
+                    android:icon="@drawable/settings_icon">
+                </item>
                 <item
                     android:id="@+id/nav_developer"
                     android:icon="@drawable/developer_icon"
                     android:title="Developer">
+                </item>
+                <item  android:id="@+id/nav_sendFeedback"
+                        android:title="Send Feedback"
+                    android:icon="@drawable/feedback_icon">
                 </item>
                 <item
                     android:id="@+id/nav_rateApp"
@@ -34,8 +46,8 @@
                 </item>
                 <item
                     android:id="@+id/nav_logOut"
-                    android:icon="@drawable/log_out"
-                    android:title="Log Out">
+                    android:icon="@drawable/icon_sign_out"
+                    android:title="Sign Out">
                 </item>
         </group>
 </menu>

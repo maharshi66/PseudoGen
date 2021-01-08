@@ -106,7 +106,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:layout_marginBottom="10dp"
-        android:background="@color/light_grey"
+        android:background="@color/blue_angel"
         app:itemBackground="@drawable/nav_drawer_item_bg"
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/nav_drawer_menu"/>
