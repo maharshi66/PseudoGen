@@ -10,6 +10,8 @@ import android.os.Bundle;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
@@ -235,7 +237,7 @@ public class CodeEditorTabbedActivity extends AppCompatActivity{
                 db.close();
             }else if(titleEditedState)
             {
-                db.overWritePostWithNewTitle( getAlgorithmTitle (),postTitle, postDescription, postPseudocode, postInput, postOutput );
+                db.overWritePostWithNewTitle(getAlgorithmTitle (),postTitle, postDescription, postPseudocode, postInput, postOutput );
                 titleEditedState = false;
                 Toast.makeText(this, "Saved!", Toast.LENGTH_SHORT).show();
             }
@@ -362,6 +364,21 @@ public class CodeEditorTabbedActivity extends AppCompatActivity{
         return selectedOutputIdx;
     }
 
+    private String getUsernameForTable() {
+        String personName = "guestposts";
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(CodeEditorTabbedActivity.this);
+        if (acct != null){
+            personName = acct.getEmail ();
+        }else
+        {
+            if( FirebaseAuth.getInstance ().getCurrentUser () != null)
+            {
+                personName = FirebaseAuth.getInstance ().getCurrentUser ().getEmail ();
+            }
+        }
+        return personName;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
@@ -376,6 +393,8 @@ public class CodeEditorTabbedActivity extends AppCompatActivity{
         setTitle(getAlgorithmTitle());
 //        getSupportActionBar().setIcon(R.drawable.code_icon);
         db = new DatabaseHandler(this);
+        db.createPostTable ( getUsernameForTable () );
+
         bottomNavEditShortCuts = findViewById(R.id.bottomNavEditShortCuts);
         codeInputTextView = findViewById(R.id.codeInputTextView);
         codeOutputTextView = findViewById(R.id.codeOutputTextView);

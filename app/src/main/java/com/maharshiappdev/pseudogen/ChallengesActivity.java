@@ -155,7 +155,7 @@ public class ChallengesActivity extends AppCompatActivity {
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.activity_challenges );
         db = new DatabaseHandler (getApplicationContext());
-        db.createTable ( getUsernameForTable () );
+        db.createChallengeTable ( getUsernameForTable () );
 
         solvedHashMap = new HashMap <Integer, Boolean> (); //Contains the Position-State pair for solved challenges
         listView = findViewById(R.id.examplesExpandableListView);
@@ -185,17 +185,15 @@ public class ChallengesActivity extends AppCompatActivity {
     }
 
     private String getUsernameForTable () {
-        String personName = "guest";
+        String personName = "guestchallenges";
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(ChallengesActivity.this);
         if (acct != null) {
-            personName = acct.getGivenName();
+            personName = acct.getEmail ();
         }else
         {
             if( FirebaseAuth.getInstance ().getCurrentUser () != null)
             {
-                String temp = FirebaseAuth.getInstance ().getCurrentUser ().getEmail ();
-                String[] splitStr = temp.split ( "@" );
-                personName = splitStr[0];
+                personName =  FirebaseAuth.getInstance ().getCurrentUser ().getEmail ();
             }
         }
         return personName;

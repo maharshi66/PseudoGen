@@ -6,19 +6,27 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String TAG = "DatabaseHandler";
-
     private static final int DATABASE_VERSION = 4;
     private static final String DATABASE_NAME = "posts_manager";
-    private static final String TABLE_NAME = "posts";
-    private static final String TABLE_NAME_CHALLENGES = "challenges";
+    private static final String TABLE_NAME = "exampleposts";
+    private static final String TABLE_NAME_CHALLENGES = "examplechallenges";
 
+    public String getNEW_POSTS_TABLE () {
+        return NEW_POSTS_TABLE;
+    }
+
+    public void setNEW_POSTS_TABLE ( String NEW_POSTS_TABLE ) {
+        this.NEW_POSTS_TABLE = NEW_POSTS_TABLE;
+    }
+
+    private String NEW_POSTS_TABLE;
+    private String NEW_CHALLENGES_TABLE;
     // Coloumn Names
     private static final String KEY_ID = "id";
     private static final String KEY_TITLE = "title";
@@ -26,56 +34,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_PSEUDOCODE = "pseudocode";
     private static final String KEY_INPUT = "input";
     private static final String KEY_OUTPUT = "output";
-    private static final String KEY_TIME = "time";
-    private static final String KEY_SPACE = "space";
     private static final String KEY_COMPLETE = "complete";
-
-
     //Column Combinations
-    private static final String[] COLS_ID_TITLE_POSTS = new String[] {KEY_ID,KEY_TITLE,KEY_DES, KEY_PSEUDOCODE, KEY_INPUT, KEY_OUTPUT, KEY_TIME, KEY_SPACE};
+    private static final String[] COLS_ID_TITLE_POSTS = new String[] {KEY_ID,KEY_TITLE,KEY_DES, KEY_PSEUDOCODE, KEY_INPUT, KEY_OUTPUT};
     private static final String[] COLS_ID_TITLE_CHALLENGES = new String[] {KEY_ID,KEY_TITLE, KEY_DES, KEY_INPUT, KEY_OUTPUT, KEY_COMPLETE};
 
     public DatabaseHandler(Context context)
     {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-    }
-
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-        // Create table SQL query
-        String CREATE_POSTS_TABLE = "CREATE TABLE " + TABLE_NAME + "("
-                        + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                        + KEY_TITLE + " TEXT NOT NULL,"
-                        + KEY_DES + " TEXT,"
-                        + KEY_PSEUDOCODE + " TEXT,"
-                        + KEY_INPUT + " TEXT,"
-                        + KEY_OUTPUT + " TEXT,"
-                        + KEY_TIME + " TEXT,"
-                        + KEY_SPACE + " TEXT"
-                        + ")";
-
-        String CREATE_CHALLENGES_TABLE = "CREATE TABLE " + TABLE_NAME_CHALLENGES + "("
-                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + KEY_TITLE + " TEXT NOT NULL,"
-                + KEY_DES + " TEXT,"
-                + KEY_INPUT + " TEXT,"
-                + KEY_OUTPUT + " TEXT,"
-                + KEY_COMPLETE + " INTEGER"
-                + ")";
-
-        db.execSQL(CREATE_POSTS_TABLE);
-        db.execSQL(CREATE_CHALLENGES_TABLE);
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        String DROP_TABLE = "DROP TABLE IF EXISTS "+ TABLE_NAME;
-
-        Log.d(TAG,DROP_TABLE);
-
-        db.execSQL(DROP_TABLE);
-
-        onCreate(db);
     }
 
     //CRUD Operations
@@ -88,14 +54,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_PSEUDOCODE, post.getPseudocode());
         values.put(KEY_INPUT, post.getInput());
         values.put(KEY_OUTPUT, post.getOutput());
-        db.insert(TABLE_NAME, null, values);
+        db.insert(NEW_POSTS_TABLE, null, values);
         db.close();
     }
 
     public Posts getPost(String title){
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor c = db.query(TABLE_NAME, COLS_ID_TITLE_POSTS,KEY_TITLE +"=?",new String[]{title},null,null,null,null);
+        Cursor c = db.query(NEW_POSTS_TABLE, COLS_ID_TITLE_POSTS,KEY_TITLE +"=?",new String[]{title},null,null,null,null);
         if(c != null){
             c.moveToFirst();
         }
@@ -114,7 +80,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     {
         SQLiteDatabase db = this.getReadableDatabase();
         List<Posts> postsList = new ArrayList<>();
-        Cursor cursor = db.query(TABLE_NAME, COLS_ID_TITLE_POSTS, null, null, null, null, null);
+        Cursor cursor = db.query(NEW_POSTS_TABLE, COLS_ID_TITLE_POSTS, null, null, null, null, null);
 
         if(cursor != null && cursor.moveToFirst())
         {
@@ -136,20 +102,20 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void deletePost(String title)
     {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("DELETE FROM " + TABLE_NAME + " WHERE " + KEY_TITLE + "=\"" + title + "\";");
+        db.execSQL("DELETE FROM " + NEW_POSTS_TABLE + " WHERE " + KEY_TITLE + "=\"" + title + "\";");
         db.close();
     }
 
     public void deleteAllPosts()
     {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_NAME, null, null);
+        db.delete(NEW_POSTS_TABLE, null, null);
     }
 
     public boolean isDuplicateTitle(String title)
     {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(TABLE_NAME, COLS_ID_TITLE_POSTS, KEY_TITLE + "=?", new String[] { title }, null, null, null);
+        Cursor cursor = db.query(NEW_POSTS_TABLE, COLS_ID_TITLE_POSTS, KEY_TITLE + "=?", new String[] { title }, null, null, null);
 
         if(cursor.moveToFirst())
         {
@@ -230,11 +196,28 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return state;
     }
 
-    public void createTable(String tableName)
+    public void createPostTable ( String tableName)
     {
         SQLiteDatabase db = getWritableDatabase ();
-        String tName = formatTableNameString ( tableName );
-        String CREATE_CHALLENGES_TABLE_USER = "CREATE TABLE IF NOT EXISTS" + tName  + "("
+        NEW_POSTS_TABLE = formatTableNameStringForPosts ( tableName );
+        String CREATE_POSTS_TABLE = "CREATE TABLE IF NOT EXISTS " + NEW_POSTS_TABLE + "("
+                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + KEY_TITLE + " TEXT NOT NULL,"
+                + KEY_DES + " TEXT,"
+                + KEY_PSEUDOCODE + " TEXT,"
+                + KEY_INPUT + " TEXT,"
+                + KEY_OUTPUT + " TEXT"
+                + ")";
+
+        db.execSQL (CREATE_POSTS_TABLE);
+        db.close ();
+    }
+
+    public void createChallengeTable ( String tableName)
+    {
+        SQLiteDatabase db = getWritableDatabase ();
+        String tName = formatTableNameStringForChallenges ( tableName );
+        String CREATE_CHALLENGES_TABLE_USER = "CREATE TABLE IF NOT EXISTS " + tName  + "("
                 + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + KEY_TITLE + " TEXT NOT NULL,"
                 + KEY_DES + " TEXT,"
@@ -250,7 +233,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void addChallenge(Posts post, String tableName)
     {
         SQLiteDatabase db = this.getWritableDatabase();
-        tableName = formatTableNameString ( tableName );
+        tableName = formatTableNameStringForChallenges ( tableName );
         ContentValues values = new ContentValues();
         values.put(KEY_TITLE, post.getTitle());
         values.put(KEY_DES, post.getDescription());
@@ -266,7 +249,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(KEY_COMPLETE, 1);
-        tableName = formatTableNameString ( tableName );
+        tableName = formatTableNameStringForChallenges ( tableName );
         db.update(tableName, cv, KEY_TITLE + "= ?", new String[]{title});
         db.close ();
     }
@@ -274,25 +257,37 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void markChallengeIncomplete(String title, String tableName)
     {
         SQLiteDatabase db = this.getWritableDatabase();
-        tableName = formatTableNameString ( tableName );
+        tableName = formatTableNameStringForChallenges ( tableName );
         ContentValues cv = new ContentValues();
         cv.put(KEY_COMPLETE, 0);
         db.update(tableName, cv, KEY_TITLE + "= ?", new String[]{title});
         db.close ();
     }
 
-    public String formatTableNameString(String tableName)
+    public String formatTableNameStringForChallenges ( String tableName)
     {
+        if(tableName.equals ( "challenges" ))
+        {
+            return tableName;
+        }
         tableName.toLowerCase ();
         tableName.replaceAll("[0-9]","");
         tableName = "[" +tableName + "]";
         return tableName;
     }
 
+    public String formatTableNameStringForPosts(String tableName)
+    {
+        tableName.toLowerCase ();
+        tableName.replaceAll("[0-9]","");
+        tableName = "[" + tableName + "posts"+"]";
+        return tableName;
+    }
+
     public int getCheckedState(String title, String tableName)
     {
         SQLiteDatabase db = this.getReadableDatabase();
-        tableName = formatTableNameString ( tableName );
+        tableName = formatTableNameStringForChallenges ( tableName );
         int state = 0;
         Cursor c = db.query(tableName, COLS_ID_TITLE_CHALLENGES,KEY_TITLE +"=?",new String[]{title},null,null,null,null);
         if(c.moveToFirst ()){
@@ -300,5 +295,40 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
         c.close ();
         return state;
+    }
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        // Create table SQL query
+        String CREATE_POSTS_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + "("
+                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + KEY_TITLE + " TEXT NOT NULL,"
+                + KEY_DES + " TEXT,"
+                + KEY_PSEUDOCODE + " TEXT,"
+                + KEY_INPUT + " TEXT,"
+                + KEY_OUTPUT + " TEXT"
+                + ")";
+
+        String CREATE_CHALLENGES_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME_CHALLENGES + "("
+                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + KEY_TITLE + " TEXT NOT NULL,"
+                + KEY_DES + " TEXT,"
+                + KEY_INPUT + " TEXT,"
+                + KEY_OUTPUT + " TEXT,"
+                + KEY_COMPLETE + " INTEGER"
+                + ")";
+
+        db.execSQL(CREATE_POSTS_TABLE);
+        db.execSQL(CREATE_CHALLENGES_TABLE);
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        String DROP_TABLE = "DROP TABLE IF EXISTS "+ TABLE_NAME;
+
+        Log.d(TAG,DROP_TABLE);
+
+        db.execSQL(DROP_TABLE);
+
+        onCreate(db);
     }
 }

@@ -41,8 +41,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -61,6 +64,21 @@ public class CodeEditorFragment extends Fragment{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+    }
+
+    private String getUsernameForTable() {
+        String personName = "guestposts";
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(getActivity ().getApplicationContext ());
+        if (acct != null) {
+            personName = acct.getGivenName();
+        }else
+        {
+            if( FirebaseAuth.getInstance ().getCurrentUser () != null)
+            {
+                personName = FirebaseAuth.getInstance ().getCurrentUser ().getEmail ();
+            }
+        }
+        return personName;
     }
 
     public void clearAllText()

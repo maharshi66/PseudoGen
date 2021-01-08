@@ -455,6 +455,21 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
         return personName;
     }
 
+    private String getUsernameForTable() {
+        String tableName = "guestposts";
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(CentralActivity.this);
+        if (acct != null) {
+            tableName = acct.getEmail ();
+        }else
+        {
+            if(FirebaseAuth.getInstance ().getCurrentUser () != null)
+            {
+                tableName = FirebaseAuth.getInstance ().getCurrentUser ().getEmail ();
+            }
+        }
+        return tableName;
+    }
+
     public void hideKeyboard(View v)
     {
         InputMethodManager imm = (InputMethodManager) getApplicationContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
@@ -565,6 +580,7 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
         navigationView.setNavigationItemSelectedListener(this);
 
         db = new DatabaseHandler(getApplicationContext());
+        db.createPostTable ( getUsernameForTable() );
         codeListExpandableListView = findViewById(R.id.codeListExpandableListView);
         prepareDataList();
         listAdapter = new CodeListExapandableListAdapter(getApplicationContext(), listDataHeader, listDataChild);
