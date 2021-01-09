@@ -18,6 +18,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
+import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -60,6 +61,8 @@ public class CodeEditorFragment extends Fragment{
     private final DatabaseReference firebaseDatabaseRef = FirebaseDatabase.getInstance().getReference();
     View view;
     LineNumberedEditText inputCodeEditText;
+    SharedPreferences mPref;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,17 +84,34 @@ public class CodeEditorFragment extends Fragment{
         return personName;
     }
 
+    public void setDefaultFontType()
+    {
+        String savedFontType =PreferenceManager
+                .getDefaultSharedPreferences(getActivity ().getApplicationContext ())
+                .getString("fontStyle","Source Code");
+        if(savedFontType == "Source Code")
+        {
+            setSourceCodeFontType ();
+        }else if(savedFontType == "Fira")
+        {
+            setFiraMonoFontType ();
+        }else if(savedFontType == "Ubuntu")
+        {
+            setUbuntuFontType ();
+        }else if(savedFontType == "Kalam")
+        {
+            setKalamFontType ();
+        }else
+        {
+            setSourceCodeFontType ();
+        }
+    }
+
     public void clearAllText()
     {
         if(!inputCodeEditText.equals("")) {
             inputCodeEditText.getText().clear();
         }
-    }
-
-    public void setDefaultFontType()
-    {
-        Typeface default_font = ResourcesCompat.getFont(getContext(), R.font.source_code_pro);
-        inputCodeEditText.setTypeface(default_font);
     }
 
     public void setFiraMonoFontType()
@@ -102,7 +122,16 @@ public class CodeEditorFragment extends Fragment{
 
     public void setDefaultFontSize()
     {
-        inputCodeEditText.setTextSize(14);
+        String savedFontSize =PreferenceManager
+                .getDefaultSharedPreferences(getActivity ().getApplicationContext ())
+                .getString("fontSize","Small");
+        if(savedFontSize == "Big")
+        {
+            setBigFontSize ();
+        }else
+        {
+            inputCodeEditText.setTextSize(14);
+        }
     }
 
     public void setKalamFontType()
@@ -132,7 +161,21 @@ public class CodeEditorFragment extends Fragment{
     {
         setDefaultFontSize();
         setDefaultFontType();
-        setBlackboardTheme();
+        setDefaultTheme ();
+    }
+
+    public void setDefaultTheme()
+    {
+        String savedTheme =PreferenceManager
+                .getDefaultSharedPreferences(getActivity ().getApplicationContext ())
+                .getString("theme","Blackboard");
+        if(savedTheme == "Blackboard")
+        {
+            setBlackboardTheme ();
+        }else
+        {
+            setWhiteBoardTheme ();
+        }
     }
 
     public void setBlackboardTheme()
@@ -223,8 +266,8 @@ public class CodeEditorFragment extends Fragment{
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         super.onActivityCreated(savedInstanceState);
         inputCodeEditText = view.findViewById(R.id.inputCodeEditText);
+        mPref = PreferenceManager.getDefaultSharedPreferences ( getActivity ().getApplicationContext () );
         setUpDefaultEditorSettings();
-
         Intent intent = getActivity().getIntent();
         if(intent.hasExtra("fromEditPseudocode"))
         {

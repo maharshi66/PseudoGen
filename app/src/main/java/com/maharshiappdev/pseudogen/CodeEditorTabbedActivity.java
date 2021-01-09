@@ -10,6 +10,7 @@ import android.os.Bundle;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -385,7 +386,7 @@ public class CodeEditorTabbedActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setRequestedOrientation ( ActivityInfo.SCREEN_ORIENTATION_PORTRAIT );
         setContentView(R.layout.activity_code_editor_tabbed);
-
+        MobileAds.initialize ( this );
         Toolbar editorToolBar = findViewById(R.id.editorToolbar);
         setSupportActionBar(editorToolBar);
         postTitle = getAlgorithmTitle();

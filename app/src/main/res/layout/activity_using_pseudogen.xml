@@ -73,6 +73,9 @@
                         android:text="do, while, endwhile"
                         android:padding="3dip" />
                 </TableRow>
+                <View
+                    android:layout_height="2dip"
+                    android:background="#FF909090" />
                 <TableRow>
                     <TextView
                         android:text="repeat, until"
