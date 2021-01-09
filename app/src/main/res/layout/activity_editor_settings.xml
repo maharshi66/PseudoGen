@@ -33,13 +33,13 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:layout_weight="6"
+            android:layout_weight="5"
             android:textSize="20dp"
             android:text="Theme">
         </TextView>
         <Spinner
             android:id="@+id/themeSpinner"
-            android:layout_weight="4"
+            android:layout_weight="5"
             android:layoutDirection="rtl"
             android:layout_width="0dp"
             android:layout_height="wrap_content">
@@ -54,13 +54,13 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:layout_weight="6"
+            android:layout_weight="5"
             android:textSize="20dp"
             android:text="Font Type">
         </TextView>
         <Spinner
             android:id="@+id/fontStyleSpinner"
-            android:layout_weight="4"
+            android:layout_weight="5"
             android:layoutDirection="rtl"
             android:layout_width="0dp"
             android:layout_height="wrap_content">
@@ -72,27 +72,26 @@
         android:padding="30dp"
         android:orientation="horizontal">
         <TextView
-            android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_width="0dp"
             android:textSize="20dp"
             android:gravity="center_vertical"
-            android:layout_weight="6"
+            android:layout_weight="5"
             android:text="Font Size">
         </TextView>
         <Spinner android:id="@+id/fontSizeSpinner"
-            android:layout_weight="4"
-            android:layoutDirection="rtl"
             android:layout_width="0dp"
+            android:layout_weight="5"
+            android:layoutDirection="rtl"
             android:layout_height="wrap_content">
         </Spinner>
     </LinearLayout>
     <Button
         android:layout_width="100dp"
         android:layout_height="60dp"
-        android:layout_gravity="center_horizontal"
+        android:layout_gravity="center"
         android:text="Set"
         android:onClick="setEditorSettingsClicked"
-        android:padding="15dp"
         android:layout_marginTop="100dp">
     </Button>
 </LinearLayout>

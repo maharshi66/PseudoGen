@@ -8,6 +8,10 @@ import android.os.Bundle;
 import android.webkit.WebView;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+
 public class UsingPseudoGenActivity extends AppCompatActivity {
     private String htmlText =
             " <!DOCTYPE html>\n" +
@@ -57,10 +61,22 @@ public class UsingPseudoGenActivity extends AppCompatActivity {
                     "can enclose a block of code or statements between <b>function <i>function-name</i>...endfunction</b> and utilize them by using the <b>call</b> keyword followed by the function name</p>"+
                     "</body>\n" +
             "</html>\n";
+
+    @Override
+    public void onBackPressed () {
+        Intent intent = new Intent ( UsingPseudoGenActivity.this, CentralActivity.class );
+        intent.putExtra ( "enableInterstitial", true );
+        startActivity ( intent );
+    }
+
     @Override
     protected void onCreate ( Bundle savedInstanceState ) {
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.activity_using_pseudogen );
+        MobileAds.initialize(this);
+        AdView usingPseudoGenAdView = findViewById ( R.id.usingPseudoGenAdView );
+        AdRequest adRequest = new AdRequest.Builder().build();
+        usingPseudoGenAdView.loadAd ( adRequest );
         TextView htmlTextView = findViewById ( R.id.usingPseudoGenTextView );
         htmlTextView.setText( HtmlCompat.fromHtml(htmlText, 0));
     }

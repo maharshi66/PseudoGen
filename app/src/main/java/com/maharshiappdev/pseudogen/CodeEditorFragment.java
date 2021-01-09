@@ -69,44 +69,6 @@ public class CodeEditorFragment extends Fragment{
         setHasOptionsMenu(true);
     }
 
-    private String getUsernameForTable() {
-        String personName = "guestposts";
-        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(getActivity ().getApplicationContext ());
-        if (acct != null) {
-            personName = acct.getGivenName();
-        }else
-        {
-            if( FirebaseAuth.getInstance ().getCurrentUser () != null)
-            {
-                personName = FirebaseAuth.getInstance ().getCurrentUser ().getEmail ();
-            }
-        }
-        return personName;
-    }
-
-    public void setDefaultFontType()
-    {
-        String savedFontType =PreferenceManager
-                .getDefaultSharedPreferences(getActivity ().getApplicationContext ())
-                .getString("fontStyle","Source Code");
-        if(savedFontType == "Source Code")
-        {
-            setSourceCodeFontType ();
-        }else if(savedFontType == "Fira")
-        {
-            setFiraMonoFontType ();
-        }else if(savedFontType == "Ubuntu")
-        {
-            setUbuntuFontType ();
-        }else if(savedFontType == "Kalam")
-        {
-            setKalamFontType ();
-        }else
-        {
-            setSourceCodeFontType ();
-        }
-    }
-
     public void clearAllText()
     {
         if(!inputCodeEditText.equals("")) {
@@ -118,20 +80,6 @@ public class CodeEditorFragment extends Fragment{
     {
         Typeface firaFont = ResourcesCompat.getFont(getContext(), R.font.fira_mono);
         inputCodeEditText.setTypeface(firaFont);
-    }
-
-    public void setDefaultFontSize()
-    {
-        String savedFontSize =PreferenceManager
-                .getDefaultSharedPreferences(getActivity ().getApplicationContext ())
-                .getString("fontSize","Small");
-        if(savedFontSize == "Big")
-        {
-            setBigFontSize ();
-        }else
-        {
-            inputCodeEditText.setTextSize(14);
-        }
     }
 
     public void setKalamFontType()
@@ -157,11 +105,39 @@ public class CodeEditorFragment extends Fragment{
         inputCodeEditText.setTextSize(18);
     }
 
+    public void setSmallFontSize()
+    {
+        inputCodeEditText.setTextSize(14);
+    }
+
     public void setUpDefaultEditorSettings()
     {
-        setDefaultFontSize();
-        setDefaultFontType();
         setDefaultTheme ();
+        setDefaultFontType();
+        setDefaultFontSize();
+    }
+
+    public void setDefaultFontType()
+    {
+        String savedFontType =PreferenceManager
+                .getDefaultSharedPreferences(getActivity ().getApplicationContext ())
+                .getString("fontStyle","Source Code");
+        if(savedFontType.equals ( "Source Code" ))
+        {
+            setSourceCodeFontType ();
+        }else if(savedFontType.equals ( "Fira" ))
+        {
+            setFiraMonoFontType ();
+        }else if(savedFontType.equals ( "Ubuntu" ))
+        {
+            setUbuntuFontType ();
+        }else if(savedFontType.equals ( "Kalam" ))
+        {
+            setKalamFontType ();
+        }else
+        {
+            setSourceCodeFontType ();
+        }
     }
 
     public void setDefaultTheme()
@@ -169,12 +145,26 @@ public class CodeEditorFragment extends Fragment{
         String savedTheme =PreferenceManager
                 .getDefaultSharedPreferences(getActivity ().getApplicationContext ())
                 .getString("theme","Blackboard");
-        if(savedTheme == "Blackboard")
-        {
-            setBlackboardTheme ();
-        }else
+        if(savedTheme.equals ( "Whiteboard" ))
         {
             setWhiteBoardTheme ();
+        }else
+        {
+            setBlackboardTheme ();
+        }
+    }
+
+    public void setDefaultFontSize()
+    {
+        String savedFontSize =PreferenceManager
+                .getDefaultSharedPreferences(getActivity ().getApplicationContext ())
+                .getString("fontSize","Small");
+        if(savedFontSize.equals ( "Big" ))
+        {
+            setBigFontSize ();
+        }else
+        {
+            setSmallFontSize();
         }
     }
 
@@ -218,9 +208,6 @@ public class CodeEditorFragment extends Fragment{
             case R.id.action_clearText:
                 createAlertForClearText();
                 break;
-            case R.id.fontSize_big:
-                setBigFontSize();
-                break;
             case R.id.fontType_kalam:
                 setKalamFontType();
                 break;
@@ -234,7 +221,10 @@ public class CodeEditorFragment extends Fragment{
                 setFiraMonoFontType();
                 break;
             case R.id.fontSize_small:
-                setDefaultFontSize();
+                setSmallFontSize ();
+                break;
+            case R.id.fontSize_big:
+                setBigFontSize();
                 break;
             case R.id.theme_blackboard:
                 setBlackboardTheme();

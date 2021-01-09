@@ -38,6 +38,13 @@ public class ChallengesActivity extends AppCompatActivity {
     DatabaseHandler db;
 
     @Override
+    public void onBackPressed () {
+        Intent intent = new Intent ( ChallengesActivity.this, CentralActivity.class );
+        intent.putExtra ( "enableInterstitial", true );
+        startActivity ( intent );
+    }
+
+    @Override
     public void onCreateContextMenu ( ContextMenu menu , View v , ContextMenu.ContextMenuInfo menuInfo ) {
         MenuInflater inflater = getMenuInflater ();
         inflater.inflate ( R.menu.challenge_context_menu, menu );

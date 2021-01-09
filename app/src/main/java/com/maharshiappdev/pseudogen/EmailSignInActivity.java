@@ -20,9 +20,12 @@ import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -53,11 +56,11 @@ public class EmailSignInActivity extends AppCompatActivity {
     public void showPasswordClicked(View view)
     {
         final ImageView passwordShowHideImageView = findViewById(R.id.passwordShowHideImageView);
-        String uriShow = "@drawable/showpassword";  //where myresource (without the extension) is the file
+        String uriShow = "@drawable/visible_off_icon";  //where myresource (without the extension) is the file
         int imageResourceShow = getResources().getIdentifier(uriShow, null, getPackageName());
         Drawable resShow = getResources().getDrawable(imageResourceShow);
 
-        String uriHide = "@drawable/hidepassword";  //where myresource (without the extension) is the file
+        String uriHide = "@drawable/visible_icon";  //where myresource (without the extension) is the file
         int imageResourceHide = getResources().getIdentifier(uriHide, null, getPackageName());
         Drawable resHide = getResources().getDrawable(imageResourceHide);
 
@@ -85,20 +88,22 @@ public class EmailSignInActivity extends AppCompatActivity {
                             //Switch activity to central
                             Intent intent = new Intent(EmailSignInActivity.this, CentralActivity.class);
                             startActivity(intent);
-                        }else
-                        {
-                            try
-                            {
-                                throw task.getException();
-                            }catch (Exception e)
-                            {
-                                Toast.makeText(EmailSignInActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-
-                            startSignUpDialog();
                         }
                     }
-                });
+                }).addOnFailureListener ( new OnFailureListener ( ) {
+            @Override
+            public void onFailure ( @NonNull Exception e ) {
+                if (e instanceof FirebaseAuthInvalidCredentialsException ) {
+                    notifyUser("Invalid password");
+                } else {
+                    startSignUpDialog();
+                }
+            }
+        } );
+    }
+
+    private void notifyUser ( String incorrect_email_address ) {
+        Toast.makeText ( this, incorrect_email_address, Toast.LENGTH_LONG ).show ();
     }
 
     public void createNewUser(String username, String password)
@@ -130,7 +135,6 @@ public class EmailSignInActivity extends AppCompatActivity {
 
     public void startSignUpDialog()
     {
-
         AlertDialog.Builder alertDialogBuilder= new AlertDialog.Builder(EmailSignInActivity.this);
         LayoutInflater layoutInflater = EmailSignInActivity.this.getLayoutInflater();
 
@@ -212,7 +216,8 @@ public class EmailSignInActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         finishAffinity();
-        finish();
+        Intent intent = new Intent(EmailSignInActivity.this, LoginActivity.class);
+        startActivity ( intent );
     }
 
     @Override
@@ -222,5 +227,9 @@ public class EmailSignInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_email_sign_in);
         usernameEditText = findViewById(R.id.usernameEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
+    }
+
+    public void signUpClicked ( View view ) {
+        startSignUpDialog ();
     }
 }
