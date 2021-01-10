@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:background="@color/code_editor_dark"
+    android:layout_width="match_parent">
+    <LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingBottom="20dp"
+    android:layout_height="match_parent">
+    <TextView
+        android:text="Example 1:"
+        android:textSize="22dp"
+        android:textColor="@color/bright_orange"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </TextView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:text="Check If Even"
+                android:textSize="16dp"
+                android:textColor="@color/code_editor_white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </TextView>
+            <TextView
+                android:text="Description: Given N integers as input, check if they contain an even number"
+                android:textSize="16dp"
+                android:textColor="@color/code_editor_white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </TextView>
+            <TextView
+                android:text="Input: Array of Integers"
+                android:textSize="16dp"
+                android:textColor="@color/code_editor_white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </TextView>
+            <TextView
+                android:text="Output: Array of Integers"
+                android:textSize="16dp"
+                android:textColor="@color/code_editor_white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </TextView>
+        </LinearLayout>
+    <com.maharshiappdev.pseudogen.LineNumberedEditText
+        android:id="@+id/exampleOneEditText"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fontFamily="@font/source_code_pro"
+        android:textSize="14dp"
+        android:textColor="@color/code_editor_white"
+        android:focusable="false"
+        android:enabled="false"
+        android:background="@color/blackboard_dark"
+        android:inputType="textMultiLine|textNoSuggestions">
+    </com.maharshiappdev.pseudogen.LineNumberedEditText>
+    <TextView
+        android:text="Example 2:"
+        android:textSize="22dp"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/bright_orange"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </TextView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:text="Compute Factorial"
+                android:textSize="16dp"
+                android:textColor="@color/code_editor_white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </TextView>
+            <TextView
+                android:text="Description: Compute factorial of 100"
+                android:textSize="16dp"
+                android:textColor="@color/code_editor_white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </TextView>
+            <TextView
+                android:text="Input: Integer"
+                android:textSize="16dp"
+                android:textColor="@color/code_editor_white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </TextView>
+            <TextView
+                android:text="Output: Integer"
+                android:textSize="16dp"
+                android:textColor="@color/code_editor_white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </TextView>
+        </LinearLayout>
+    <com.maharshiappdev.pseudogen.LineNumberedEditText
+        android:id="@+id/exampleTwoEditText"
+        android:layout_width="match_parent"
+        android:fontFamily="@font/source_code_pro"
+        android:textSize="14dp"
+        android:textColor="@color/code_editor_white"
+        android:focusable="false"
+        android:enabled="false"
+        android:layout_height="match_parent"
+        android:background="@color/blackboard_dark"
+        android:inputType="textMultiLine|textNoSuggestions">
+    </com.maharshiappdev.pseudogen.LineNumberedEditText>
+</LinearLayout>
+</ScrollView>

@@ -1,7 +1,5 @@
 package com.maharshiappdev.pseudogen;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,25 +12,17 @@ import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.tabs.TabLayout;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.view.ContextMenu;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -43,9 +33,6 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.maharshiappdev.pseudogen.ui.main.SectionsPagerAdapter;
-
-import java.lang.reflect.Array;
 
 public class CodeEditorTabbedActivity extends AppCompatActivity{
     private final DatabaseReference firebaseDatabaseRef = FirebaseDatabase.getInstance().getReference();
@@ -62,6 +49,9 @@ public class CodeEditorTabbedActivity extends AppCompatActivity{
     DatabaseHandler db;
     private AdView editorAdViewBanner;
     Boolean titleEditedState = false;
+    SharedPreferences mPrefs;
+    final String saveOnWelcomeDialogString = "saveOnWelcomeDialogShown";
+    private Boolean isSaveOnWelcomeShown;
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
@@ -412,5 +402,27 @@ public class CodeEditorTabbedActivity extends AppCompatActivity{
         editorAdViewBanner = findViewById (R.id.editorAdViewBanner);
         AdRequest adRequest = new AdRequest.Builder().build();
         editorAdViewBanner.loadAd ( adRequest );
+
+        mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        isSaveOnWelcomeShown = mPrefs.getBoolean ( saveOnWelcomeDialogString , false );
+        if(!isSaveOnWelcomeShown )
+        {
+            createSaveAlertOnWelcome ();
+            SharedPreferences.Editor editor = mPrefs.edit();
+            editor.putBoolean( saveOnWelcomeDialogString , true);
+            editor.commit();
+        }
+
+    }
+    private void createSaveAlertOnWelcome () {
+        AlertDialog.Builder welcomeAlert = new AlertDialog.Builder ( this, R.style.CutomAlertDialog);
+        LayoutInflater layoutInflater = this.getLayoutInflater();
+        final View dialogView = layoutInflater.inflate(R.layout.welcome_to_app_dialog, null);
+        welcomeAlert.setIcon ( R.drawable.info_icon );
+        welcomeAlert.setTitle ( "Important Note" );
+        welcomeAlert.setView ( dialogView );
+        final TextView welcomeMessageTextView = dialogView.findViewById ( R.id.welcomeMessageTextView );
+        welcomeMessageTextView.setText ( "Please save your work by clicking on the save icon before exiting" );
+        welcomeAlert.show ();
     }
 }

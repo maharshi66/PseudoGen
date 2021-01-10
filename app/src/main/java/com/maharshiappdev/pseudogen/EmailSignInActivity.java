@@ -40,8 +40,6 @@ public class EmailSignInActivity extends AppCompatActivity {
     String userPassword;
     String firstName;
     String lastName;
-    //Hide is 0, Show is 1
-    boolean showHideState = false;
     public void signInClicked(View view)
     {
         if(mAuth.getCurrentUser() == null)

@@ -19,9 +19,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -56,9 +61,11 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CentralActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private DrawerLayout navDrawer;
@@ -135,6 +142,10 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
                 Intent editorSettingsIntent = new Intent ( CentralActivity.this, EditorSettingsActivity.class );
                 startActivity ( editorSettingsIntent );
                 break;
+            case R.id.nav_generalStructure:
+                createAlertForGeneralStructure();
+                
+                break;
             case R.id.nav_challenges:
                 Intent challengesIntent = new Intent ( CentralActivity.this, ChallengesActivity.class );
                 challengesIntent.putExtra ( "tableName", getDisplayNameInNavbar ().toLowerCase () );
@@ -142,6 +153,7 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
                 break;
             case R.id.nav_developer:
                 //TODO Add alert giving background on the developer and why this app was made (succinctly)
+                createAlertForDeveloper();
                 break;
             case R.id.nav_rateApp:
                 //Opens  Playstore for rating the app
@@ -162,6 +174,88 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
         }
         return true;
     }
+
+    private void createAlertForGeneralStructure () {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        LayoutInflater layoutInflater = this.getLayoutInflater();
+        final View dialogView = layoutInflater.inflate(R.layout.general_structure_dialog, null);
+        final TextView exampleOneEditText = dialogView.findViewById ( R.id.exampleOneEditText );
+        final TextView exampleTwoEditText = dialogView.findViewById ( R.id.exampleTwoEditText );
+
+        String[] keys = {"process", "endprocess", "if","else", "endif", "for", "endloop", "then", "function", "endfunction", "integer", "call"};
+        String checkEven = "process\n"
+                + "\tfor i in 0 to N"
+                + "\n\t\tif i % 2 == 0 then"
+                + "\n\t\t\treturn true"
+                + "\n\t\tendif"
+                + "\n\tendloop" +
+                "\nendprocess";
+        exampleOneEditText.setText(checkEven);
+        for(String str : keys){
+            setHighlightTextColor ( exampleOneEditText, str );
+        }
+
+        String findFactorial = "function computeFactorial(integer)" +
+                "\n\tif N == 1 then" +
+                "\n\t\treturn" +
+                "\n\telse" +
+                "\n\t\treturn N * computeFactorial(N - 1)" +
+                "\n\tendif" +
+                "\nendfunction" +
+                "\n\nprocess" +
+                "\n\tcall computeFactorial(100)" +
+                "\nendprocess";
+        exampleTwoEditText.setText ( findFactorial );
+        for(String str : keys){
+            setHighlightTextColor ( exampleTwoEditText, str );
+        }
+
+        alertDialog.setView ( dialogView );
+        alertDialog.setIcon ( R.drawable.pseudogenlogo_layer_list );
+        alertDialog.setTitle ( "General Structure" );
+        alertDialog.show ();
+    }
+
+    private void createAlertForDeveloper () {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this, R.style.CutomAlertDialog);
+        LayoutInflater layoutInflater = this.getLayoutInflater();
+        final View dialogView = layoutInflater.inflate(R.layout.developer_dialog, null);
+        final TextView developerInFoTextView = dialogView.findViewById ( R.id.developerInfoTextView );
+        final TextView developerEmailTextView = dialogView.findViewById ( R.id.developerEmailTextView );
+        developerInFoTextView.setText ("This app has been developed by Maharshi Shah. " +
+                "This app is intended to be used by programming enthusiasts and developers as " +
+                "a tool for planning the flow and structure of code. " +
+                "\nPlease feel free to provide feedback and suggestions!" );
+
+        String emailString = "maharshishah06@gmail.com";
+        developerEmailTextView.setText ("Contact via email:" + emailString);
+        setUnderlinedTextColor (developerEmailTextView, emailString);
+
+        developerEmailTextView.setOnClickListener ( new View.OnClickListener ( ) {
+            @Override
+            public void onClick ( View v ) {
+                openIntentForEmail();
+            }
+        } );
+
+        alertDialog.setIcon ( R.drawable.pseudogenlogo_layer_list );
+        alertDialog.setTitle ( "Developer" );
+        alertDialog.setView ( dialogView );
+        alertDialog.show ( );
+
+    }
+
+    private void openIntentForEmail () {
+        Intent i = new Intent(Intent.ACTION_SEND);
+        i.setType("message/rfc822");
+        i.putExtra(Intent.EXTRA_EMAIL  , new String[]{"maharshishah06@gmail.com"});
+        try {
+            startActivity(Intent.createChooser(i, "Email Developer"));
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(CentralActivity.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
     public void createAlertForDeleteItem()
     {
         AlertDialog.Builder alert = new AlertDialog.Builder(CentralActivity.this, R.style.CutomAlertDialog);
@@ -310,7 +404,7 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
 
         codeInputSpinner.setAdapter(codeInputArrayAdapter);
         codeOutputSpinner.setAdapter(codeOutputArrayAdapter);
-
+        alertDialog.setIcon ( R.drawable.add_new_layer_list );
         alertDialog.setView(dialogView)
                 .setTitle ( "Add Details" )
                 .setMessage ( "*All fields are required" )
@@ -526,6 +620,8 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
         LayoutInflater layoutInflater = this.getLayoutInflater();
         final View dialogView = layoutInflater.inflate(R.layout.privacy_policy_dialog, null);
         alert.setView ( dialogView );
+        alert.setTitle ( "Privacy Policy" );
+        alert.setIcon ( R.drawable.pseudogenlogo_layer_list );
         final TextView policyDescription = dialogView.findViewById ( R.id.privacyPolicyDescriptionTextView );
         String htmlText = "<!DOCTYPE html>\n" +
                 "    <html>\n" +
@@ -534,8 +630,7 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
                 "      <meta name='viewport' content='width=device-width'>\n" +
                 "      <title></title>\n" +
                 "    </head>\n" +
-                "    <body>\n" +
-                "    <strong>Privacy Policy</strong> <p>\n" +
+                "    <body>\n" + " <p>\n" +
                 "                  Maharshi Shah built the PseudoGen app as\n" +
                 "                  an Ad Supported app. This SERVICE is provided by\n" +
                 "                  Maharshi Shah at no cost and is intended for use as\n" +
@@ -645,6 +740,8 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
         LayoutInflater layoutInflater = this.getLayoutInflater();
         final View dialogView = layoutInflater.inflate(R.layout.terms_of_use_dialog, null);
         alert.setView ( dialogView );
+        alert.setTitle ( "Terms & Conditions" );
+        alert.setIcon ( R.drawable.pseudogenlogo_layer_list );
         final TextView termsOfUseDescription = dialogView.findViewById ( R.id.termsOfUseTextView );
         String htmlText = "<!DOCTYPE html>\n" +
                 "    <html>\n" +
@@ -654,7 +751,7 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
                 "      <title></title>\n" +
                 "    </head>\n" +
                 "    <body>\n" +
-                "    <strong>Terms &amp; Conditions</strong> <p>\n" +
+                "    <p>\n" +
                 "                  By downloading or using the app, these terms will\n" +
                 "                  automatically apply to you – you should make sure therefore\n" +
                 "                  that you read them carefully before using the app. You’re not\n" +
@@ -761,6 +858,41 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
                 "      ";
         termsOfUseDescription.setText ( HtmlCompat.fromHtml(htmlText, 0) );
         alert.show ();
+    }
+
+    public void setUnderlinedTextColor ( TextView tv, String textToHighlight) {
+        String tvt = tv.getText().toString();
+        int ofe = tvt.indexOf(textToHighlight, 0);
+        Spannable wordToSpan = new SpannableString(tv.getText());
+        for (int ofs = 0; ofs < tvt.length() && ofe != -1; ofs = ofe + 1) {
+            ofe = tvt.indexOf(textToHighlight, ofs);
+            if (ofe == -1)
+                break;
+            else {
+                // set color here
+                //wordToSpan.setSpan(new BackgroundColorSpan (0xFFFFFF00), ofe, ofe + textToHighlight.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                wordToSpan.setSpan(new ForegroundColorSpan (Color.BLUE), ofe, ofe + textToHighlight.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                wordToSpan.setSpan(new UnderlineSpan (), ofe, ofe + textToHighlight.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                tv.setText(wordToSpan, TextView.BufferType.SPANNABLE);
+            }
+        }
+    }
+
+    public void setHighlightTextColor ( TextView tv, String textToHighlight) {
+        String tvt = tv.getText().toString();
+        int ofe = tvt.indexOf(textToHighlight, 0);
+        Spannable wordToSpan = new SpannableString(tv.getText());
+        for (int ofs = 0; ofs < tvt.length() && ofe != -1; ofs = ofe + 1) {
+            ofe = tvt.indexOf(textToHighlight, ofs);
+            if (ofe == -1)
+                break;
+            else {
+                // set color here
+                //wordToSpan.setSpan(new BackgroundColorSpan (0xFFFFFF00), ofe, ofe + textToHighlight.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                wordToSpan.setSpan(new ForegroundColorSpan (getResources ().getColor ( R.color.bright_orange )), ofe, ofe + textToHighlight.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                tv.setText(wordToSpan, TextView.BufferType.SPANNABLE);
+            }
+        }
     }
 
     @Override

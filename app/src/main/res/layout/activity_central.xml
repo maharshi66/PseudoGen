@@ -47,9 +47,9 @@
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:padding="5dp"
-            android:textColor="@color/indigo"
+            android:textColor="@color/bright_orange"
             android:textAlignment="center"
-            android:text="Y O U R  L I S T"
+            android:text="M Y  L I S T"
             android:textSize="16dp">
         </TextView>
         <FrameLayout
@@ -106,7 +106,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:layout_marginBottom="10dp"
-        android:background="@color/blue_angel"
+        android:background="@color/light_grey"
         app:itemBackground="@drawable/nav_drawer_item_bg"
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/nav_drawer_menu"/>

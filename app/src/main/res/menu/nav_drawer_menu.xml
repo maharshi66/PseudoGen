@@ -15,16 +15,20 @@
                     android:icon="@drawable/privacy_icon">
                 </item>
                 <item android:id="@+id/nav_termsConditions"
-                    android:title="Terms of Use"
+                    android:title="Terms &#38; Conditions"
                     android:icon="@drawable/terms_conditions_icon">
                 </item>
                 <item android:id="@+id/nav_usingThisApp"
                     android:title="Using PseudoGen"
                     android:icon="@drawable/using_pseudogen_icon">
                 </item>
-                <item android:id="@+id/nav_challenges"
-                    android:title="Challenges"
+                <item android:id="@+id/nav_generalStructure"
+                    android:title="General Structure"
                     android:icon="@drawable/example_icon">
+                </item>
+                <item android:id="@+id/nav_challenges"
+                    android:title="Common Problems"
+                    android:icon="@drawable/challenges_icon">
                 </item>
                 <item android:id="@+id/nav_editorSettings"
                     android:title="Editor Settings"

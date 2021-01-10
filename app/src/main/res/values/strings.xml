@@ -45,6 +45,8 @@
         <item>Singly Linked List</item>
         <item>Doubly Linked List</item>
         <item>Circular Linked List</item>
+        <item>Linked List Head</item>
+        <item>Linked List Node</item>
         <item>Tuple</item>
         <item>Stack</item>
         <item>Queue</item>
@@ -58,6 +60,8 @@
         <item>Tree</item>
         <item>Binary Tree</item>
         <item>Binary Search Tree</item>
+        <item>Binary Tree Root</item>
+        <item>Binary Tree Node</item>
         <item>B-Tree</item>
         <item>AVL Tree</item>
         <item>Red-Black Tree</item>
@@ -95,6 +99,8 @@
         <item>Singly Linked List</item>
         <item>Doubly Linked List</item>
         <item>Circular Linked List</item>
+        <item>Linked List Head</item>
+        <item>Linked List Node</item>
         <item>Tuple</item>
         <item>Stack</item>
         <item>Queue</item>
@@ -108,6 +114,8 @@
         <item>Tree</item>
         <item>Binary Tree</item>
         <item>Binary Search Tree</item>
+        <item>Binary Tree Root</item>
+        <item>Binary Tree Node</item>
         <item>B-Tree</item>
         <item>AVL Tree</item>
         <item>Red-Black Tree</item>

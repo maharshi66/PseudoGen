@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Pair;
 import android.view.ContextMenu;
@@ -12,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -332,6 +334,10 @@ public class ChallengesActivity extends AppCompatActivity {
     protected void onCreate ( Bundle savedInstanceState ) {
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.activity_challenges );
+        TextView examplesHeaderTextView = findViewById ( R.id.examplesHeaderTextView );
+        Drawable infoIcon = getResources().getDrawable(R.drawable.info_icon);
+        examplesHeaderTextView.setCompoundDrawablesWithIntrinsicBounds(infoIcon, null, null, null);
+
         db = new DatabaseHandler (getApplicationContext());
         db.createChallengeTable ( getUsernameForTable () );
 

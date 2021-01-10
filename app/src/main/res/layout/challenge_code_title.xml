@@ -10,6 +10,7 @@
         android:layout_height="70dp"
         android:focusable="false"
         android:clickable="false"
+        android:buttonTint="@color/indigo"
         android:layout_weight="6"
         android:layoutDirection="rtl"
         android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"

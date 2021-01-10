@@ -21,11 +21,12 @@
         android:id="@+id/examplesHeaderTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="C H A L L E N G E S"
-        android:textColor="@color/indigo"
+        android:text="Solve these common problems to get better at writing pseudocode"
+        android:textColor="@color/bright_orange"
         android:textSize="16dp"
         android:padding="10dp"
-        android:textAlignment="center"
+        android:drawableLeft="@drawable/info_icon"
+        android:textAlignment="viewStart"
         app:layout_constraintTop_toBottomOf="@id/examplesAdView">
     </TextView>
     <FrameLayout
