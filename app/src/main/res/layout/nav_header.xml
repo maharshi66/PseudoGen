@@ -8,7 +8,6 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
     <ImageView
         android:layout_width="100dp"
-        android:paddingTop="5dp"
         android:layout_height="100dp"
         android:src="@drawable/pigeonlogo">
     </ImageView>
@@ -19,8 +18,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="5dp"
-            android:paddingLeft="16dp"
+            android:paddingLeft="10dp"
             android:fontFamily="@font/maven_pro_medium"
             android:textColor="@color/bright_orange"
             android:textSize="22dp"
@@ -30,18 +28,19 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="16dp"
+            android:paddingLeft="10dp"
             android:textSize="14dp"
             android:id="@+id/versionCodeTextView">
         </TextView>
         <TextView
             android:id="@+id/displayNameTextView"
             android:layout_width="match_parent"
-            android:paddingTop="20dp"
-            android:paddingLeft="16dp"
+            android:layout_weight="5"
+            android:gravity="center_vertical"
             android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
             android:fontFamily="@font/maven_pro_medium"
-            android:textSize="18dp">
+            android:textSize="16dp">
         </TextView>
     </LinearLayout>
 </LinearLayout>

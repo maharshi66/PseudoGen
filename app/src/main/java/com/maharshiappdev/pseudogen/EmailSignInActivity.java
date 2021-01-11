@@ -40,6 +40,7 @@ public class EmailSignInActivity extends AppCompatActivity {
     String userPassword;
     String firstName;
     String lastName;
+
     public void signInClicked(View view)
     {
         if(mAuth.getCurrentUser() == null)
@@ -114,7 +115,7 @@ public class EmailSignInActivity extends AppCompatActivity {
                         {
                             Toast.makeText(getApplicationContext(), "Signed Up!", Toast.LENGTH_SHORT).show();
                             //Update Database
-                            writeToDatabase(firstName, lastName, userEmail, userPassword);
+//                            writeToDatabase(firstName, lastName, userEmail, userPassword);
                             //TODO Switch Activity
                             Intent intent = new Intent(EmailSignInActivity.this, CentralActivity.class);
                             startActivity(intent);
@@ -187,7 +188,7 @@ public class EmailSignInActivity extends AppCompatActivity {
                 .setPositiveButton("Yes, send", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if (!usernameEditText.getText().equals("")) {
+                        if (!usernameEditText.getText ().toString ().isEmpty ()) {
                             mAuth.sendPasswordResetEmail(usernameEditText.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
@@ -199,6 +200,9 @@ public class EmailSignInActivity extends AppCompatActivity {
                                     }
                                 }
                             });
+                        }else
+                        {
+                            Toast.makeText ( getApplicationContext (),"Invalid Username", Toast.LENGTH_SHORT  ).show ();
                         }
                     }
                 })

@@ -75,8 +75,8 @@ public class ChallengesActivity extends AppCompatActivity {
                     String title = groupPair.first;
                     List<String> childrenList = listDataChild.get(groupPair);
                     String description = skipStringPattern ( childrenList.get ( 0 ), "Description:" );
-                    String input = skipStringPattern ( childrenList.get ( 1 ), "Input:" );
-                    String output = skipStringPattern ( childrenList.get ( 2 ), "Output:" );
+                    String input = skipStringPattern ( childrenList.get ( 1 ), "Input: " );
+                    String output = skipStringPattern ( childrenList.get ( 2 ), "Output: " );
                     Intent editorIntent = new Intent(ChallengesActivity.this, CodeEditorTabbedActivity.class);
                     editorIntent.putExtra ( "challengeTitle", title );
                     editorIntent.putExtra ( "challengeDescription", description );
@@ -200,7 +200,7 @@ public class ChallengesActivity extends AppCompatActivity {
 
         Posts reverseLinkedList = new Posts (  );
         reverseLinkedList.setTitle ( "Reverse Linked List" );
-        reverseLinkedList.setInput ( "Singly Linked List" );
+        reverseLinkedList.setInput ( "Linked List Head" );
         reverseLinkedList.setOutput ( "Singly Linked List" );
         reverseLinkedList.setDescription ( "Given a singly linked list of elements, reverse its contents and return the new list." );
         newListOfPosts.add ( reverseLinkedList );
@@ -208,7 +208,7 @@ public class ChallengesActivity extends AppCompatActivity {
 
         Posts bubbleSort = new Posts (  );
         bubbleSort.setTitle ( "Bubble Sort" );
-        bubbleSort.setInput ( "Array Of Integers" );
+        bubbleSort.setInput ( "Array of Integers" );
         bubbleSort.setOutput ( "Array of Integers" );
         bubbleSort.setDescription ( "Given an integer array, sort the numbers using the Bubble Sort algorithm" );
         newListOfPosts.add ( bubbleSort );
@@ -216,7 +216,7 @@ public class ChallengesActivity extends AppCompatActivity {
 
         Posts insertionSort = new Posts (  );
         insertionSort.setTitle ( "Insertion Sort" );
-        insertionSort.setInput ( "Array Of Integers" );
+        insertionSort.setInput ( "Array of Integers" );
         insertionSort.setOutput ( "Array of Integers" );
         insertionSort.setDescription ( "Given an integer array, sort the numbers using the Insertion Sort algorithm" );
         newListOfPosts.add ( insertionSort );
@@ -224,7 +224,7 @@ public class ChallengesActivity extends AppCompatActivity {
 
         Posts selectionSort = new Posts (  );
         selectionSort.setTitle ( "Selection Sort" );
-        selectionSort.setInput ( "Array Of Integers" );
+        selectionSort.setInput ( "Array of Integers" );
         selectionSort.setOutput ( "Array of Integers" );
         selectionSort.setDescription ( "Given an integer array, sort the numbers using the Selection Sort algorithm" );
         newListOfPosts.add ( selectionSort );
@@ -232,7 +232,7 @@ public class ChallengesActivity extends AppCompatActivity {
 
         Posts mergeSort = new Posts (  );
         mergeSort.setTitle ( "Merge Sort" );
-        mergeSort.setInput ( "Array Of Integers" );
+        mergeSort.setInput ( "Array of Integers" );
         mergeSort.setOutput ( "Array of Integers" );
         mergeSort.setDescription ( "Given an integer array, sort the numbers using the Merge Sort algorithm" );
         newListOfPosts.add ( mergeSort );
@@ -240,7 +240,7 @@ public class ChallengesActivity extends AppCompatActivity {
 
         Posts quickSort = new Posts (  );
         quickSort.setTitle ( "Quick Sort" );
-        quickSort.setInput ( "Array Of Integers" );
+        quickSort.setInput ( "Array of Integers" );
         quickSort.setOutput ( "Array of Integers" );
         quickSort.setDescription ( "Given an integer array, sort the numbers using the Quick Sort algorithm" );
         newListOfPosts.add ( quickSort );
@@ -248,7 +248,7 @@ public class ChallengesActivity extends AppCompatActivity {
 
         Posts binarySearch = new Posts (  );
         binarySearch.setTitle ( "Binary Search" );
-        binarySearch.setInput ( "Array Of Integers" );
+        binarySearch.setInput ( "Array of Integers" );
         binarySearch.setOutput ( "Integer" );
         binarySearch.setDescription ( "Given a sorted integer array, find the position of target X using Binary Search" );
         newListOfPosts.add ( binarySearch);

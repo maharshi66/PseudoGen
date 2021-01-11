@@ -328,7 +328,7 @@ public class CodeEditorTabbedActivity extends AppCompatActivity{
     private int setInputSpinnerSelection(String[] dataStructuresInput)
     {
         int selectedInputIdx = -1;
-        String selectedInputStr = getInputCodeText();
+        String selectedInputStr = this.getInputCodeText();
         for(int i = 0; i < dataStructuresInput.length; i++)
         {
             if(dataStructuresInput[i].equals ( selectedInputStr ))
@@ -343,7 +343,7 @@ public class CodeEditorTabbedActivity extends AppCompatActivity{
     private int setOutputSpinnerSelection(String[] dataStructuresOutput)
     {
         int selectedOutputIdx = -1;
-        String selectedOutputStr = getOutputCodeText();
+        String selectedOutputStr = this.getOutputCodeText();
         for(int i = 0; i < dataStructuresOutput.length; i++)
         {
             if(dataStructuresOutput[i].equals ( selectedOutputStr ))

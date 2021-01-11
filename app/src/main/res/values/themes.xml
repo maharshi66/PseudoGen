@@ -77,4 +77,8 @@
         <item name="android:textColor">@color/dark_orange</item>
         <item name="android:fontFamily">@font/maven_pro_medium</item>
     </style>
+
+    <style name="mySpinnerItemStyle" parent="@android:style/Widget.Holo.DropDownItem.Spinner">
+        <item name="android:textColor">@color/indigo</item>
+    </style>
 </resources>

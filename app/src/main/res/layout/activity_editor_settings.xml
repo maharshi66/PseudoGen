@@ -42,6 +42,8 @@
             android:id="@+id/themeSpinner"
             android:layout_weight="5"
             android:layoutDirection="rtl"
+            android:theme="@style/mySpinnerItemStyle"
+
             android:layout_width="0dp"
             android:layout_height="wrap_content">
         </Spinner>
@@ -65,6 +67,7 @@
             android:layout_weight="5"
             android:layoutDirection="rtl"
             android:layout_width="0dp"
+            android:theme="@style/mySpinnerItemStyle"
             android:layout_height="wrap_content">
         </Spinner>
     </LinearLayout>
@@ -85,6 +88,7 @@
         <Spinner android:id="@+id/fontSizeSpinner"
             android:layout_width="0dp"
             android:layout_weight="5"
+            android:theme="@style/mySpinnerItemStyle"
             android:layoutDirection="rtl"
             android:layout_height="wrap_content">
         </Spinner>

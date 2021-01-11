@@ -726,7 +726,7 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
                 "                  this page.\n" +
                 "                </p> <p>This policy is effective as of 2021-01-03</p> <p><strong>Contact Us</strong></p> <p>\n" +
                 "                  If you have any questions or suggestions about my\n" +
-                "                  Privacy Policy, do not hesitate to contact me at support.pseudogen@gmail.com.\n" +
+                "                  Privacy Policy, do not hesitate to contact me at pseudogenhelp@gmail.com.\n" +
                 "                </p> <p>This privacy policy page was created at App Privacy Policy Generator </p>\n" +
                 "    </body>\n" +
                 "    </html>\n" +
