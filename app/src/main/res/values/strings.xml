@@ -17,11 +17,6 @@
 
     <string name="navigation_drawer_open">Open Navigation Drawer</string>
     <string name="navigation_drawer_close">Close Navigation Drawer</string>
-    <!--Code Input Options Strings for Spinner-->
-    <string-array name="sort_by_options">
-        <item>Name</item>
-        <item>Date Modified</item>
-    </string-array>
 
     <!--Code Input Options Strings for Spinner-->
     <string-array name="data_structures_input">

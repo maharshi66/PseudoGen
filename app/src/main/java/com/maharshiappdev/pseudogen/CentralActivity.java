@@ -420,6 +420,12 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
                         codeInputText = codeInputSpinner.getSelectedItem().toString();
                         codeOutputText = codeOutputSpinner.getSelectedItem().toString();
 
+                        if(listDataHeader.contains ( codeTitleText ))
+                        {
+                            Toast.makeText ( CentralActivity.this, "Title Exists!", Toast.LENGTH_SHORT ).show ();
+                            return;
+                        }
+
                         if(!codeTitleText.isEmpty() && !codeDescriptionText.isEmpty() &&
                             !codeInputText.isEmpty() && !codeOutputText.isEmpty())
                         {

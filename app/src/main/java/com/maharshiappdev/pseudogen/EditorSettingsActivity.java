@@ -44,7 +44,7 @@ public class EditorSettingsActivity extends AppCompatActivity {
         fontStyleSpinner = findViewById ( R.id.fontStyleSpinner );
         fontSizeSpinner = findViewById ( R.id.fontSizeSpinner );
         String[] themes = {"Blackboard", "Whiteboard"};
-        String[] fontStyle = {"Source Code","Fira","Kalam", "Ubuntu"};
+        String[] fontStyle = {"Fira","Kalam","Ubuntu", "Source Code"};
         String[] fontSize = {"Small","Big"};
         ArrayAdapter <String> themesAdapter = new ArrayAdapter<String>( EditorSettingsActivity.this, android.R.layout.simple_spinner_dropdown_item, themes);
         ArrayAdapter <String> fontStyleAdapter = new ArrayAdapter<String>( EditorSettingsActivity.this, android.R.layout.simple_spinner_dropdown_item, fontStyle);
