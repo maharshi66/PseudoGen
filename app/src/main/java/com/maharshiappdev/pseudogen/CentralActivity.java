@@ -157,14 +157,14 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
                 break;
             case R.id.nav_rateApp:
                 //Opens  Playstore for rating the app
-                Intent intent = getPackageManager().getLaunchIntentForPackage("com.android.vending");
-                startActivity(intent);
-/*                final String appPackageName = getPackageName(); // getPackageName() from Context or Activity object
+/*                Intent intent = getPackageManager().getLaunchIntentForPackage("com.android.vending");
+                startActivity(intent);*/
+                final String appPackageName = getPackageName(); // getPackageName() from Context or Activity object
                 try {
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
                 } catch (android.content.ActivityNotFoundException anfe) {
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
-                }*/
+                }
                 break;
             case R.id.nav_signOut:
                 alertUserForSignOut();
