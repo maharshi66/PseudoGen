@@ -96,7 +96,8 @@ public class LoginActivity extends AppCompatActivity {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 firebaseAuthWithGoogle(account.getIdToken());
             } catch (ApiException e) {
-
+                String message = e.getMessage ();
+                Toast.makeText ( this , message , Toast.LENGTH_LONG ).show ( );
             }
         }
     }

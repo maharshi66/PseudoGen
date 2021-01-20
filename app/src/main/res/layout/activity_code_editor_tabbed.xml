@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/editorAdViewBanner"
             ads:adSize="BANNER"
-            ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
+            ads:adUnitId="ca-app-pub-4846620296621716/4827256430">
         </com.google.android.gms.ads.AdView>
     </LinearLayout>
     <com.google.android.material.appbar.AppBarLayout

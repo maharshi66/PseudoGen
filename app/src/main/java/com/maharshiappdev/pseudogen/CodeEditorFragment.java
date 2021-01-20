@@ -269,13 +269,13 @@ public class CodeEditorFragment extends Fragment{
         inputCodeEditText.addTextChangedListener(new TextWatcher() {
             ColorScheme keywords = new ColorScheme(
                     Pattern.compile(
-                            "\\b(process|endprocess|initialize|solve|each|void|char|int|long|double|float|const|static|volatile|byte|boolean|class|interface|private|protected|public|final|abstract|enum|instanceof|assert|if|else|then|switch|case|default|break|goto|return|for|while|endloop|do|continue|throw|try|catch|finally|this|implements|import|true|false|null|N|Graph|List|Set|Queue|Stack|Array|BinaryTree|LinkedList|Heap|Heapify|fetch|get|find|call|function|endwhile|Let|let)\\b"),
+                            "\\b(process|endprocess|Initialize|initialize|each|void|char|int|long|double|float|const|static|volatile|byte|boolean|class|interface|private|protected|public|final|abstract|enum|instanceof|assert|if|else|then|switch|case|default|break|goto|return|for|while|endloop|do|continue|throw|try|catch|finally|this|implements|import|true|false|null|Grid|Matrix|Graph|List|Set|Queue|Stack|Array|BinaryTree|LinkedList|Heap|Heapify|fetch|get|find|call|function|endwhile|Let|let|endif|return|endfunction|and|or|declare|Declare|exception|catch|case|endcase|switch|Node)\\b"),
                     getActivity().getResources().getColor(R.color.dark_orange)
             );
 
             ColorScheme numbers = new ColorScheme(
                     Pattern.compile("(\\b(\\d*[.]?\\d+)\\b)"),
-                    getActivity().getResources().getColor(R.color.app_blue)
+                    getActivity().getResources().getColor(R.color.darker_orange)
             );
             final ColorScheme[] schemes = { keywords, numbers };
             @Override

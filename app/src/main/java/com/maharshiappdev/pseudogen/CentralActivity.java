@@ -919,7 +919,7 @@ public class CentralActivity extends AppCompatActivity implements NavigationView
 
         MobileAds.initialize(this);
         centralInterstitialAd = new InterstitialAd(this);
-        centralInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        centralInterstitialAd.setAdUnitId("ca-app-pub-4846620296621716/4635684744");
         Intent intent = getIntent ();
         enableInterstitialAd = intent.getBooleanExtra ( "enableInterstitial", false);
         centralInterstitialAd.loadAd(new AdRequest.Builder().build());

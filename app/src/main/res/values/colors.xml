@@ -22,8 +22,8 @@
     <color name="indigo">#4B0082</color>
     <color name="bright_orange">#FFA500</color>
     <color name="cream_orange">#FBC95A</color>
+    <color name="darker_orange">#cc7000</color>
     <color name="dark_orange">#ff8c00</color>
     <color name="green">#008000</color>
     <color name="fire_brick">#B22222</color>
-
 </resources>

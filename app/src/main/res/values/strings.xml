@@ -50,6 +50,8 @@
         <item>Multi-Map</item>>
         <item>Set</item>
         <item>Multi-Set</item>
+        <item>HashMap</item>
+        <item>HashSet</item>
         <item>Disjoint-Set (Union)</item>
         <item>Dictionary</item>
         <item>Tree</item>
@@ -71,6 +73,7 @@
         <item>Weighted Graph</item>
         <item>Adjacency Matrix</item>
         <item>Adjacency List</item>
+        <item>Edge List</item>
     </string-array>
 
     <string-array name="data_structures_output">
@@ -104,6 +107,8 @@
         <item>Multi-Map</item>>
         <item>Set</item>
         <item>Multi-Set</item>
+        <item>HashMap</item>
+        <item>HashSet</item>
         <item>Disjoint-Set (Union)</item>
         <item>Dictionary</item>
         <item>Tree</item>
@@ -125,6 +130,7 @@
         <item>Weighted Graph</item>
         <item>Adjacency Matrix</item>
         <item>Adjacency List</item>
+        <item>Edge List</item>
     </string-array>
 
     <string name="hint_input_resource">Input</string>
